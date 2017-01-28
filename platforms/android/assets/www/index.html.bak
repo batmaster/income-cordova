@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <!-- Include meta tag to ensure proper rendering and touch zooming -->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- Include jQuery Mobile stylesheets -->
+  <link rel="stylesheet" href="css/jquery.mobile-1.4.5.min.css">
+  <!-- Include the jQuery library -->
+  <script src="js/jquery-1.11.3.min.js"></script>
+  <!-- Include the jQuery Mobile library -->
+  <script src="js/jquery.mobile-1.4.5.min.js"></script>
+  <script src="js/page1.js"></script>
+  <script src="js/page2.js"></script>
+</head>
+<body>
+<section data-role="page" id="pageone">
+  <div data-role="header" data-position="fixed">
+    <h1> Login </h1>
+  </div>
+  <div data-role="main" class="ui-content">
+     
+      <div class="ui-field-contain">
+        <label>ชื่อผู้ใช้:</label>
+        <input type="text" id="user_id" placeholder="ชื่อผู้ใช้">
+		<label>รหัสผ่าน:</label>
+        <input type="password" id="user_pass"  placeholder="รหัสผ่าน">		
+      </div>
+      <input type="button" data-inline="true" value="Submit" class="submit_login">
+	  
+	  <a href="#pagethree" data-icon="plus" data-role="button" data-inline="true">Register</a>
+  </div>
+  <div data-role="footer" data-position="fixed">
+    <h1>&copy;copyright by jassada</h1>
+  </div>
+</section> 
+<!-- page1 -->
+<!-- page2 home -->
+<section data-role="page" id="pagetwo" data-position="fixed">
+ 
+   <div data-role="header">
+    <h1>My Homepage</h1>   
+  </div>
+	<div data-role="main" class="ui-content">
+
+   <a href="#pagefour" data-icon="plus" data-role="button" >บันทึกรายรับ-รายจ่าย</a>
+   <a href="#pagefive" data-icon="grid" data-role="button" >รายการรายรับ-รายจ่าย</a>
+   <a href="#pagesix" data-icon="plus" data-role="button" >บันทึกรายการแจ้งเตือน</a>
+   <a href="#pageseven" data-icon="grid" data-role="button" >รายการของกลุ่ม</a>
+   <a href="#pageeight" data-icon="grid" data-role="button" >สรุปรายรับรายจ่าย</a>
+
+
+   </div>
+  <div data-role="footer" data-position="fixed">
+    <h1>&copy;copyright by jassada</h1>
+  </div>
+</section>
+<!-- page2 -->
+<!-- page3 register -->
+<section data-role="page" id="pagethree" data-position="fixed">
+ 
+   <div data-role="header">
+    <h1>Register</h1>
+  </div>
+  <div data-role="main" class="ui-content">
+   <label for="name">ชื่อ</label>
+   <input type="text" name="name" id="name">
+
+   <label for="lastname">สกุล</label>
+   <input type="text" name="lastname" id="lastname">
+
+   <label for="username">ชื่อผู้ใช้</label>
+   <input type="text" name="username" id="username">
+
+   <label for="password">รหัสผ่าน</label>
+   <input type="password" name="password" id="password">
+
+    <label for="password">ยืนยันรหัสผ่าน</label>
+   <input type="password" name="password" id="password">
+
+   <label for="email">E-mail</label>
+   <input type="email" name="email" id="email">
+
+	<legend>สถานะการเป็นสมาชิก</legend>
+	<select id="regisgroup" name="regisgroup">
+		<option value="1">หัวหน้ากลุ่ม</option>
+		<option value="1">สมาชิก</option>
+	</select>
+
+	<label for="phone">เบอร์โทรศัพท์</label>
+   <input type="tel" name="phone" id="phone">
+
+   <label for="birthdate">วันเกิด</label>
+   <input type="date" name="birthdate" id="birthdate">
+
+   <input type="button" data-inline="true" value="ยืนยัน" class="">
+
+	    
+   </div>
+  <div data-role="footer" data-position="fixed">
+    <h1>&copy;copyright by jassada</h1>
+  </div>
+  </section>
+<!-- page3  -->
+
+<!-- page4 save -->
+<section data-role="page" id="pagefour" data-position="fixed">
+ 
+   <div data-role="header">
+   <a href="#pagetwo" class="ui-btn ui-corner-all ui-shadow ui-icon-home ui-btn-icon-left">Home</a>
+    <h1>บันทึกรายรับ-รายจ่าย</h1>   
+  </div>
+	<div data-role="main" class="ui-content">
+   <label for="birthdate">วันเที่</label>
+   <input type="date" name="numdate" id="numdate">
+
+   <legend></legend>
+	<select id="status" name="status">
+		<option value="1">รายรับ</option>
+		<option value="2">รายจ่าย</option>
+	</select>
+
+	<label for="listname">รายการ</label>
+   <input type="text" name="listname" id="listname">
+
+   <label for="listmoney">จำนวนเงิน</label>
+   <input type="tel" name="listmoney" id="listmoney">
+
+  <input type="button" data-inline="true" value="บันทึก" class="">
+
+
+
+
+   </div>
+
+  <div data-role="footer" data-position="fixed">
+    <h1>&copy;copyright by jassada</h1>
+  </div>
+</section>
+<!-- page4 -->
+
+<!-- page5  -->
+<section data-role="page" id="pagefive" data-position="fixed">
+ 
+   <div data-role="header">
+   <a href="#pagetwo" class="ui-btn ui-corner-all ui-shadow ui-icon-home ui-btn-icon-left">Home</a>
+    <h1>รายการรายรับ-รายจ่าย</h1>   
+  </div>
+	<div data-role="main" class="ui-content">
+   
+   </div>
+  <div data-role="footer" data-position="fixed">
+    <h1>&copy;copyright by jassada</h1>
+  </div>
+</section>
+<!-- page5 -->
+
+<!-- page6 -->
+<section data-role="page" id="pagesix" data-position="fixed">
+ 
+   <div data-role="header">
+   <a href="#pagetwo" class="ui-btn ui-corner-all ui-shadow ui-icon-home ui-btn-icon-left">Home</a>
+    <h1>รายการรายรับ-รายจ่าย</h1>   
+  </div>
+	<div data-role="main" class="ui-content">
+   
+   </div>
+  <div data-role="footer" data-position="fixed">
+    <h1>&copy;copyright by jassada</h1>
+  </div>
+</section>
+<!-- page6 -->
+ 
+</body>
+</html>
