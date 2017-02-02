@@ -12,10 +12,17 @@
     <!-- Include the jQuery Mobile library -->
     <script src="js/jquery.mobile-1.4.5.min.js"></script>
 
-    <script type="text/javascript" src="js/global.js"></script>
+    <!--http://dev.jtsage.com/jQM-DateBox/-->
+    <link rel="stylesheet" href="css/jqm-datebox.min.css">
+    <script src="js/jqm-datebox.core.min.js"></script>
+    <script src="js/jqm-datebox.mode.calbox.min.js"></script>
+    <script src="js/jqm-datebox.mode.datebox.min.js"></script>
+
+    <script src="js/global.js"></script>
     <script src="js/page1.js"></script>
     <script src="js/page2.js"></script>
     <script src="js/page3.js"></script>
+    <script src="js/page4.js"></script>
 </head>
 <body>
 <section data-role="page" id="pageone">
@@ -65,7 +72,7 @@
         <a href="#pageseven" data-icon="grid" data-role="button" >รายการของกลุ่ม</a>
         <a href="#pageeight" data-icon="grid" data-role="button" >สรุปรายรับรายจ่าย</a>
 
-        <a href="#" data-icon="delete" data-role="button" id="logout">สรุปรายรับรายจ่าย</a>
+        <a href="#" data-icon="delete" data-role="button" id="logout">ออกจากระบบ</a>
 
 
     </div>
@@ -131,25 +138,24 @@
         <h1>บันทึกรายรับ-รายจ่าย</h1>
     </div>
     <div data-role="main" class="ui-content">
-        <label for="birthdate">วันเที่</label>
-        <input type="date" id="numdate">
+        <label for="date">วันที่</label>
+        <input type="text" id="date" data-role="datebox" data-options='{"mode":"calbox"}' />
 
-        <legend></legend>
-        <select id="status">
-            <option value="1">รายรับ</option>
-            <option value="2">รายจ่าย</option>
+        <label for="time">เวลา</label>
+        <input type="text" id="time" data-role="datebox" data-options='{"mode":"timebox", "useNewStyle":true, "overrideTimeFormat": 24, "themeButton": "a", "themeInput": "a", "theme": "a", "themeHeader": "b", "overrideSetTimeButtonLabel": "ตั้งเวลา"}' />
+
+        <select id="type">
+            <option value="0" selected>รายรับ</option>
+            <option value="1">รายจ่าย</option>
         </select>
 
-        <label for="listname">รายการ</label>
-        <input type="text" id="listname">
+        <label for="title">รายการ</label>
+        <input type="text" id="title">
 
-        <label for="listmoney">จำนวนเงิน</label>
-        <input type="tel" id="listmoney">
+        <label for="amount">จำนวนเงิน</label>
+        <input type="number" id="amount">
 
-        <input type="button" data-inline="true" value="บันทึก" class="">
-
-
-
+        <input type="button" data-inline="true" value="บันทึก" id="submit">
 
     </div>
 
