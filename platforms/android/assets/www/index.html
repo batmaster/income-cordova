@@ -23,6 +23,7 @@
     <script src="js/page2.js"></script>
     <script src="js/page3.js"></script>
     <script src="js/page4.js"></script>
+    <script src="js/page5.js"></script>
 </head>
 <body>
 <section data-role="page" id="pageone">
@@ -173,7 +174,30 @@
         <h1>รายการรายรับ-รายจ่าย</h1>
     </div>
     <div data-role="main" class="ui-content">
+        <label for="date-from">จากวันที่</label>
+        <input type="text" id="date-from" data-role="datebox" data-options='{"mode":"calbox"}' />
 
+        <label for="date-to">ถึงวันที่</label>
+        <input type="text" id="date-to" data-role="datebox" data-options='{"mode":"calbox"}' />
+
+        <a href="#" class="ui-btn ui-corner-all ui-btn-a" id="today">เลือกวันนี้</a>
+
+        <div style="display: none;" id="table-column-toggle-popup-placeholder">คอลัมน์</div>
+        <!--<a href="#table-column-toggle-popup" class="ui-table-columntoggle-btn ui-btn ui-btn-a ui-corner-all ui-shadow ui-mini" data-rel="popup">คอลัมน์</a>-->
+        <table data-role="table" id="table-column-toggle" data-mode="columntoggle" class="ui-responsive table-stroke ui-table ui-table-columntoggle">
+            <thead>
+            <tr>
+                <th data-colstart="1">#</th>
+                <th data-colstart="2">รายการ</th>
+                <th data-colstart="3" data-priority="1" class="ui-table-priority-3 ui-table-cell-hidden">ประเภท</th>
+                <th data-colstart="4">จำนวน</th>
+                <th data-colstart="5" data-priority="2" class="ui-table-priority-5 ui-table-cell-hidden">วันที่</th>
+                <th data-colstart="6" data-priority="3" class="ui-table-priority-6 ui-table-cell-hidden"><abbr title="ชื่อผู้ทำรายการ">ชื่อ</abbr></th>
+            </tr>
+            </thead>
+            <tbody id="table-body">
+            </tbody>
+        </table>
     </div>
     <div data-role="footer" data-position="fixed">
         <h1>&copy;copyright by jassada</h1>

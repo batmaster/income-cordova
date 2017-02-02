@@ -1,15 +1,17 @@
 $(document).ready(function() {
-    /*$(document).on('click','#pagefour #date', function() {
-        var d = new Date();
-        $("#pagefour #date").datebox({'defaultValue' : [d.getFullYear(), d.getMonth(), d.getDate]});
+    $(document).on('click','#pagefour #date', function() {
+        $("#pagefour #date").datebox('setTheDate', new Date());
     });
 
     $(document).on('click','#pagefour #time', function() {
         var d = new Date();
-        $("#pagefour #time").datebox({'setTheDate' : d});
-    });*/
+        $("#pagefour #time").datebox('setTheDate', new Date());
+    });
 
     $(document).on("pagebeforeshow", "#pagefour", function() {
+        $("#pagefour #date").datebox('setTheDate', new Date());
+        $("#pagefour #time").datebox('setTheDate', new Date());
+
         $("#pagefour #type").val(0);
         $("#pagefour #title").val("");
         $("#pagefour #amount").val("");
@@ -18,7 +20,7 @@ $(document).ready(function() {
     $(document).on('click','#pagefour #submit', function() {
         var d = $("#pagefour #date").datebox('getTheDate');
         var t = $("#pagefour #time").datebox('getTheDate');
-        var date = d.getFullYear() + "-" + (d.getMonth() + 1) + "-" + d.getDate() + " " + t.getHours() + ":" + t.getMinutes() + ":00";
+        var date = TODATE(d.getFullYear(), d.getMonth() + 1, t.getDate(), t.getHours(), t.getMinutes(), 0);
 
         $.ajax({
             url: SERVER_URL,

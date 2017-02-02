@@ -1,6 +1,8 @@
 var SERVER_URL = "http://188.166.180.204:8888/db_connector.php";
 
 var KEY_USERID = "KEY_USERID";
+var LEVEL = ["สมาชิก", "หัวหน้ากลุ่ม"];
+var TYPE = ["รายรับ", "รายจ่าย"];
 
 function printLocalStorages() {
     var values = [],
@@ -11,6 +13,18 @@ function printLocalStorages() {
         console.log(keys[i] + " " + localStorage.getItem(keys[i]));
     }
     console.log("===============================");
+}
+
+function TODATE(y, m, d, h, i, s) {
+    if (typeof(h)==='undefined') h = 0;
+    if (typeof(i)==='undefined') i = 0;
+    if (typeof(s)==='undefined') s = 0;
+
+    return y + "-" + PAD(m) + "-" + PAD(d) + " " + PAD(h) + ":" + PAD(i) + ":" + PAD(s);
+}
+
+function PAD(n) {
+    return (n < 10) ? ("0" + n) : n;
 }
 
 
