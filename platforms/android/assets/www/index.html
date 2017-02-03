@@ -151,7 +151,8 @@
         </select>
 
         <label for="title">รายการ</label>
-        <input type="text" id="title">
+        <input type="text" data-type="search" id="title">
+        <form data-role="controlgroup" data-filter-reveal="true" data-filter="true" data-input="#title" id="title-list"></form>
 
         <label for="amount">จำนวนเงิน</label>
         <input type="number" id="amount">
@@ -180,7 +181,7 @@
         <label for="date-to">ถึงวันที่</label>
         <input type="text" id="date-to" data-role="datebox" data-options='{"mode":"calbox"}' />
 
-        <a href="#" class="ui-btn ui-corner-all ui-btn-a" id="today">เลือกวันนี้</a>
+        <a href="#" class="ui-btn ui-corner-all ui-btn-" id="today">เลือกวันนี้</a>
 
         <div style="display: none;" id="table-column-toggle-popup-placeholder">คอลัมน์</div>
         <!--<a href="#table-column-toggle-popup" class="ui-table-columntoggle-btn ui-btn ui-btn-a ui-corner-all ui-shadow ui-mini" data-rel="popup">คอลัมน์</a>-->

@@ -17,6 +17,10 @@ $(document).ready(function() {
         $("#pagefour #amount").val("");
     });
 
+    $(document).on('change','#pagefour #type', function() {
+        getTransactionTitles();
+    });
+
     $(document).on('click','#pagefour #submit', function() {
         var d = $("#pagefour #date").datebox('getTheDate');
         var t = $("#pagefour #time").datebox('getTheDate');
@@ -43,5 +47,46 @@ $(document).ready(function() {
             }
         });
     });
+
+    function getTransactionTitles() {
+        $("#pagefour #title-list .ui-controlgroup-controls").empty();
+        $.ajax({
+            url: SERVER_URL,
+            type: "POST",
+            dataType: "json",
+            data: {
+                "function": "get_transaction_titles",
+                "user_id": localStorage.getItem(KEY_USERID),
+                "type": $("#pagefour #type").val()
+            }
+        }).done(function(response) {
+            if (response != undefined) {
+                for (var i = 0; i < response.length; i++) {
+                    var r = response[i];
+                    $("#pagefour #title-list .ui-controlgroup-controls").append('<div class="ui-checkbox ui-screen-hidden"><label class="ui-btn ui-corner-all ui-btn-inherit ui-btn-icon-left ui-checkbox-off">' + r.title + '</label><input type="checkbox" id="in' + i + '"></div>');
+                }
+            }
+            else {
+
+            }
+        });
+    }
+
+    $("#pagefour #title-list").on('click', "label", function() {
+        console.log($(this).text().trim());
+        $("#pagefour #title").val($(this).text().trim());
+        $(this).first().prop('checked', false);
+
+        $("#pagefour #title-list .ui-checkbox").each(function() {
+            $(this).addClass("ui-screen-hidden");
+        });
+    });
+
+
+    $(document).on("pageshow", "#pagefour", function() {
+        $("#pagefour #title-list .ui-controlgroup-controls").removeClass("ui-screen-hidden");
+        getTransactionTitles();
+    });
+
 
 });
