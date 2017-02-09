@@ -60,8 +60,8 @@ $(document).ready(function() {
                         <td data-colstart="6" data-priority="3" class="ui-table-priority-3 ui-table-cell-hidden">' + r.name + '</td>\
                     </tr>');
                 }
-                $('#table-column-toggle').trigger("create");
-                $('#table-column-toggle').table("refresh");
+                $('#pagefive #table-column-toggle').trigger("create");
+                $('#pagefive #table-column-toggle').table("refresh");
             }
             else {
                 console.log("getting transaction failed");

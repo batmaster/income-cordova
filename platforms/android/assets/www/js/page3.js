@@ -6,6 +6,16 @@ $(document).ready(function() {
 //		$("#pagetwo .user_pass").html(user_pass);
 //	});
 
+    $(document).on('change','#pagethree #level', function() {
+        if ($("#pagethree #level").val() == 0) {
+            $("#pagethree #group-input").hide("slow");
+            $("#pagethree #group").val("");
+        }
+        else {
+            $("#pagethree #group-input").show("slow");
+        }
+    });
+
     $(document).on('click','#pagethree #register', function() {
         $.ajax({
             url: SERVER_URL,
@@ -19,6 +29,7 @@ $(document).ready(function() {
                 "password": MD5($("#pagethree #password").val()),
                 "email": $("#pagethree #email").val(),
                 "level": $("#pagethree #level").val(),
+                "group": $("#pagethree #group").val(),
                 "phone": $("#pagethree #phone").val(),
                 "birthday": $("#pagethree #birthday").val(),
             }
@@ -40,7 +51,6 @@ $(document).ready(function() {
     $(document).on('change','#pagethree input:not(#username)', function() {
         validateForm();
     });
-
 
     function checkUsernameExists() {
         $("#pagethree #register").button('disable');
@@ -93,6 +103,7 @@ $(document).ready(function() {
         console.log(correct);
     }
 
-     $("#pagethree #warning1").hide(0);
-     $("#pagethree #warning2").hide(0);
+    $("#pagethree #group-input").hide(0);
+    $("#pagethree #warning1").hide(0);
+    $("#pagethree #warning2").hide(0);
 });

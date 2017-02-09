@@ -18,12 +18,14 @@
     <script src="js/jqm-datebox.mode.calbox.min.js"></script>
     <script src="js/jqm-datebox.mode.datebox.min.js"></script>
 
+    <link rel="stylesheet" href="css/custom.css">
     <script src="js/global.js"></script>
     <script src="js/page1.js"></script>
     <script src="js/page2.js"></script>
     <script src="js/page3.js"></script>
     <script src="js/page4.js"></script>
     <script src="js/page5.js"></script>
+    <script src="js/page7.js"></script>
 </head>
 <body>
 <section data-role="page" id="pageone">
@@ -70,8 +72,9 @@
         <a href="#pagefour" data-icon="plus" data-role="button" >บันทึกรายรับ-รายจ่าย</a>
         <a href="#pagefive" data-icon="grid" data-role="button" >รายการรายรับ-รายจ่าย</a>
         <a href="#pagesix" data-icon="plus" data-role="button" >บันทึกรายการแจ้งเตือน</a>
-        <a href="#pageseven" data-icon="grid" data-role="button" >รายการของกลุ่ม</a>
-        <a href="#pageeight" data-icon="grid" data-role="button" >สรุปรายรับรายจ่าย</a>
+        <a href="#pageseven" data-icon="grid" data-role="button" >จัดการกลุ่ม</a>
+        <a href="#pageeight" data-icon="grid" data-role="button" >รายการของกลุ่ม</a>
+        <a href="#pagenine" data-icon="grid" data-role="button" >สรุปรายรับรายจ่าย</a>
 
         <a href="#" data-icon="delete" data-role="button" id="logout">ออกจากระบบ</a>
 
@@ -86,6 +89,7 @@
 <section data-role="page" id="pagethree" data-position="fixed">
 
     <div data-role="header">
+        <a href="#" onclick="$.mobile.back();" class="ui-btn ui-corner-all ui-shadow ui-icon-back ui-btn-icon-left">Back</a>
         <h1>Register</h1>
     </div>
     <div data-role="main" class="ui-content">
@@ -114,6 +118,10 @@
             <option value="0" selected>สมาชิก</option>
             <option value="1">หัวหน้ากลุ่ม</option>
         </select>
+        <div id="group-input">
+            <label for="group">ชื่อกลุ่ม</label>
+            <input type="text" id="group">
+        </div>
 
         <label for="phone">เบอร์โทรศัพท์</label>
         <input type="tel" id="phone">
@@ -135,7 +143,7 @@
 <section data-role="page" id="pagefour" data-position="fixed">
 
     <div data-role="header">
-        <a href="#pagetwo" class="ui-btn ui-corner-all ui-shadow ui-icon-home ui-btn-icon-left">Home</a>
+        <a href="#" onclick="$.mobile.back();" class="ui-btn ui-corner-all ui-shadow ui-icon-home ui-btn-icon-left">Home</a>
         <h1>บันทึกรายรับ-รายจ่าย</h1>
     </div>
     <div data-role="main" class="ui-content">
@@ -171,7 +179,7 @@
 <section data-role="page" id="pagefive" data-position="fixed">
 
     <div data-role="header">
-        <a href="#pagetwo" class="ui-btn ui-corner-all ui-shadow ui-icon-home ui-btn-icon-left">Home</a>
+        <a href="#" onclick="$.mobile.back();" class="ui-btn ui-corner-all ui-shadow ui-icon-home ui-btn-icon-left">Home</a>
         <h1>รายการรายรับ-รายจ่าย</h1>
     </div>
     <div data-role="main" class="ui-content">
@@ -183,9 +191,7 @@
 
         <a href="#" class="ui-btn ui-corner-all ui-btn-" id="today">เลือกวันนี้</a>
 
-        <div style="display: none;" id="table-column-toggle-popup-placeholder">คอลัมน์</div>
-        <!--<a href="#table-column-toggle-popup" class="ui-table-columntoggle-btn ui-btn ui-btn-a ui-corner-all ui-shadow ui-mini" data-rel="popup">คอลัมน์</a>-->
-        <table data-role="table" id="table-column-toggle" data-mode="columntoggle" class="ui-responsive table-stroke ui-table ui-table-columntoggle">
+        <table data-role="table" id="table-column-toggle" data-mode="columntoggle" data-column-btn-text="คอลัมน์" class="ui-responsive table-stroke ui-table ui-table-columntoggle">
             <thead>
             <tr>
                 <th data-colstart="1">#</th>
@@ -210,7 +216,7 @@
 <section data-role="page" id="pagesix" data-position="fixed">
 
     <div data-role="header">
-        <a href="#pagetwo" class="ui-btn ui-corner-all ui-shadow ui-icon-home ui-btn-icon-left">Home</a>
+        <a href="#" onclick="$.mobile.back();" class="ui-btn ui-corner-all ui-shadow ui-icon-home ui-btn-icon-left">Home</a>
         <h1>รายการรายรับ-รายจ่าย</h1>
     </div>
     <div data-role="main" class="ui-content">
@@ -226,10 +232,28 @@
 <section data-role="page" id="pageseven" data-position="fixed">
 
     <div data-role="header">
-        <a href="#pagetwo" class="ui-btn ui-corner-all ui-shadow ui-icon-home ui-btn-icon-left">Home</a>
-        <h1>รายการรายรับ-รายจ่าย</h1>
+        <a href="#" onclick="$.mobile.back();" class="ui-btn ui-corner-all ui-shadow ui-icon-home ui-btn-icon-left">Home</a>
+        <h1>จัดการกลุ่ม</h1>
+
     </div>
     <div data-role="main" class="ui-content">
+        <h3>กลุ่ม <span id="title"></span></h3>
+        <h3>รหัสกลุ่ม <i>@<span id="code"></span></i></h3>
+
+        <h4>รายชื่อสมาชิก <span id="badge" class="badge"></span></h4>
+        <table data-role="table" id="table-column-toggle" data-mode="columntoggle" data-column-btn-text="คอลัมน์" class="ui-responsive table-stroke ui-table ui-table-columntoggle">
+            <thead>
+            <tr>
+                <th data-colstart="1">#</th>
+                <th data-colstart="2">ชื่อสมาชิก</th>
+                <th data-colstart="3" data-priority="1" class="ui-table-priority-3 ui-table-cell-hidden">อีเมล์</th>
+                <th data-colstart="4">เบอร์โทรศัพท์</th>
+                <th data-colstart="5" data-priority="2" class="ui-table-priority-5 ui-table-cell-hidden"><abbr title="อนุมัติเข้ากลุ่ม">อนุมัติ</abbr></th>
+            </tr>
+            </thead>
+            <tbody id="table-body">
+            </tbody>
+        </table>
 
     </div>
     <div data-role="footer" data-position="fixed">
@@ -242,7 +266,39 @@
 <section data-role="page" id="pageeight" data-position="fixed">
 
     <div data-role="header">
-        <a href="#pagetwo" class="ui-btn ui-corner-all ui-shadow ui-icon-home ui-btn-icon-left">Home</a>
+        <a href="#" onclick="$.mobile.back();" class="ui-btn ui-corner-all ui-shadow ui-icon-home ui-btn-icon-left">Home</a>
+        <h1>จัดการกลุ่ม</h1>
+
+    </div>
+    <div data-role="main" class="ui-content">
+        ยังไม่ได้เข้ากลุ่ม
+        <div id="content-not-sign-head">
+            <div class="ui-field-contain">
+                <label for="title">สร้างกลุ่ม</label>
+                <input type="text" placeholder="ชื่อกลุ่ม" id="title">
+            </div>
+            <input type="button" data-inline="true" value="สร้าง" id="create">
+        </div>
+
+        <div id="content-not sign-member">
+
+        </div>
+
+        เข้ากลุ่มแล้ว หัวหน้า
+
+        เข้ากลุ่มแล้ว สมาชิก
+    </div>
+    <div data-role="footer" data-position="fixed">
+        <h1>&copy;copyright by jassada</h1>
+    </div>
+</section>
+<!-- page8 -->
+
+<!-- page8 -->
+<section data-role="page" id="pagenine" data-position="fixed">
+
+    <div data-role="header">
+        <a href="#" onclick="$.mobile.back();" class="ui-btn ui-corner-all ui-shadow ui-icon-home ui-btn-icon-left">Home</a>
         <h1>รายการรายรับ-รายจ่าย</h1>
     </div>
     <div data-role="main" class="ui-content">
