@@ -1,6 +1,8 @@
 var SERVER_URL = "http://188.166.180.204:8888/db_connector.php";
 
 var KEY_USERID = "KEY_USERID";
+var KEY_LEVEL = "KEY_LEVEL";
+var KEY_GROUPID = "KEY_GROUPID";
 var LEVEL = ["สมาชิก", "หัวหน้ากลุ่ม"];
 var TYPE = ["รายรับ", "รายจ่าย"];
 

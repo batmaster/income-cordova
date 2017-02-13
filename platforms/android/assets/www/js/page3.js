@@ -36,6 +36,8 @@ $(document).ready(function() {
         }).done(function(response) {
             console.log(response);
             localStorage.setItem(KEY_USERID, response.id);
+            localStorage.setItem(KEY_LEVEL, $("#pagethree #level").val());
+            localStorage.setItem(KEY_GROUPID, response.group_id);
             printLocalStorages();
 
             $.mobile.changePage($("#pagetwo"), {transition: "slideup", changeHash: false});

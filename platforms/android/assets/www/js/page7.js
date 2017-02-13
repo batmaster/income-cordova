@@ -37,8 +37,8 @@ $(document).ready(function() {
             type: "POST",
             dataType: "json",
             data: {
-                "function": "get_members_by_head_user_id",
-                "user_id": localStorage.getItem(KEY_USERID)
+                "function": "get_members_by_group_id",
+                "group_id": localStorage.getItem(KEY_GROUPID)
             }
         }).done(function(response) {
             $("#pageseven #table-body").empty();

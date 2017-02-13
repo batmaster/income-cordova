@@ -26,6 +26,8 @@
     <script src="js/page4.js"></script>
     <script src="js/page5.js"></script>
     <script src="js/page7.js"></script>
+    <script src="js/page8.js"></script>
+    <script src="js/page10.js"></script>
 </head>
 <body>
 <section data-role="page" id="pageone">
@@ -71,10 +73,11 @@
 
         <a href="#pagefour" data-icon="plus" data-role="button" >บันทึกรายรับ-รายจ่าย</a>
         <a href="#pagefive" data-icon="grid" data-role="button" >รายการรายรับ-รายจ่าย</a>
-        <a href="#pagesix" data-icon="plus" data-role="button" >บันทึกรายการแจ้งเตือน</a>
+        <a href="#pagesix" data-icon="calendar" data-role="button" >บันทึกรายการแจ้งเตือน</a>
         <a href="#pageseven" data-icon="grid" data-role="button" >จัดการกลุ่ม</a>
         <a href="#pageeight" data-icon="grid" data-role="button" >รายการของกลุ่ม</a>
         <a href="#pagenine" data-icon="grid" data-role="button" >สรุปรายรับรายจ่าย</a>
+        <a href="#pageten" data-icon="user" data-role="button" >ข้อมูลผู้ใช้</a>
 
         <a href="#" data-icon="delete" data-role="button" id="logout">ออกจากระบบ</a>
 
@@ -160,7 +163,7 @@
 
         <label for="title">รายการ</label>
         <input type="text" data-type="search" id="title">
-        <form data-role="controlgroup" data-filter-reveal="true" data-filter="true" data-input="#title" id="title-list"></form>
+        <form data-role="controlgroup" data-filter-reveal="true" data-filter="true" data-input="#pagefour #title" id="title-list"></form>
 
         <label for="amount">จำนวนเงิน</label>
         <input type="number" id="amount">
@@ -199,7 +202,7 @@
                 <th data-colstart="3" data-priority="1" class="ui-table-priority-3 ui-table-cell-hidden">ประเภท</th>
                 <th data-colstart="4">จำนวน</th>
                 <th data-colstart="5" data-priority="2" class="ui-table-priority-5 ui-table-cell-hidden">วันที่</th>
-                <th data-colstart="6" data-priority="3" class="ui-table-priority-6 ui-table-cell-hidden"><abbr title="ชื่อผู้ทำรายการ">ชื่อ</abbr></th>
+                <th data-colstart="6" data-priority="3" class="ui-table-priority-6 ui-table-cell-hidden"><abbr title="แก้ไขข้อมูล">แก้ไข</abbr></th>
             </tr>
             </thead>
             <tbody id="table-body">
@@ -267,26 +270,34 @@
 
     <div data-role="header">
         <a href="#" onclick="$.mobile.back();" class="ui-btn ui-corner-all ui-shadow ui-icon-home ui-btn-icon-left">Home</a>
-        <h1>จัดการกลุ่ม</h1>
+        <h1>รายการของกลุ่ม</h1>
 
     </div>
     <div data-role="main" class="ui-content">
-        ยังไม่ได้เข้ากลุ่ม
-        <div id="content-not-sign-head">
-            <div class="ui-field-contain">
-                <label for="title">สร้างกลุ่ม</label>
-                <input type="text" placeholder="ชื่อกลุ่ม" id="title">
-            </div>
-            <input type="button" data-inline="true" value="สร้าง" id="create">
+        <div data-role="main" class="ui-content">
+            <label for="date-from">จากวันที่</label>
+            <input type="text" id="date-from" data-role="datebox" data-options='{"mode":"calbox"}' />
+
+            <label for="date-to">ถึงวันที่</label>
+            <input type="text" id="date-to" data-role="datebox" data-options='{"mode":"calbox"}' />
+
+            <a href="#" class="ui-btn ui-corner-all ui-btn-" id="today">เลือกวันนี้</a>
+
+            <table data-role="table" id="table-column-toggle" data-mode="columntoggle" data-column-btn-text="คอลัมน์" class="ui-responsive table-stroke ui-table ui-table-columntoggle">
+                <thead>
+                <tr>
+                    <th data-colstart="1">#</th>
+                    <th data-colstart="2">รายการ</th>
+                    <th data-colstart="3" data-priority="1" class="ui-table-priority-3 ui-table-cell-hidden">ประเภท</th>
+                    <th data-colstart="4">จำนวน</th>
+                    <th data-colstart="5" data-priority="2" class="ui-table-priority-5 ui-table-cell-hidden">วันที่</th>
+                    <th data-colstart="6"><abbr title="ชื่อผู้ทำรายการ">ชื่อ</abbr></th>
+                </tr>
+                </thead>
+                <tbody id="table-body">
+                </tbody>
+            </table>
         </div>
-
-        <div id="content-not sign-member">
-
-        </div>
-
-        เข้ากลุ่มแล้ว หัวหน้า
-
-        เข้ากลุ่มแล้ว สมาชิก
     </div>
     <div data-role="footer" data-position="fixed">
         <h1>&copy;copyright by jassada</h1>
@@ -294,7 +305,7 @@
 </section>
 <!-- page8 -->
 
-<!-- page8 -->
+<!-- page9 -->
 <section data-role="page" id="pagenine" data-position="fixed">
 
     <div data-role="header">
@@ -308,7 +319,96 @@
         <h1>&copy;copyright by jassada</h1>
     </div>
 </section>
-<!-- page8 -->
+<!-- page9 -->
+
+<!-- page10 -->
+<section data-role="page" id="pageten" data-position="fixed">
+
+    <div data-role="header">
+        <a href="#" onclick="$.mobile.back();" class="ui-btn ui-corner-all ui-shadow ui-icon-home ui-btn-icon-left">Home</a>
+        <h1>ข้อมูลผู้ใช้</h1>
+    </div>
+    <div data-role="main" class="ui-content">
+
+        <div class="entry-content" id="not-join">
+            <article class="entry widget">
+                <h2 class="section-title">
+                    <span>ยังไม่ได้เข้าร่วมกลุ่ม</span>
+                </h2>
+                <div class="entry-wrapper">
+                    <label for="title">เข้าร่วมกลุ่ม</label>
+
+                    <label id="rejoin-group"><input type="checkbox" id="rejoin"> เข้าร่วมกลุ่มอื่น</label>
+
+                    <input type="text" data-type="search" placeholder="ชื่อกลุ่ม" id="title">
+                    <form data-role="controlgroup" data-filter-reveal="true" data-filter="true" data-input="#pageten #title" id="title-list"></form>
+
+                    <input type="button" data-inline="true" value="เข้าร่วม" id="join">
+                </div>
+            </article>
+        </div>
+
+        <div class="entry-content" id="joined">
+            <article class="entry widget">
+                <h2 class="section-title">
+                    <span>รายละเอียดกลุ่ม</span>
+                </h2>
+                <div class="entry-wrapper">
+                    <h3>กลุ่ม <span id="title"></span></h3>
+                    <h3>รหัสกลุ่ม <i>@<span id="code"></span></i></h3>
+                </div>
+            </article>
+        </div>
+
+        <div class="entry-content">
+            <article class="entry widget">
+                <h2 class="section-title">
+                    <span>ข้อมูลผู้ใช้</span>
+                </h2>
+                <div class="entry-wrapper">
+                    <label for="name">ชื่อ</label>
+                    <input type="text" id="name">
+
+                    <label for="lastname">สกุล</label>
+                    <input type="text" id="lastname">
+
+                    <label for="username">ชื่อผู้ใช้</label>
+                    <input type="text" id="username">
+                    <label for="password2" id="warning1"><font color="red">มีชื่อผู้ใช้นี้แล้ว</font></label>
+
+
+
+                    <label for="email">E-mail</label>
+                    <input type="email" id="email">
+
+                    <label for="phone">เบอร์โทรศัพท์</label>
+                    <input type="tel" id="phone">
+
+                    <label for="birthday">วันเกิด</label>
+                    <input type="date" id="birthday">
+
+                    <div id="change-password">
+                        <label for="password">รหัสผ่าน</label>
+                        <input type="password" id="password">
+
+                        <label for="password2">ยืนยันรหัสผ่าน</label>
+                        <input type="password" id="password2">
+                        <label for="password2" id="warning2"><font color="red">รหัสผ่านไม่ตรงกัน</font></label>
+                    </div>
+
+                    <label for="password">ใส่รหัสผ่านเดิมเพื่อแก้ไขข้อมูลผู้ใช้</label>
+                    <input type="password" id="password">
+
+                    <input type="button" data-inline="true" value="ยืนยัน" id="register">
+                </div>
+            </article>
+        </div>
+    </div>
+    <div data-role="footer" data-position="fixed">
+        <h1>&copy;copyright by jassada</h1>
+    </div>
+</section>
+<!-- page10 -->
 
 <script type="text/javascript">
 

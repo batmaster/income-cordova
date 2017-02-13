@@ -13,6 +13,8 @@ $(document).ready(function() {
         }).done(function(response) {
             if (response.id != undefined) {
                 localStorage.setItem(KEY_USERID, response.id);
+                localStorage.setItem(KEY_LEVEL, response.level);
+                localStorage.setItem(KEY_GROUPID, response.group_id);
                 printLocalStorages();
 
                 $.mobile.changePage($("#pagetwo"), {transition: "slideup", changeHash: false});
