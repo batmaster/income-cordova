@@ -34,11 +34,9 @@ $(document).ready(function() {
                 "birthday": $("#pagethree #birthday").val(),
             }
         }).done(function(response) {
-            console.log(response);
             localStorage.setItem(KEY_USERID, response.id);
             localStorage.setItem(KEY_LEVEL, $("#pagethree #level").val());
             localStorage.setItem(KEY_GROUPID, response.group_id);
-            printLocalStorages();
 
             $.mobile.changePage($("#pagetwo"), {transition: "slideup", changeHash: false});
         }).fail(function(jqXHR, textStatus, errorThrown) {
@@ -67,7 +65,7 @@ $(document).ready(function() {
             }
         }).done(function(response) {
              console.log(JSON.stringify(response));
-             if (response.count == 0) {
+             if (Number(response.count) == 0) {
                 $("#pagethree #warning1").hide("slow");
                 $("#pagethree #register").button('enable');
              }

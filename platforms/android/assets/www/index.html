@@ -452,21 +452,22 @@
                     <input type="tel" id="phone">
 
                     <label for="birthday">วันเกิด</label>
-                    <input type="date" id="birthday">
+                    <input type="text" id="birthday" data-role="datebox" data-options='{"mode":"calbox", "calUsePickers": "true"}' />
 
-                    <div id="change-password">
-                        <label for="password">รหัสผ่าน</label>
-                        <input type="password" id="password">
+                    <label><input type="checkbox" id="change-password"> เปลี่ยนรหัสผ่าน</label>
+                    <div id="change-password-group">
+                        <label for="password_new">รหัสผ่าน</label>
+                        <input type="password" id="password_new">
 
-                        <label for="password2">ยืนยันรหัสผ่าน</label>
-                        <input type="password" id="password2">
-                        <label for="password2" id="warning2"><font color="red">รหัสผ่านไม่ตรงกัน</font></label>
+                        <label for="password_new2">ยืนยันรหัสผ่าน</label>
+                        <input type="password" id="password_new2">
+                        <label for="password_new2" id="warning2"><font color="red">รหัสผ่านไม่ตรงกัน</font></label>
                     </div>
 
                     <label for="password">ใส่รหัสผ่านเดิมเพื่อแก้ไขข้อมูลผู้ใช้</label>
                     <input type="password" id="password">
 
-                    <input type="button" data-inline="true" value="ยืนยัน" id="register">
+                    <input type="button" data-inline="true" value="แก้ไขข้อมูล" id="edit">
                 </div>
             </article>
         </div>
