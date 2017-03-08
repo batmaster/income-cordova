@@ -16,14 +16,14 @@ $(document).ready(function() {
         }).done(function(response) {
             console.log(response);
 
-            $("#pagetwo #amount").text(response.amount + " บาท");
+            $("#pagetwo #amount").text((response.amount == undefined ? 0 : response.amount) + " บาท");
 
             google.charts.setOnLoadCallback(function() {
                 var summary = new google.visualization.DataTable();
                 summary.addColumn('string', 'รายการ');
                 summary.addColumn('number', 'จำนวน');
 
-                summary.addRows([["รายรับ", Number(response.income)], ["รายจ่าย", Number(response.outcome)]]);
+                summary.addRows([["รายรับ " + Number(response.income) + " บาท", Number(response.income)], ["รายจ่าย "  + Number(response.outcome) + " บาท", Number(response.outcome)]]);
 
                 var div = $("#pagetwo #summary_div");
                 var chartwidth = div.width();

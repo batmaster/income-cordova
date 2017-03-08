@@ -1,9 +1,8 @@
 $(document).ready(function() {
-
     var group_id = 0;
 
     function getGroups() {
-        $("#pageten #title-list .ui-controlgroup-controls").empty();
+        $("#pagenine #title-list .ui-controlgroup-controls").empty();
         $.ajax({
             url: SERVER_URL,
             type: "POST",
@@ -15,7 +14,7 @@ $(document).ready(function() {
             if (response != undefined) {
                 for (var i = 0; i < response.length; i++) {
                     var r = response[i];
-                    $("#pageten #title-list .ui-controlgroup-controls").append('<div class="ui-checkbox ui-screen-hidden"><label class="ui-btn ui-corner-all ui-btn-inherit ui-btn-icon-left ui-checkbox-off" data-id="' + r.id + '">' + r.title + ' @' + r.code + '</label><input type="checkbox"></div>');
+                    $("#pagenine #title-list .ui-controlgroup-controls").append('<div class="ui-checkbox ui-screen-hidden"><label class="ui-btn ui-corner-all ui-btn-inherit ui-btn-icon-left ui-checkbox-off" data-id="' + r.id + '">' + r.title + ' @' + r.code + '</label><input type="checkbox"></div>');
                 }
             }
         });
@@ -32,8 +31,8 @@ $(document).ready(function() {
             }
         }).done(function(response) {
             if (response != undefined) {
-                $("#pageten #title").text(response.title);
-                $("#pageten #code").text(response.code);
+                $("#pagenine #title").text(response.title);
+                $("#pagenine #code").text(response.code);
             }
             else {
                 console.log("getting transaction failed");
@@ -54,12 +53,12 @@ $(document).ready(function() {
         }).done(function(response) {
         console.log(response)
             if (response != undefined) {
-                $("#pageten #name").val(response.name);
-                $("#pageten #lastname").val(response.lastname);
-                $("#pageten #username").val(response.username);
-                $("#pageten #email").val(response.email);
-                $("#pageten #phone").val(response.phone);
-                $("#pageten #birthday").val(response.birthday);
+                $("#pagenine #name").val(response.name);
+                $("#pagenine #lastname").val(response.lastname);
+                $("#pagenine #username").val(response.username);
+                $("#pagenine #email").val(response.email);
+                $("#pagenine #phone").val(response.phone);
+                $("#pagenine #birthday").val(response.birthday);
             }
             else {
                 console.log("getting user failed");
@@ -67,18 +66,18 @@ $(document).ready(function() {
         });
     }
 
-    $("#pageten #title-list").on('click', "label", function() {
-        $("#pageten #title").val($(this).text().trim());
+    $("#pagenine #title-list").on('click', "label", function() {
+        $("#pagenine #title").val($(this).text().trim());
         group_id =  (-1 * $(this).data("id"));
 
         $(this).first().prop('checked', false);
 
-        $("#pageten #title-list .ui-checkbox").each(function() {
+        $("#pagenine #title-list .ui-checkbox").each(function() {
             $(this).addClass("ui-screen-hidden");
         });
     });
 
-    $(document).on('click','#pageten #join', function() {
+    $(document).on('click','#pagenine #join', function() {
         $.ajax({
             url: SERVER_URL,
             type: "POST",
@@ -99,35 +98,35 @@ $(document).ready(function() {
         });
     });
 
-    $(document).on("pagebeforeshow", "#pageten", function() {
-        $("#pageten #not-join").hide(0);
-        $("#pageten #joined").hide(0);
-        $("#pageten #rejoin-group").hide(0);
-        $("#pageten #rejoin").hide(0);
+    $(document).on("pagebeforeshow", "#pagenine", function() {
+        $("#pagenine #not-join").hide(0);
+        $("#pagenine #joined").hide(0);
+        $("#pagenine #rejoin-group").hide(0);
+        $("#pagenine #rejoin").hide(0);
     });
 
-    $(document).on("pageshow", "#pageten", function() {
-        $("#pageten #title-list .ui-controlgroup-controls").removeClass("ui-screen-hidden");
+    $(document).on("pageshow", "#pagenine", function() {
+        $("#pagenine #title-list .ui-controlgroup-controls").removeClass("ui-screen-hidden");
         getGroups();
         getUserDetail();
 
         var g = Number(localStorage.getItem(KEY_GROUPID));
         if (g == 0) {
-            $("#pageten #not-join").show(0);
+            $("#pagenine #not-join").show(0);
         }
         else if (g > 0) {
-            $("#pageten #joined").show(0);
+            $("#pagenine #joined").show(0);
             getGroupDetail();
         }
         else {
-            $("#pageten #not-join").show(0);
-            $("#pageten #join").val("เข้าร่วมกลุ่มอื่น");
-            $("#pageten #join").button("refresh");
-            $("#pageten #rejoin-group").show(0);
-            $("#pageten #rejoin").show(0);
+            $("#pagenine #not-join").show(0);
+            $("#pagenine #join").val("เข้าร่วมกลุ่มอื่น");
+            $("#pagenine #join").button("refresh");
+            $("#pagenine #rejoin-group").show(0);
+            $("#pagenine #rejoin").show(0);
 
-            $("#pageten #title").prop("disabled", true);
-            $("#pageten #join").button("disable");
+            $("#pagenine #title").prop("disabled", true);
+            $("#pagenine #join").button("disable");
 
             $.ajax({
                 url: SERVER_URL,
@@ -139,7 +138,7 @@ $(document).ready(function() {
                 }
             }).done(function(response) {
                 if (response != undefined) {
-                    $("#pageten #not-join #title").val(response.title + ' @' + response.code);
+                    $("#pagenine #not-join #title").val(response.title + ' @' + response.code);
                     group_id = -1 * response.id;
                 }
                 else {
@@ -147,29 +146,29 @@ $(document).ready(function() {
                 }
             });
 
-            $(document).on("change", "#pageten #rejoin", function() {
+            $(document).on("change", "#pagenine #rejoin", function() {
                 if ($(this).prop("checked")) {
-                    $("#pageten #title").prop("disabled", false);
-                    $("#pageten #join").button("enable");
+                    $("#pagenine #title").prop("disabled", false);
+                    $("#pagenine #join").button("enable");
                 }
                 else {
-                    $("#pageten #title").prop("disabled", true);
-                    $("#pageten #join").button("disable");
+                    $("#pagenine #title").prop("disabled", true);
+                    $("#pagenine #join").button("disable");
                 }
             });
         }
     });
 
-    $(document).on('change','#pageten #username', function() {
+    $(document).on('change','#pagenine #username', function() {
         checkUsernameExists();
     });
 
-    $(document).on('change','#pageten input:not(#username)', function() {
+    $(document).on('change','#pagenine input:not(#username)', function() {
         validateForm();
     });
 
     function checkUsernameExists() {
-        $("#pageten #edit").button('disable');
+        $("#pagenine #edit").button('disable');
 
         $.ajax({
             url: SERVER_URL,
@@ -177,17 +176,17 @@ $(document).ready(function() {
             dataType: "json",
             data: {
                 "function": "check_user",
-                "username": $("#pageten #username").val()
+                "username": $("#pagenine #username").val()
             }
         }).done(function(response) {
              console.log(JSON.stringify(response));
              if (Number(response.count) == 0) {
-                $("#pageten #warning1").hide("slow");
-                $("#pageten #edit").button('enable');
+                $("#pagenine #warning1").hide("slow");
+                $("#pagenine #edit").button('enable');
              }
              else {
-                $("#pageten #warning1").show("fast");
-                $("#pageten #edit").button('disable');
+                $("#pagenine #warning1").show("fast");
+                $("#pagenine #edit").button('disable');
              }
         }).fail(function(jqXHR, textStatus, errorThrown) {
             console.log(jqXHR + "\n" + textStatus + "\n" + errorThrown);
@@ -199,37 +198,37 @@ $(document).ready(function() {
         var correct = true;
 
         // check passwords matched
-        if ($("#pageten #change-password").prop("checked")) {
-            if ($("#pageten #password_new").val() != $("#pageten #password_new2").val()) {
+        if ($("#pagenine #change-password").prop("checked")) {
+            if ($("#pagenine #password_new").val() != $("#pagenine #password_new2").val()) {
                 correct = false;
-                $("#pageten #warning2").show("fast");
+                $("#pagenine #warning2").show("fast");
             }
             else {
                 correct = true;
-                $("#pageten #warning2").hide("slow");
+                $("#pagenine #warning2").hide("slow");
             }
         }
 
         if (correct) {
-            $("#pageten #edit").button('enable');
+            $("#pagenine #edit").button('enable');
         }
         else {
-            $("#pageten #edit").button('disable');
+            $("#pagenine #edit").button('disable');
         }
     }
 
-    $(document).on('change','#pageten #change-password', function() {
+    $(document).on('change','#pagenine #change-password', function() {
         if ($(this).prop("checked")) {
-            $("#pageten #change-password-group").show("slow");
+            $("#pagenine #change-password-group").show("slow");
         }
         else {
-            $("#pageten #change-password-group").hide("fast");
+            $("#pagenine #change-password-group").hide("fast");
         }
     });
 
-    $(document).on('click','#pageten #edit', function() {
-        var password_new = MD5($("#pageten #password_new").val());
-        if (!$("#pageten #change-password").prop("checked")) {
+    $(document).on('click','#pagenine #edit', function() {
+        var password_new = MD5($("#pagenine #password_new").val());
+        if (!$("#pagenine #change-password").prop("checked")) {
             password_new = "";
         }
 
@@ -240,15 +239,15 @@ $(document).ready(function() {
             data: {
                 "function": "edit_user",
                 "user_id": localStorage.getItem(KEY_USERID),
-                "name": $("#pageten #name").val(),
-                "lastname": $("#pageten #lastname").val(),
-                "username": $("#pageten #username").val(),
-                "password": MD5($("#pageten #password").val()),
-                "email": $("#pageten #email").val(),
-                "level": $("#pageten #level").val(),
-                "group": $("#pageten #group").val(),
-                "phone": $("#pageten #phone").val(),
-                "birthday": $("#pageten #birthday").val(),
+                "name": $("#pagenine #name").val(),
+                "lastname": $("#pagenine #lastname").val(),
+                "username": $("#pagenine #username").val(),
+                "password": MD5($("#pagenine #password").val()),
+                "email": $("#pagenine #email").val(),
+                "level": $("#pagenine #level").val(),
+                "group": $("#pagenine #group").val(),
+                "phone": $("#pagenine #phone").val(),
+                "birthday": $("#pagenine #birthday").val(),
                 "password_new": password_new
             }
         }).done(function(response) {
@@ -266,8 +265,8 @@ $(document).ready(function() {
 
 
 
-    $("#pageten #group-input").hide(0);
-    $("#pageten #warning1").hide(0);
-    $("#pageten #warning2").hide(0);
-    $("#pageten #change-password-group").hide(0);
+    $("#pagenine #group-input").hide(0);
+    $("#pagenine #warning1").hide(0);
+    $("#pagenine #warning2").hide(0);
+    $("#pagenine #change-password-group").hide(0);
 });

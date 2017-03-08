@@ -8,7 +8,7 @@
     <!-- Include jQuery Mobile stylesheets -->
     <link rel="stylesheet" href="css/jquery.mobile-1.4.5.min.css">
     <!-- Include the jQuery library -->
-    <script src="js/jquery-1.11.3.min.js"></script>
+    <script src="js/jquery-1.11.3.js"></script>
     <!-- Include the jQuery Mobile library -->
     <script src="js/jquery.mobile-1.4.5.min.js"></script>
 
@@ -22,6 +22,8 @@
     <script src="js/jqm-datebox.mode.calbox.min.js"></script>
     <script src="js/jqm-datebox.mode.datebox.min.js"></script>
 
+    <script src="js/moment-with-locales.js"></script>
+
     <link rel="stylesheet" href="css/custom.css">
     <script src="js/global.js"></script>
     <script src="js/page1.js"></script>
@@ -31,7 +33,7 @@
     <script src="js/page5.js"></script>
     <script src="js/page7.js"></script>
     <script src="js/page8.js"></script>
-    <script src="js/page10.js"></script>
+    <script src="js/page9.js"></script>
 </head>
 <body>
 
@@ -44,15 +46,14 @@
         <a href="#pagesix" data-icon="calendar" data-role="button" class="ui-page-theme-a">การแจ้งเตือน</a>
         <a href="#pageseven" data-icon="grid" data-role="button" class="ui-page-theme-a">จัดการกลุ่ม</a>
         <a href="#pageeight" data-icon="grid" data-role="button" class="ui-page-theme-a">รายการของกลุ่ม</a>
-        <a href="#pagenine" data-icon="grid" data-role="button" class="ui-page-theme-a">สรุปรายรับรายจ่าย</a>
-        <a href="#pageten" data-icon="user" data-role="button" class="ui-page-theme-a">ข้อมูลผู้ใช้</a>
+        <a href="#pagenine" data-icon="user" data-role="button" class="ui-page-theme-a">ข้อมูลผู้ใช้</a>
 
         <a href="#" data-icon="delete" data-role="button" class="ui-page-theme-a" id="logout">ออกจากระบบ</a>
 
 
     </div>
     <div data-role="footer" data-position="fixed">
-        <h1>&copy;copyright by jassada</h1>
+        <h1>&copy;coppyrith by jassada</h1>
     </div>
 </div>
 
@@ -73,7 +74,7 @@
         <a href="#pagethree" data-icon="plus" data-role="button" data-inline="true">Register</a>
     </div>
     <div data-role="footer" data-position="fixed">
-        <h1>&copy;copyright by jassada</h1>
+        <h1>&copy;coppyrith by jassada</h1>
     </div>
 </section>
 
@@ -105,7 +106,7 @@
 
     </div>
     <div data-role="footer" data-position="fixed">
-        <h1>&copy;copyright by jassada</h1>
+        <h1>&copy;coppyrith by jassada</h1>
     </div>
 </section>
 <!-- page2 -->
@@ -158,7 +159,7 @@
 
     </div>
     <div data-role="footer" data-position="fixed">
-        <h1>&copy;copyright by jassada</h1>
+        <h1>&copy;coppyrith by jassada</h1>
     </div>
 </section>
 <!-- page3  -->
@@ -194,7 +195,7 @@
     </div>
 
     <div data-role="footer" data-position="fixed">
-        <h1>&copy;copyright by jassada</h1>
+        <h1>&copy;coppyrith by jassada</h1>
     </div>
 </section>
 <!-- page4 -->
@@ -223,20 +224,20 @@
                 <label for="date-to">ถึงวันที่</label>
                 <input type="text" id="date-to" data-role="datebox" data-options='{"mode":"calbox", "calUsePickers": "true"}' />
 
-                <div data-role="tabs">
+                <div data-role="tabs" id="inner-tabs1">
                     <div data-role="navbar">
                         <ul>
-                            <li><a href="#fragment-1" class="ui-btn-active">ตารางรายการ</a></li>
-                            <li><a href="#fragment-2">กราฟแท่งเปรียบเทียบรายรับ-รายจ่าย</a></li>
-                            <li><a href="#fragment-3">กราฟวงกลมเปรียบเทียบประเภท</a></li>
+                            <li><a href="#fragment-11" class="ui-btn-active">ตารางรายการ</a></li>
+                            <li><a href="#fragment-12">กราฟแท่งเปรียบเทียบรายรับ-รายจ่าย</a></li>
+                            <li><a href="#fragment-13">กราฟวงกลมเปรียบเทียบประเภท</a></li>
                         </ul>
                     </div>
-                    <div id="fragment-1">
+                    <div id="fragment-11">
                         <p></p>
-                        <a href="#" class="ui-btn ui-corner-all ui-btn-" id="today">เลือกวันนี้</a>
+                        <a href="#" class="ui-btn ui-corner-all ui-btn-a" id="today">เลือกวันนี้</a>
 
                         <div style="width: 100%; height: 400px; overflow: auto">
-                            <table data-role="table" id="table-column-toggle" data-mode="columntoggle" data-column-btn-text="คอลัมน์" class="ui-responsive table-stroke ui-table ui-table-columntoggle">
+                            <table data-role="table" id="table-column-toggle-pagefive" data-mode="columntoggle" data-column-btn-text="คอลัมน์" class="ui-responsive table-stroke ui-table ui-table-columntoggle">
                                 <thead>
                                 <tr>
                                     <th data-colstart="1">#</th>
@@ -252,23 +253,46 @@
                             </table>
                         </div>
                     </div>
-                    <div id="fragment-2">
+                    <div id="fragment-12">
                         <p></p>
                         <div id="bar_div"></div>
                     </div>
-                    <div id="fragment-3">
+                    <div id="fragment-13">
                         <p></p>
                         <div id="income_div"></div>
 
                         <div id="outcome_div"></div>
                     </div>
                 </div>
-
-
             </div>
+
             <div id="fragment-2">
-                <p>This is the content of the tab 'Two', with the id fragment-2.</p>
-                kk
+                <p></p>
+                <label for="month-from">จากเดือน</label>
+                <input type="date" id="month-from" data-role="datebox" data-options='{"mode": "datebox", "overrideDateFormat":"%Y-%m", "overrideDateFieldOrder": ["m", "y"], "overrideSetDateButtonLabel": "เลือก", "overrideTitleDateDialogLabel": "เลือกเดือนและปี"}' />
+
+
+                <label for="month-to">ถึงเดือน</label>
+                <input type="date" id="month-to" data-role="datebox" data-options='{"mode": "datebox", "overrideDateFormat":"%Y-%m", "overrideDateFieldOrder": ["m", "y"], "overrideSetDateButtonLabel": "เลือก", "overrideTitleDateDialogLabel": "เลือกเดือนและปี"}' />
+
+                <div data-role="tabs" id="inner-tabs2">
+                    <div data-role="navbar">
+                        <ul>
+                            <li><a href="#fragment-22" class="ui-btn-active">กราฟแท่งเปรียบเทียบรายรับ-รายจ่าย</a></li>
+                            <li><a href="#fragment-23">กราฟวงกลมเปรียบเทียบประเภท</a></li>
+                        </ul>
+                    </div>
+                    <div id="fragment-22">
+                        <p></p>
+                        <div id="bar_month_div"></div>
+                    </div>
+                    <div id="fragment-23">
+                        <p></p>
+                        <div id="income_month_div"></div>
+
+                        <div id="outcome_month_div"></div>
+                    </div>
+                </div>
             </div>
         </div>
 
@@ -277,7 +301,7 @@
 
     </div>
     <div data-role="footer" data-position="fixed">
-        <h1>&copy;copyright by jassada</h1>
+        <h1>&copy;coppyrith by jassada</h1>
     </div>
 </section>
 <!-- page5 -->
@@ -293,7 +317,7 @@
 
     </div>
     <div data-role="footer" data-position="fixed">
-        <h1>&copy;copyright by jassada</h1>
+        <h1>&copy;coppyrith by jassada</h1>
     </div>
 </section>
 <!-- page6 -->
@@ -311,7 +335,7 @@
         <h3>รหัสกลุ่ม <i>@<span id="code"></span></i></h3>
 
         <h4>รายชื่อสมาชิก <span id="badge" class="badge"></span></h4>
-        <table data-role="table" id="table-column-toggle" data-mode="columntoggle" data-column-btn-text="คอลัมน์" class="ui-responsive table-stroke ui-table ui-table-columntoggle">
+        <table data-role="table" id="table-column-toggle-pageseven" data-mode="columntoggle" data-column-btn-text="คอลัมน์" class="ui-responsive table-stroke ui-table ui-table-columntoggle">
             <thead>
             <tr>
                 <th data-colstart="1">#</th>
@@ -327,7 +351,7 @@
 
     </div>
     <div data-role="footer" data-position="fixed">
-        <h1>&copy;copyright by jassada</h1>
+        <h1>&copy;coppyrith by jassada</h1>
     </div>
 </section>
 <!-- page7 -->
@@ -338,58 +362,105 @@
     <div data-role="header">
         <a href="#mypanel" class="ui-btn ui-corner-all ui-shadow ui-icon-bars ui-btn-icon-left">Menu</a>
         <h1>รายการของกลุ่ม</h1>
-
     </div>
     <div data-role="main" class="ui-content">
-        <div data-role="main" class="ui-content">
-            <label for="date-from">จากวันที่</label>
-            <input type="text" id="date-from" data-role="datebox" data-options='{"mode":"calbox", "calUsePickers": "true"}' />
 
-            <label for="date-to">ถึงวันที่</label>
-            <input type="text" id="date-to" data-role="datebox" data-options='{"mode":"calbox", "calUsePickers": "true"}' />
+        <div data-role="tabs">
+            <div data-role="navbar">
+                <ul>
+                    <li><a href="#fragment-1" class="ui-btn-active">รายวัน</a></li>
+                    <li><a href="#fragment-2">รายเดือน</a></li>
+                </ul>
+            </div>
+            <div id="fragment-1">
+                <p></p>
+                <label for="date-from">จากวันที่</label>
+                <input type="text" id="date-from" data-role="datebox" data-options='{"mode":"calbox", "calUsePickers": "true"}' />
 
-            <a href="#" class="ui-btn ui-corner-all ui-btn-" id="today">เลือกวันนี้</a>
+                <label for="date-to">ถึงวันที่</label>
+                <input type="text" id="date-to" data-role="datebox" data-options='{"mode":"calbox", "calUsePickers": "true"}' />
 
-            <table data-role="table" id="table-column-toggle" data-mode="columntoggle" data-column-btn-text="คอลัมน์" class="ui-responsive table-stroke ui-table ui-table-columntoggle">
-                <thead>
-                <tr>
-                    <th data-colstart="1">#</th>
-                    <th data-colstart="2">รายการ</th>
-                    <th data-colstart="3" data-priority="1" class="ui-table-priority-3 ui-table-cell-hidden">ประเภท</th>
-                    <th data-colstart="4">จำนวน</th>
-                    <th data-colstart="5" data-priority="2" class="ui-table-priority-5 ui-table-cell-hidden">วันที่</th>
-                    <th data-colstart="6"><abbr title="ชื่อผู้ทำรายการ">ชื่อ</abbr></th>
-                </tr>
-                </thead>
-                <tbody id="table-body">
-                </tbody>
-            </table>
+                <div data-role="tabs" id="inner-tabs1">
+                    <div data-role="navbar">
+                        <ul>
+                            <li><a href="#fragment-11" class="ui-btn-active"><abbr title="ตารางรายการ">ตาราง</abbr></a></li>
+                            <li><a href="#fragment-12"><abbr title="กราฟแท่งเปรียบเทียบรายรับ-รายจ่าย">กราฟแท่ง</abbr></a></li>
+                            <li><a href="#fragment-13"><abbr title="กราฟวงกลมเปรียบเทียบประเภท">กราฟวงกลม</abbr></a></li>
+                        </ul>
+                    </div>
+                    <div id="fragment-11">
+                        <p></p>
+                        <a href="#" class="ui-btn ui-corner-all ui-btn-a" id="today">เลือกวันนี้</a>
+
+                        <div style="width: 100%; height: 400px; overflow: auto">
+                            <table data-role="table" id="table-column-toggle-pageeight" data-mode="columntoggle" data-column-btn-text="คอลัมน์" class="ui-responsive table-stroke ui-table ui-table-columntoggle">
+                                <thead>
+                                <tr>
+                                    <th data-colstart="1">#</th>
+                                    <th data-colstart="2">รายการ</th>
+                                    <th data-colstart="3" data-priority="1" class="ui-table-priority-3 ui-table-cell-hidden">ประเภท</th>
+                                    <th data-colstart="4">จำนวน</th>
+                                    <th data-colstart="5" data-priority="2" class="ui-table-priority-5 ui-table-cell-hidden">วันที่</th>
+                                    <th data-colstart="6" data-priority="3" class="ui-table-priority-6"><abbr title="ชื่อผู้ทำรายการ">ชื่อ</abbr></th>
+                                </tr>
+                                </thead>
+                                <tbody id="table-body">
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div id="fragment-12">
+                        <p></p>
+                        <div id="bar_group_div"></div>
+                    </div>
+                    <div id="fragment-13">
+                        <p></p>
+                        <div id="income_group_div"></div>
+
+                        <div id="outcome_group_div"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="fragment-2">
+                <p></p>
+                <label for="month-from">จากเดือน</label>
+                <input type="date" id="month-from" data-role="datebox" data-options='{"mode": "datebox", "overrideDateFormat":"%Y-%m", "overrideDateFieldOrder": ["m", "y"], "overrideSetDateButtonLabel": "เลือก", "overrideTitleDateDialogLabel": "เลือกเดือนและปี"}' />
+
+
+                <label for="month-to">ถึงเดือน</label>
+                <input type="date" id="month-to" data-role="datebox" data-options='{"mode": "datebox", "overrideDateFormat":"%Y-%m", "overrideDateFieldOrder": ["m", "y"], "overrideSetDateButtonLabel": "เลือก", "overrideTitleDateDialogLabel": "เลือกเดือนและปี"}' />
+
+                <div data-role="tabs" id="inner-tabs2">
+                    <div data-role="navbar">
+                        <ul>
+                            <li><a href="#fragment-22" class="ui-btn-active"><abbr title="กราฟแท่งเปรียบเทียบรายรับ-รายจ่าย">กราฟแท่ง</abbr></a></li>
+                            <li><a href="#fragment-23"><abbr title="กราฟวงกลมเปรียบเทียบประเภท">กราฟวงกลม</abbr></a></li>
+                        </ul>
+                    </div>
+                    <div id="fragment-22">
+                        <p></p>
+                        <div id="bar_month_group_div"></div>
+                    </div>
+                    <div id="fragment-23">
+                        <p></p>
+                        <div id="income_month_group_div"></div>
+
+                        <div id="outcome_month_group_div"></div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
+
     <div data-role="footer" data-position="fixed">
-        <h1>&copy;copyright by jassada</h1>
+        <h1>&copy;coppyrith by jassada</h1>
     </div>
 </section>
 <!-- page8 -->
 
 <!-- page9 -->
 <section data-role="page" id="pagenine" data-position="fixed">
-
-    <div data-role="header">
-        <a href="#mypanel" class="ui-btn ui-corner-all ui-shadow ui-icon-bars ui-btn-icon-left">Menu</a>
-        <h1>รายการรายรับ-รายจ่าย</h1>
-    </div>
-    <div data-role="main" class="ui-content">
-
-    </div>
-    <div data-role="footer" data-position="fixed">
-        <h1>&copy;copyright by jassada</h1>
-    </div>
-</section>
-<!-- page9 -->
-
-<!-- page10 -->
-<section data-role="page" id="pageten" data-position="fixed">
 
     <div data-role="header">
         <a href="#mypanel" class="ui-btn ui-corner-all ui-shadow ui-icon-bars ui-btn-icon-left">Menu</a>
@@ -408,7 +479,7 @@
                     <label id="rejoin-group"><input type="checkbox" id="rejoin"> เข้าร่วมกลุ่มอื่น</label>
 
                     <input type="text" data-type="search" placeholder="ชื่อกลุ่ม" id="title">
-                    <form data-role="controlgroup" data-filter-reveal="true" data-filter="true" data-input="#pageten #title" id="title-list"></form>
+                    <form data-role="controlgroup" data-filter-reveal="true" data-filter="true" data-input="#pagenine #title" id="title-list"></form>
 
                     <input type="button" data-inline="true" value="เข้าร่วม" id="join">
                 </div>
@@ -473,15 +544,25 @@
         </div>
     </div>
     <div data-role="footer" data-position="fixed">
-        <h1>&copy;copyright by jassada</h1>
+        <h1>&copy;coppyrith by jassada</h1>
     </div>
 </section>
-<!-- page10 -->
+<!-- page9 -->
 
 <script type="text/javascript">
 
-    $(document).bind("mobileinit", function() {
+    $(document).on("mobileinit", function() {
         $.mobile.autoInitialize = false;
+
+        // not work
+        $(document).on("swipeleft swiperight", function(e) {
+            if ($.mobile.activePage.jqmData("panel") !== "open") {
+                if (e.type === "swipeleft") {
+                    $("#mypanel").panel("open");
+                }
+            }
+        });
+        //
     });
 
     $(document).ready(function() {

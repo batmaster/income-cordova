@@ -4,17 +4,11 @@ $(document).ready(function() {
     });
 
     $(document).on('click','#pagefour #time', function() {
-        var d = new Date();
         $("#pagefour #time").datebox('setTheDate', new Date());
     });
 
     $(document).on("pagebeforeshow", "#pagefour", function() {
-        $("#pagefour #date").datebox('setTheDate', new Date());
-        $("#pagefour #time").datebox('setTheDate', new Date());
-
-        $("#pagefour #type").val(0);
-        $("#pagefour #title").val("");
-        $("#pagefour #amount").val("");
+        clearFields();
     });
 
     $(document).on('change','#pagefour #type', function() {
@@ -42,6 +36,7 @@ $(document).ready(function() {
         }).done(function(response) {
             if (response.id != undefined) {
                 console.log("adding transaction ok");
+                clearFields();
             }
             else {
                 console.log("adding transaction failed");
@@ -68,6 +63,15 @@ $(document).ready(function() {
                 }
             }
         });
+    }
+
+    function clearFields() {
+        $("#pagefour #date").datebox('setTheDate', new Date());
+        $("#pagefour #time").datebox('setTheDate', new Date());
+
+//        $("#pagefour #type").val(0);
+        $("#pagefour #title").val("");
+        $("#pagefour #amount").val("");
     }
 
     $("#pagefour #title-list").on('click', "label", function() {

@@ -1,13 +1,18 @@
 $(document).ready(function() {
 
-    // f 1
+    // f 1, f 2
     $(document).on("pagebeforeshow", "#pagefive", function() {
         $("#pagefive #fragment-1 #date-from").datebox('setTheDate', new Date());
         $("#pagefive #fragment-1 #date-to").datebox('setTheDate', new Date());
 
+        $("#pagefive #fragment-2 #month-from").datebox('setTheDate', new Date());
+        $("#pagefive #fragment-2 #month-to").datebox('setTheDate', new Date());
+
         google.charts.load('current', {'packages':['corechart']});
     });
 
+
+    // f 1
     $(document).on('click','#pagefive #fragment-1 #date-from', function() {
         $("#pagefive #fragment-1 #date-from").datebox('setTheDate', new Date());
     });
@@ -28,21 +33,55 @@ $(document).ready(function() {
         getDailyPie();
     });
 
-    $(document).on('click','#pagefive #fragment-1 #fragment-1 #today', function() {
+    $(document).on('click','#pagefive #fragment-1 #fragment-11 #today', function() {
         $("#pagefive #fragment-1 #date-from").datebox('setTheDate', new Date());
         $("#pagefive #fragment-1 #date-to").datebox('setTheDate', new Date());
     });
 
 
+    // f 2
+    $(document).on('click','#pagefive #fragment-2 #month-from', function() {
+        $("#pagefive #fragment-2 #month-from").datebox('setTheDate', new Date());
+    });
 
+    $(document).on("change", "#pagefive #fragment-2 #month-from", function() {
+        getMonthlyBar();
+        getMonthlyPie();
+    });
 
+    $(document).on('click','#pagefive #fragment-2 #month-to', function() {
+        $("#pagefive #fragment-2 #month-to").datebox('setTheDate', new Date());
+    });
 
-    $(document).on("pageshow", "#pagefive", function() {
+    $(document).on("change", "#pagefive #fragment-2 #month-to", function() {
+        getMonthlyBar();
+        getMonthlyPie();
+    });
 
+    $("#pagefive #inner-tabs1").on("tabsactivate", function(event, ui) {
+        switch ($(this).tabs('option', 'active')) {
+            case 1:
+                getDailyBar();
+                break;
+            case 2:
+                getDailyPie();
+                break;
+        }
+    });
+
+    $("#pagefive #inner-tabs2").on("tabsactivate", function(event, ui) {
+        switch ($(this).tabs('option', 'active')) {
+            case 0:
+                getMonthlyBar();
+                break;
+            case 1:
+                getMonthlyPie();
+                break;
+        }
     });
 
     function hideAllEditFields() {
-        $("#pagefive #fragment-1 #fragment-1 #table-body tr[id^=edit-field]").hide(0);
+        $("#pagefive #fragment-1 #fragment-11 #table-body tr[id^=edit-field]").hide(0);
     }
 
 
@@ -52,30 +91,28 @@ $(document).ready(function() {
 });
 
 function showEditField(i) {
-    $("#pagefive #fragment-1 #fragment-1 #table-body tr[id^=edit-field]:not(#edit-field" + i + ")").hide(0);
-    $("#pagefive #fragment-1 #fragment-1 #table-body #edit-field" + i).show(0);
+    $("#pagefive #fragment-1 #fragment-11 #table-body tr[id^=edit-field]:not(#edit-field" + i + ")").hide(0);
+    $("#pagefive #fragment-1 #fragment-11 #table-body #edit-field" + i).show(0);
 
-    $("#pagefive #fragment-1 #fragment-1 #table-body tr[id^=dummy]:not(#dummy" + i + ")").show(0);
-    $("#pagefive #fragment-1 #fragment-1 #table-body #dummy" + i).hide(0);
+    $("#pagefive #fragment-1 #fragment-11 #table-body tr[id^=dummy]:not(#dummy" + i + ")").show(0);
+    $("#pagefive #fragment-1 #fragment-11 #table-body #dummy" + i).hide(0);
 }
 
 function hideAllEditFields() {
-    $("#pagefive #fragment-1 #fragment-1 #table-body tr[id^=dummy]").show(0);
-    $("#pagefive #fragment-1 #fragment-1 #table-body tr[id^=edit-field]").hide(0);
+    $("#pagefive #fragment-1 #fragment-11 #table-body tr[id^=dummy]").show(0);
+    $("#pagefive #fragment-1 #fragment-11 #table-body tr[id^=edit-field]").hide(0);
 }
 
 function saveEdit(i) {
-    var id = $("#pagefive #fragment-1 #fragment-1 #table-body #edit-field" + i).data("id");
-    var title = $("#pagefive #fragment-1 #fragment-1 #table-body #edit-field" + i + " #title").val();
-    var type = $("#pagefive #fragment-1 #fragment-1 #table-body #edit-field" + i + " #type").val();
-    var amount = Math.abs($("#pagefive #fragment-1 #fragment-1 #table-body #edit-field" + i + " #amount").val());
+    var id = $("#pagefive #fragment-1 #fragment-11 #table-body #edit-field" + i).data("id");
+    var title = $("#pagefive #fragment-1 #fragment-11 #table-body #edit-field" + i + " #title").val();
+    var type = $("#pagefive #fragment-1 #fragment-11 #table-body #edit-field" + i + " #type").val();
+    var amount = Math.abs($("#pagefive #fragment-1 #fragment-11 #table-body #edit-field" + i + " #amount").val());
 
 
-    var d = $("#pagefive #fragment-1 #fragment-1 #table-body #edit-field" + i + " #date").datebox('getTheDate');
-    var t = $("#pagefive #fragment-1 #fragment-1 #table-body #edit-field" + i + " #time").datebox('getTheDate');
+    var d = $("#pagefive #fragment-1 #fragment-11 #table-body #edit-field" + i + " #date").datebox('getTheDate');
+    var t = $("#pagefive #fragment-1 #fragment-11 #table-body #edit-field" + i + " #time").datebox('getTheDate');
     var date = TODATE(d.getFullYear(), d.getMonth() + 1, d.getDate(), t.getHours(), t.getMinutes(), 0);
-
-    console.log(id +" " + title + " "+ type + " " + amount + " " + date);
 
     $.ajax({
         url: SERVER_URL,
@@ -98,7 +135,7 @@ function saveEdit(i) {
 
 // f 1 1
 function getTransactionsTable() {
-    $("#pagefive #fragment-1 #fragment-1 #table-body").empty();
+    $("#pagefive #fragment-1 #fragment-11 #table-body").empty();
 
     var df = $("#pagefive #fragment-1 #date-from").datebox('getTheDate');
     var date_from = TODATE(df.getFullYear(), df.getMonth() + 1, df.getDate());
@@ -116,18 +153,18 @@ function getTransactionsTable() {
             "user_id": localStorage.getItem(KEY_USERID)
         }
     }).done(function(response) {
-        $("#pagefive #fragment-1 #fragment-1 #table-body").empty();
+        $("#pagefive #fragment-1 #fragment-11 #table-body").empty();
         if (response != undefined) {
             for (var i = 0; i < response.length; i++) {
                 var r = response[i];
-                $("#pagefive #fragment-1 #fragment-1 #table-body").append('\
+                $("#pagefive #fragment-1 #fragment-11 #table-body").append('\
                 <tr id="dummy' + i + '">\
                     <th data-colstart="1">' + (i+1) + '</th>\
                     <td data-colstart="2"><span id="title">' + r.title + '</span></td>\
-                    <td data-colstart="3" data-priority="1" class="ui-table-priority-1 ui-table-cell-hidden">' + TYPE[r.type] + '</td>\
-                    <td data-colstart="4" style="text-align:right;">' + (r.type == "0" ? "+" : "-") + Number(r.amount).toFixed(2) + '</td>\
-                    <td data-colstart="5" data-priority="2" class="ui-table-priority-2 ui-table-cell-hidden">' + r.date.substring(0, 16) + '</td>\
-                    <td data-colstart="6" data-priority="3" class="ui-table-priority-3 ui-table-cell-hidden">\
+                    <td data-colstart="3" data-priority="1" class="ui-table-priority-3 ui-table-cell-hidden">' + TYPE[r.type] + '</td>\
+                    <td data-colstart="4" style="text-align: right;">' + (r.type == "0" ? "+" : "-") + Number(r.amount).toFixed(2) + '</td>\
+                    <td data-colstart="5" data-priority="2" class="ui-table-priority-5 ui-table-cell-hidden">' + r.date.substring(0, 16) + '</td>\
+                    <td data-colstart="6" data-priority="3" class="ui-table-priority-6 ui-table-cell-hidden">\
                         <div class="ui-controlgroup-controls ">\
                             <a href="#" onclick="showEditField(' + i + ');" data-role="button" data-iconpos="notext" data-theme="a" data-inline="true" class="ui-link ui-btn ui-btn-a ui-icon-edit ui-btn-icon-notext ui-btn-inline ui-shadow ui-corner-all" role="button">My button</a>\
                             <a href="#" data-role="button" data-iconpos="notext" data-theme="a" data-inline="true" class="ui-link ui-btn ui-btn-a ui-icon-delete ui-btn-icon-notext ui-btn-inline ui-shadow ui-corner-all" role="button">My button</a>\
@@ -137,22 +174,22 @@ function getTransactionsTable() {
 
                 var date = new Date(r.date);
 
-                $("#pagefive #fragment-1 #fragment-1 #table-body").append('\
+                $("#pagefive #fragment-1 #fragment-11 #table-body").append('\
                 <tr id="edit-field' + i + '" data-id="' + r.id + '">\
                     <th data-colstart="1">' + (i+1) + '</th>\
                     <td data-colstart="2"><input type="text" id="title" value="' + r.title + '"></td>\
-                    <td data-colstart="3" data-priority="1" class="ui-table-priority-1 ui-table-cell-hidden">\
+                    <td data-colstart="3" data-priority="1" class="ui-table-priority-3 ui-table-cell-hidden">\
                         <select id="type">\
                             <option value="0" ' + (TYPE[r.type] == 0 ? "selected" : "") + '>รายรับ</option>\
                             <option value="1" ' + (TYPE[r.type] == 1 ? "selected" : "") + '>รายจ่าย</option>\
                         </select>\
                     </td>\
-                    <td data-colstart="4" style="text-align:right;"><input type="number" id="amount" value="' + Number(r.amount) + '"></td>\
-                    <td data-colstart="5" data-priority="2" class="ui-table-priority-2 ui-table-cell-hidden">\
+                    <td data-colstart="4" style="text-align: right;"><input type="number" id="amount" value="' + Number(r.amount) + '"></td>\
+                    <td data-colstart="5" data-priority="2" class="ui-table-priority-5 ui-table-cell-hidden">\
                         <input type="text" id="date" data-role="datebox" value="' + r.date.substring(0, 10) + '" data-options=\'{"mode":"calbox", "calUsePickers": "true", "defaultValue": "' + r.date.substring(0, 10) + '"}\' />\
                         <input type="text" id="time" data-role="datebox" value="' + r.date.substring(11, 16) + '" data-options=\'{"mode":"timebox", "useNewStyle":true, "overrideTimeFormat": 24, "themeButton": "a", "themeInput": "a", "theme": "a", "themeHeader": "b", "overrideSetTimeButtonLabel": "ตั้งเวลา", "defaultValue": "' + r.date.substring(11, 16) + '"}\' />\
                     </td>\
-                    <td data-colstart="6" data-priority="3" class="ui-table-priority-3 ui-table-cell-hidden">\
+                    <td data-colstart="6" data-priority="6" class="ui-table-priority-6 ui-table-cell-hidden">\
                         <div class="ui-controlgroup-controls ">\
                             <a href="#" onclick="hideAllEditFields();" data-role="button" data-iconpos="notext" data-theme="a" data-inline="true" class="ui-link ui-btn ui-btn-a ui-icon-back ui-btn-icon-notext ui-btn-inline ui-shadow ui-corner-all" role="button">My button</a>\
                             <a href="#" onclick="saveEdit(' + i + ');" data-role="button" data-iconpos="notext" data-theme="a" data-inline="true" class="ui-link ui-btn ui-btn-a ui-icon-check ui-btn-icon-notext ui-btn-inline ui-shadow ui-corner-all ui-last-child" role="button">My button</a>\
@@ -161,8 +198,12 @@ function getTransactionsTable() {
                 </tr>');
             }
 
-            $('#pagefive #fragment-1 #fragment-1 #table-column-toggle').trigger("create");
-            $('#pagefive #fragment-1 #fragment-1 #table-column-toggle').table("refresh");
+            if (response.length == 0) {
+                $("#pagefive #fragment-1 #fragment-11 #table-body").append('<tr><td colspan="6" style="text-align: center;">ไม่มีรายการ</td></tr>');
+            }
+
+            $('#pagefive #fragment-1 #fragment-11 #table-column-toggle-pagefive').trigger("create");
+            $('#pagefive #fragment-1 #fragment-11 #table-column-toggle-pagefive').table("refresh");
 
             hideAllEditFields();
         }
@@ -195,7 +236,7 @@ function getDailyBar() {
         google.charts.setOnLoadCallback(function() {
             var data = new google.visualization.DataTable();
 
-            data.addColumn('date', 'วันที่');
+            data.addColumn('string', 'วันที่');
             data.addColumn('number', 'รายรับ');
             data.addColumn('number', 'รายจ่าย');
 
@@ -207,20 +248,19 @@ function getDailyBar() {
 
                     var current = new Date(r.date);
 
-                    if ((d.getFullYear() == current.getFullYear()) && (d.getMonth() == current.getMonth()) &&+ (d.getDate() == current.getDate())) {
-                        data.addRow([new Date(d.getFullYear(), d.getMonth(), d.getDate()), Number(r.income), Number(r.outcome)]);
+                    if ((d.getFullYear() == current.getFullYear()) && (d.getMonth() == current.getMonth()) && (d.getDate() == current.getDate())) {
+                        data.addRow([moment(new Date(d.getFullYear(), d.getMonth(), d.getDate())).locale("th").format('D MMM'), Number(r.income), Number(r.outcome)]);
                         response.splice(i, 1);
                         added = true;
                         break;
                     }
                 }
                 if (!added) {
-                    data.addRow([new Date(Date.UTC(d.getFullYear(), d.getMonth(), d.getDate())), 0, 0]);
+                    data.addRow([moment(new Date(Date.UTC(d.getFullYear(), d.getMonth(), d.getDate()))).locale("th").format('D MMM'), 0, 0]);
                 }
-                    console.log(JSON.stringify(data.qg));
             }
 
-            var div = $("#pagefive #fragment-1 #fragment-2 #bar_div");
+            var div = $("#pagetwo #summary_div");
             var chartwidth = div.width();
 
             var options = {
@@ -228,24 +268,29 @@ function getDailyBar() {
               width: chartwidth,
               height: 400,
               hAxis: {
-                format: 'yyyy-MM-dd',
                 gridlines: {count: 15},
                 slantedText: true,
                 slantedTextAngle: 90,
-//                        minValue: new Date("2017-01-01")
               },
               vAxis: {
                 gridlines: {color: 'none'},
                 minValue: 0,
               },
-//                      bar: {groupWidth: 20},
-              explorer: {actions: ['dragToPan', 'rightClickToReset'], axis: 'horizontal'},
-              'chartArea': {'width': '80%', 'height': '55%'}
+              bar: {
+                groupWidth: 40
+              },
+              explorer: {
+                axis: 'horizontal',
+                keepInBounds: false
+              },
+              chartArea: {
+                left: '12%',
+                right: '25%',
+                width: '63%',
+                height: '65%'}
             };
 
-//                    console.log(data);
-            var chart = new google.visualization.ColumnChart(document.getElementById('bar_div'));
-            chart.draw(data, options);
+            new google.visualization.ColumnChart(document.getElementById('bar_div')).draw(data, options);
         });
     }).fail(function(jqXHR, textStatus, errorThrown) {
                 console.log(jqXHR + "\n" + textStatus + "\n" + errorThrown);
@@ -264,7 +309,7 @@ function getDailyPie() {
         type: "POST",
         dataType: "json",
         data: {
-            "function": "get_transactions_by_title_by_user_id",
+            "function": "get_transactions_group_by_title_by_user_id",
             "date_from": date_from,
             "date_to": date_to,
             "user_id": localStorage.getItem(KEY_USERID)
@@ -289,16 +334,152 @@ function getDailyPie() {
                 }
             }
 
-            var div = $("#pagefive #fragment-1 #fragment-3 #income_div");
+            var div = $("#pagetwo #summary_div");
             var chartwidth = div.width();
 
-            console.log(chartwidth);
-
-            var incomeOption = {'title':'รายรับ', 'width':chartwidth, 'height':300, 'chartArea': {'width': '90%', 'height': '90%'}};
-            var outcomeOption = {'title':'รายจ่าย', 'width':chartwidth, 'height':300, 'chartArea': {'width': '90%', 'height': '90%'}};
+            var incomeOption = {'title':'รายรับ ' + date_from.split(" ")[0] + " - " + date_to.split(" ")[0], 'width':chartwidth, 'height':300, 'chartArea': {'width': '90%', 'height': '85%'}};
+            var outcomeOption = {'title':'รายจ่าย ' + date_from.split(" ")[0] + " - " + date_to.split(" ")[0], 'width':chartwidth, 'height':300, 'chartArea': {'width': '90%', 'height': '85%'}};
 
             new google.visualization.PieChart(document.getElementById('income_div')).draw(income, incomeOption);
             new google.visualization.PieChart(document.getElementById('outcome_div')).draw(outcome, outcomeOption);
+        });
+
+    }).fail(function(jqXHR, textStatus, errorThrown) {
+                console.log(jqXHR + "\n" + textStatus + "\n" + errorThrown);
+    });
+}
+
+
+
+// f 2 2
+function getMonthlyBar() {
+    var df = $("#pagefive #fragment-2 #month-from").datebox('getTheDate');
+    var month_from = TODATE(df.getFullYear(), df.getMonth() + 1, 1);
+    var dt = $("#pagefive #fragment-2 #month-to").datebox('getTheDate');
+    var last_day = new Date(dt.getFullYear(), dt.getMonth() + 1, 0);
+    var month_to = TODATE(last_day.getFullYear(), last_day.getMonth() + 1, last_day.getDate(), 23, 59, 59);
+
+    $.ajax({
+        url: SERVER_URL,
+        type: "POST",
+        dataType: "json",
+        data: {
+            "function": "get_transactions_group_by_month_by_user_id",
+            "month_from": month_from,
+            "month_to": month_to,
+            "user_id": localStorage.getItem(KEY_USERID)
+        }
+    }).done(function(response) {
+        google.charts.setOnLoadCallback(function() {
+            var data = new google.visualization.DataTable();
+
+            data.addColumn('string', 'เดือน');
+            data.addColumn('number', 'รายรับ');
+            data.addColumn('number', 'รายจ่าย');
+
+            for (var d = new Date(df.getFullYear(), df.getMonth(), 1); d <= dt; d.setMonth(d.getMonth() + 1)) {
+
+                var added = false;
+                for (var i = 0; i < response.length; i++) {
+                    var r = response[i];
+
+                    var current = new Date(r.date);
+
+                    if ((d.getFullYear() == current.getFullYear()) && (d.getMonth() == current.getMonth())) {
+                        data.addRow([moment(new Date(d.getFullYear(), d.getMonth(), 1)).locale("th").format('MMM YYYY'), Number(r.income), Number(r.outcome)]);
+                        response.splice(i, 1);
+                        added = true;
+                        break;
+                    }
+                }
+                if (!added) {
+                    data.addRow([moment(new Date(Date.UTC(d.getFullYear(), d.getMonth(), 1))).locale("th").format('MMM YYYY'), 0, 0]);
+                }
+            }
+
+            var div = $("#pagetwo #summary_div");
+            var chartwidth = div.width();
+
+            var options = {
+              title: 'กราฟแสดงรายรับ-รายจ่ายรายเดือน',
+              width: chartwidth,
+              height: 400,
+              hAxis: {
+                gridlines: {count: 15},
+                slantedText: true,
+                slantedTextAngle: 90,
+              },
+              vAxis: {
+                gridlines: {color: 'none'},
+                minValue: 1,
+              },
+              bar: {
+                groupWidth: 40
+              },
+              explorer: {
+                axis: 'horizontal',
+                keepInBounds: false
+              },
+              chartArea: {
+                left: '12%',
+                right: '25%',
+                width: '63%',
+                height: '65%'}
+            };
+
+            new google.visualization.ColumnChart(document.getElementById('bar_month_div')).draw(data, options);
+        });
+    }).fail(function(jqXHR, textStatus, errorThrown) {
+                console.log(jqXHR + "\n" + textStatus + "\n" + errorThrown);
+    });
+}
+
+// f 2 3
+function getMonthlyPie() {
+    var df = $("#pagefive #fragment-2 #month-from").datebox('getTheDate');
+    var month_from = TODATE(df.getFullYear(), df.getMonth() + 1, 1);
+    var dt = $("#pagefive #fragment-2 #month-to").datebox('getTheDate');
+    var last_day = new Date(dt.getFullYear(), dt.getMonth() + 1, 0);
+    var month_to = TODATE(last_day.getFullYear(), last_day.getMonth() + 1, last_day.getDate(), 23, 59, 59);
+
+    $.ajax({
+        url: SERVER_URL,
+        type: "POST",
+        dataType: "json",
+        data: {
+            "function": "get_transactions_group_by_month_by_title_by_user_id",
+            "month_from": month_from,
+            "month_to": month_to,
+            "user_id": localStorage.getItem(KEY_USERID)
+        }
+    }).done(function(response) {
+        google.charts.setOnLoadCallback(function() {
+            var income = new google.visualization.DataTable();
+            income.addColumn('string', 'รายการ');
+            income.addColumn('number', 'จำนวน');
+
+            var outcome = new google.visualization.DataTable();
+            outcome.addColumn('string', 'รายการ');
+            outcome.addColumn('number', 'จำนวน');
+
+            for (var i = 0; i < response.length; i++) {
+                var r = response[i];
+                if (r.type == "0") {
+                    income.addRow([r.title + " (" + r.count + ")", Number(r.amount)]);
+                }
+                else {
+                    outcome.addRow([r.title + " (" + r.count + ")", Number(r.amount)]);
+                }
+            }
+
+            var div = $("#pagetwo #summary_div");
+            var chartwidth = div.width();
+
+            var incomeOption = {'title':'รายรับ ' + month_from.substring(0, 10) + " - " + month_to.substring(0, 10), 'width':chartwidth, 'height':300, 'chartArea': {'width': '90%', 'height': '90%'}};
+            var outcomeOption = {'title':'รายจ่าย ' + month_from.substring(0, 10) + " - " + month_to.substring(0, 10), 'width':chartwidth, 'height':300, 'chartArea': {'width': '90%', 'height': '90%'}};
+
+            new google.visualization.PieChart(document.getElementById('income_month_div')).draw(income, incomeOption);
+            new google.visualization.PieChart(document.getElementById('outcome_month_div')).draw(outcome, outcomeOption);
         });
 
     }).fail(function(jqXHR, textStatus, errorThrown) {

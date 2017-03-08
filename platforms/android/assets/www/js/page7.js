@@ -49,13 +49,13 @@ $(document).ready(function() {
                     <tr>\
                         <th data-colstart="1">' + (i+1) + '</th>\
                         <td data-colstart="2">' + r.name + '</td>\
-                        <td data-colstart="3" data-priority="1" class="ui-table-priority-1 ui-table-cell-hidden">' + r.email + '</td>\
+                        <td data-colstart="3" data-priority="1" class="ui-table-priority-3 ui-table-cell-hidden">' + r.email + '</td>\
                         <td data-colstart="4">' + r.phone + '</td>\
-                        <td data-colstart="5" data-priority="2" class="ui-table-priority-2 ui-table-cell-hidden"><input type="button" value="อนุมัติ" ' + (Number(r.group_id) > 0 ? 'disabled' : '') + ' onclick="approve(' + r.id + ', this);"></td>\
+                        <td data-colstart="5" data-priority="2" class="ui-table-priority-5 ui-table-cell-hidden"><input type="button" value="อนุมัติ" ' + (Number(r.group_id) > 0 ? 'disabled' : '') + ' onclick="approve(' + r.id + ', this);"></td>\
                     </tr>');
                 }
-                $('#pageseven #table-column-toggle').trigger("create");
-                $('#pageseven #table-column-toggle').table("refresh");
+                $('#pageseven #table-column-toggle-pageseven').trigger("create");
+                $('#pageseven #table-column-toggle-pageseven').table("refresh");
             }
             else {
                 console.log("getting transaction failed");
