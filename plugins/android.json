@@ -7,22 +7,22 @@
         "files": {}
     },
     "installed_plugins": {
-        "cordova-plugin-console": {
-            "PACKAGE_NAME": "io.cordova.hellocordova"
+        "cordova-plugin-whitelist": {
+            "PACKAGE_NAME": "com.cordovaapp.income"
         },
         "de.appplant.cordova.plugin.local-notification": {
-            "PACKAGE_NAME": "io.cordova.hellocordova"
+            "PACKAGE_NAME": "com.cordovaapp.income"
         },
-        "cordova-plugin-whitelist": {
-            "PACKAGE_NAME": "io.cordova.hellocordova"
+        "cordova-plugin-console": {
+            "PACKAGE_NAME": "com.cordovaapp.income"
         }
     },
     "dependent_plugins": {
         "cordova-plugin-device": {
-            "PACKAGE_NAME": "io.cordova.hellocordova"
+            "PACKAGE_NAME": "com.cordovaapp.income"
         },
-        "cordova-android-support-v4": {
-            "PACKAGE_NAME": "io.cordova.hellocordova"
+        "cordova-plugin-app-event": {
+            "PACKAGE_NAME": "com.cordovaapp.income"
         }
     }
 }

@@ -1,11 +1,16 @@
 
+[![npm version](https://badge.fury.io/js/de.appplant.cordova.plugin.local-notification.svg)](http://badge.fury.io/js/de.appplant.cordova.plugin.local-notification)
 [![PayPayl donate button](https://img.shields.io/badge/paypal-donate-yellow.svg)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=L3HKQCD9UA35A "Donate once-off to this project using Paypal")
 
-#### :bangbang: Please vote for these cordova-windows issues :bangbang:
-1. https://issues.apache.org/jira/browse/CB-8674 _(Missing launch arguments)_
-2. https://issues.apache.org/jira/browse/CB-8946 _(Missing ToastCapable flag)_
+## Important notice
+1. Its been a while that the plugin has received major updates and bug fixes. My (free)time is limited and I have multiple projects to maintain. Once I've updated my background-mode plugin the local-notification plugin will get an official release supporting ios10. The ios10 branch will be merged into the master as well.
 
-Thanks a lot!
+2. For the future I am looking for other opportunities to support and enhance the plugin. That might be a crowdfunding campain or adding other core maintainers. Everyone with an serious interest is welcome to contact me!
+
+3. I am aware of the growing number of open issues and pull. Therefore, there's a new ticket template that can be found [here][ticket_template]. For every new issue please add an filled template. That will help rwillett and me to faster response to your issue. If you ignore this template, we'll ignore your issue.
+
+Thanks for using my plugin and for your support!</br>
+Sebastián Katzer
 
 Cordova Local-Notification Plugin
 =================================
@@ -13,7 +18,7 @@ Cordova Local-Notification Plugin
 The essential purpose of local notifications is to enable an application to inform its users that it has something for them — for example, a message or an upcoming appointment — when the application isn’t running in the foreground.<br>
 They are scheduled by an application and delivered on the same device.
 
-<img width="35%" align="right" hspace="19" vspace="12" src="https://github.com/katzer/cordova-plugin-local-notifications/blob/example/images/android.png"></img>
+<img width="35%" align="right" hspace="19" vspace="12" src="https://raw.githubusercontent.com/katzer/cordova-plugin-local-notifications/example/images/android.png"></img>
 
 ### How they appear to the user
 Users see notifications in the following ways:
@@ -29,10 +34,11 @@ For example, applications that depend on servers for messages or data can poll t
 
 ## Supported Platforms
 The current 0.8 branch supports the following platforms:
-- __iOS__ _(including iOS8)_<br>
+- __iOS__ _(>= 8)_<br>
 - __Android__ _(SDK >=7)_
 - __Windows 8.1__ _(added with v0.8.2)_
 - __Windows Phone 8.1__ _(added with v0.8.2)_
+- __Windows 10__ _(added with v0.8.3)_
 
 Find out more informations [here][wiki_platforms] in our wiki.
 
@@ -119,9 +125,10 @@ Thank you!
 
 This software is released under the [Apache 2.0 License][apache2_license].
 
-© 2013-2015 appPlant UG, Inc. All rights reserved
+© 2013-2016 appPlant UG, Inc. All rights reserved
 
 
+[ticket_template]: https://github.com/katzer/cordova-plugin-local-notifications/issues/1188
 [cordova]: https://cordova.apache.org
 [wiki]: https://github.com/katzer/cordova-plugin-local-notifications/wiki
 [wiki_platforms]: https://github.com/katzer/cordova-plugin-local-notifications/wiki/02.-Platforms
