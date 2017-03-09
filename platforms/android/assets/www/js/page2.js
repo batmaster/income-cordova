@@ -14,7 +14,6 @@ $(document).ready(function() {
                 "user_id": localStorage.getItem(KEY_USERID)
             }
         }).done(function(response) {
-            console.log(response);
 
             $("#pagetwo #amount").text((response.amount == undefined ? 0 : response.amount) + " บาท");
 

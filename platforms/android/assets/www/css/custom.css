@@ -33,3 +33,7 @@
     padding: 10px;
     border-radius: 0 0 5px 5px;
 }
+
+fieldset.group-days .ui-btn {
+    padding: .7em 0.8em;
+}

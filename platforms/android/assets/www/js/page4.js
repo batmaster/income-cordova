@@ -69,7 +69,6 @@ $(document).ready(function() {
         $("#pagefour #date").datebox('setTheDate', new Date());
         $("#pagefour #time").datebox('setTheDate', new Date());
 
-//        $("#pagefour #type").val(0);
         $("#pagefour #title").val("");
         $("#pagefour #amount").val("");
     }

@@ -6,6 +6,8 @@ var KEY_GROUPID = "KEY_GROUPID";
 var LEVEL = ["สมาชิก", "หัวหน้ากลุ่ม"];
 var TYPE = ["รายรับ", "รายจ่าย"];
 
+var DAYS = ["อ", "จ", "ค", "พ", "ห", "ศ", "ส"];
+
 function printLocalStorages() {
     var values = [],
         keys = Object.keys(localStorage);
