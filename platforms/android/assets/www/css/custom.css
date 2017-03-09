@@ -1,0 +1,35 @@
+.badge {
+    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+    background-color: #d9534f;
+    display: inline;
+    padding: .2em .6em .3em;
+    font-size: 75%;
+    font-weight: 700;
+    line-height: 1;
+    color: #fff;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: baseline;
+    border-radius: .25em;
+}
+
+.section-title {
+    background: #333;
+    border: 1px solid #111;
+    padding: 8px 15px;
+    font-size: 16px;
+    color: white;
+    text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.5);
+    letter-spacing: 0;
+    border-radius: 5px 5px 0 0;
+    font-weight: normal;
+    margin-bottom: 0;
+    overflow: hidden;
+}
+
+.entry-wrapper {
+    border: 1px solid #ccc;
+    border-top: 0;
+    padding: 10px;
+    border-radius: 0 0 5px 5px;
+}
