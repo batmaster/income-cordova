@@ -37,6 +37,17 @@ $(document).ready(function() {
     }
 
     $(document).on("pageshow", "#pagetwo", function() {
-        getSummary();
+
+        console.log(localStorage.getItem(KEY_NOTI_SCHEDULE_ID_CLICKED))
+        console.log(localStorage.getItem(KEY_NOTI_SCHEDULE_ID_CLICKED) == null)
+        console.log(localStorage.getItem(KEY_NOTI_SCHEDULE_ID_CLICKED) == undefined)
+
+        if (localStorage.getItem(KEY_NOTI_SCHEDULE_ID_CLICKED) != undefined) {
+            document.location.hash = "#pagefour";
+        }
+        else {
+            getSummary();
+        }
+
     });
 });

@@ -11,6 +11,38 @@ $(document).ready(function() {
 
         google.charts.load('current', {'packages':['corechart']});
     });
+    
+    $(document).on("pageshow", "#pageeight", function() {
+
+    });
+
+    $(document).on("focus", "#fragment-1 *", function() {
+        $("#pageeight #tab1").addClass('ui-btn-active');
+    });
+
+    $(document).on("focus", "#fragment-2 *", function() {
+        $("#pageeight #tab2").addClass('ui-btn-active');
+    });
+
+    $(document).on("focus", "#fragment-11 *", function() {
+        $("#pageeight #tab11").addClass('ui-btn-active');
+    });
+
+    $(document).on("focus", "#fragment-12 *", function() {
+        $("#pageeight #tab12").addClass('ui-btn-active');
+    });
+
+    $(document).on("focus", "#fragment-13 *", function() {
+        $("#pageeight #tab13").addClass('ui-btn-active');
+    });
+
+    $(document).on("focus", "#fragment-22 *", function() {
+        $("#pageeight #tab22").addClass('ui-btn-active');
+    });
+
+    $(document).on("focus", "#fragment-23 *", function() {
+        $("#pageeight #tab23").addClass('ui-btn-active');
+    });
 
 
     // f 1

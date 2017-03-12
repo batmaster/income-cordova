@@ -87,6 +87,30 @@ $(document).ready(function() {
     $(document).on("pageshow", "#pagefour", function() {
         $("#pagefour #title-list .ui-controlgroup-controls").removeClass("ui-screen-hidden");
         getTransactionTitles();
+
+        if (localStorage.getItem(KEY_NOTI_SCHEDULE_ID_CLICKED) != undefined) {
+            var id = localStorage.getItem(KEY_NOTI_SCHEDULE_ID_CLICKED);
+
+            $.ajax({
+                url: SERVER_URL,
+                type: "POST",
+                dataType: "json",
+                data: {
+                    "function": "get_schedule",
+                    "id": id
+                }
+            }).done(function(response) {
+                console.log(response);
+                if (response != undefined) {
+                    $("#pagefour #type").val(response.type).selectmenu("refresh");
+                    $("#pagefour #title").val(response.title);
+                    $("#pagefour #amount").focus();
+
+                    localStorage.removeItem(KEY_NOTI_SCHEDULE_ID_CLICKED);
+                }
+            });
+        }
+
     });
 
 

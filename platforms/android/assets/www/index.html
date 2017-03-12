@@ -50,11 +50,6 @@
         <a href="#pagenine" data-icon="user" data-role="button" class="ui-page-theme-a">ข้อมูลผู้ใช้</a>
 
         <a href="#" data-icon="delete" data-role="button" class="ui-page-theme-a" id="logout">ออกจากระบบ</a>
-
-
-    </div>
-    <div data-role="footer" data-position="fixed">
-        <h1>&copy;coppyrith by jassada</h1>
     </div>
 </div>
 
@@ -95,13 +90,12 @@
 <section data-role="page" id="pagetwo" data-position="fixed">
 
     <div data-role="header">
-        <a href="#mypanel" class="ui-btn ui-corner-all ui-shadow ui-icon-bars ui-btn-icon-left">Menu</a>
+        <a href="#mypanel" class="ui-btn ui-corner-all ui-icon-bars ui-btn-icon-notext"></a>
         <h1>My Homepage</h1>
     </div>
     <div data-role="main" class="ui-content">
         <h3>สรุปบัญชี</h3>
         <h4>ยอดเงินคงเหลือ <span id="amount"></span></h4>
-
         <br>
         <div id="summary_div"></div>
 
@@ -169,7 +163,7 @@
 <section data-role="page" id="pagefour" data-position="fixed">
 
     <div data-role="header">
-        <a href="#mypanel" class="ui-btn ui-corner-all ui-shadow ui-icon-bars ui-btn-icon-left">Menu</a>
+        <a href="#mypanel" class="ui-btn ui-corner-all ui-icon-bars ui-btn-icon-notext"></a>
         <h1>บันทึกรายรับ-รายจ่าย</h1>
     </div>
     <div data-role="main" class="ui-content">
@@ -205,7 +199,7 @@
 <section data-role="page" id="pagefive" data-position="fixed">
 
     <div data-role="header">
-        <a href="#mypanel" class="ui-btn ui-corner-all ui-shadow ui-icon-bars ui-btn-icon-left">Menu</a>
+        <a href="#mypanel" class="ui-btn ui-corner-all ui-icon-bars ui-btn-icon-notext"></a>
         <h1>รายการรายรับ-รายจ่าย</h1>
     </div>
     <div data-role="main" class="ui-content">
@@ -213,8 +207,8 @@
         <div data-role="tabs">
             <div data-role="navbar">
                 <ul>
-                    <li><a href="#fragment-1" class="ui-btn-active">รายวัน</a></li>
-                    <li><a href="#fragment-2">รายเดือน</a></li>
+                    <li><a href="#fragment-1" class="ui-btn-active" id="tab1">รายวัน</a></li>
+                    <li><a href="#fragment-2" id="tab2">รายเดือน</a></li>
                 </ul>
             </div>
             <div id="fragment-1">
@@ -228,9 +222,9 @@
                 <div data-role="tabs" id="inner-tabs1">
                     <div data-role="navbar">
                         <ul>
-                            <li><a href="#fragment-11" class="ui-btn-active">ตารางรายการ</a></li>
-                            <li><a href="#fragment-12">กราฟแท่งเปรียบเทียบรายรับ-รายจ่าย</a></li>
-                            <li><a href="#fragment-13">กราฟวงกลมเปรียบเทียบประเภท</a></li>
+                            <li><a href="#fragment-11" class="ui-btn-active" id="tab11"><abbr title="ตารางรายการ">ตาราง</abbr></a></li>
+                            <li><a href="#fragment-12" id="tab12"><abbr title="กราฟแท่งเปรียบเทียบรายรับ-รายจ่าย">กราฟแท่ง</abbr></a></li>
+                            <li><a href="#fragment-13" id="tab13"><abbr title="กราฟวงกลมเปรียบเทียบประเภท">กราฟวงกลม</abbr></a></li>
                         </ul>
                     </div>
                     <div id="fragment-11">
@@ -270,17 +264,17 @@
             <div id="fragment-2">
                 <p></p>
                 <label for="month-from">จากเดือน</label>
-                <input type="date" id="month-from" data-role="datebox" data-options='{"mode": "datebox", "overrideDateFormat":"%Y-%m", "overrideDateFieldOrder": ["m", "y"], "overrideSetDateButtonLabel": "เลือก", "overrideTitleDateDialogLabel": "เลือกเดือนและปี"}' />
+                <input type="text" id="month-from" data-role="datebox" data-options='{"mode": "datebox", "overrideDateFormat":"%Y-%m", "overrideDateFieldOrder": ["m", "y"], "overrideSetDateButtonLabel": "เลือก", "overrideTitleDateDialogLabel": "เลือกเดือนและปี"}' />
 
 
                 <label for="month-to">ถึงเดือน</label>
-                <input type="date" id="month-to" data-role="datebox" data-options='{"mode": "datebox", "overrideDateFormat":"%Y-%m", "overrideDateFieldOrder": ["m", "y"], "overrideSetDateButtonLabel": "เลือก", "overrideTitleDateDialogLabel": "เลือกเดือนและปี"}' />
+                <input type="text" id="month-to" data-role="datebox" data-options='{"mode": "datebox", "overrideDateFormat":"%Y-%m", "overrideDateFieldOrder": ["m", "y"], "overrideSetDateButtonLabel": "เลือก", "overrideTitleDateDialogLabel": "เลือกเดือนและปี"}' />
 
                 <div data-role="tabs" id="inner-tabs2">
                     <div data-role="navbar">
                         <ul>
-                            <li><a href="#fragment-22" class="ui-btn-active">กราฟแท่งเปรียบเทียบรายรับ-รายจ่าย</a></li>
-                            <li><a href="#fragment-23">กราฟวงกลมเปรียบเทียบประเภท</a></li>
+                            <li><a href="#fragment-22" class="ui-btn-active" id="tab22"><abbr title="กราฟแท่งเปรียบเทียบรายรับ-รายจ่าย">กราฟแท่ง</abbr></a></li>
+                            <li><a href="#fragment-23" id="tab23"><abbr title="กราฟวงกลมเปรียบเทียบประเภท">กราฟวงกลม</abbr></a></li>
                         </ul>
                     </div>
                     <div id="fragment-22">
@@ -311,19 +305,143 @@
 <section data-role="page" id="pagesix" data-position="fixed">
 
     <div data-role="header">
-        <a href="#mypanel" class="ui-btn ui-corner-all ui-shadow ui-icon-bars ui-btn-icon-left">Menu</a>
+        <a href="#mypanel" class="ui-btn ui-corner-all ui-icon-bars ui-btn-icon-notext"></a>
         <h1>การแจ้งเตือน</h1>
     </div>
     <div data-role="main" class="ui-content">
 
+        <div data-role="tabs">
+            <div data-role="navbar">
+                <ul>
+                    <li><a href="#fragment-61" class="ui-btn-active">เพิ่มรายการ</a></li>
+                    <li><a href="#fragment-62" id="tab1">รายการแจ้งเตือน</a></li>
+                </ul>
+            </div>
+            <div id="fragment-61">
+                <select id="type">
+                    <option value="0" selected>รายรับ</option>
+                    <option value="1">รายจ่าย</option>
+                </select>
+
+                <label for="title">รายการ</label>
+                <input type="text" data-type="search" id="title">
+                <form data-role="controlgroup" data-filter-reveal="true" data-filter="true" data-input="#pagesix #title" id="title-list"></form>
+
+                <div data-role="collapsible-set">
+                    <div data-role="collapsible" data-collapsed="false" id="days">
+                        <h3>ทุกวัน</h3>
+                        <div class="ui-field-contain">
+                            <fieldset data-role="controlgroup" data-type="horizontal" class="group-days">
+                                <input type="checkbox" id="checkbox-su" class="custom">
+                                <label for="checkbox-su">อ</label>
+
+                                <input type="checkbox" id="checkbox-mo" class="custom">
+                                <label for="checkbox-mo">จ</label>
+
+                                <input type="checkbox" id="checkbox-tu" class="custom">
+                                <label for="checkbox-tu">ค</label>
+
+                                <input type="checkbox" id="checkbox-we" class="custom">
+                                <label for="checkbox-we">พ</label>
+
+                                <input type="checkbox" id="checkbox-th" class="custom">
+                                <label for="checkbox-th">ห</label>
+
+                                <input type="checkbox" id="checkbox-fr" class="custom">
+                                <label for="checkbox-fr">ศ</label>
+
+                                <input type="checkbox" id="checkbox-sa" class="custom">
+                                <label for="checkbox-sa">ส</label>
+                            </fieldset>
+                        </div>
+
+                        <label for="time">เวลา</label>
+                        <input type="text" id="time" data-role="datebox" data-options='{"mode":"timebox", "useNewStyle":true, "overrideTimeFormat": 24, "themeButton": "a", "themeInput": "a", "theme": "a", "themeHeader": "b", "overrideSetTimeButtonLabel": "ตั้งเวลา"}' />
+
+                        <input type="button" data-inline="true" value="เพิ่มการแจ้งเตือน" id="submit">
+                    </div>
+
+                    <div data-role="collapsible" id="month">
+                        <h3>ทุกวันที่</h3>
+                        <label for="date" class="select">วันที่</label>
+                        <select name="select-choice-min" id="date" data-mini="true">
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                            <option value="6">6</option>
+                            <option value="7">7</option>
+                            <option value="8">8</option>
+                            <option value="9">9</option>
+                            <option value="10">10</option>
+                            <option value="11">11</option>
+                            <option value="12">12</option>
+                            <option value="13">13</option>
+                            <option value="14">14</option>
+                            <option value="15">15</option>
+                            <option value="16">16</option>
+                            <option value="17">17</option>
+                            <option value="18">18</option>
+                            <option value="19">19</option>
+                            <option value="20">20</option>
+                            <option value="21">21</option>
+                            <option value="22">22</option>
+                            <option value="23">23</option>
+                            <option value="24">24</option>
+                            <option value="25">25</option>
+                            <option value="26">26</option>
+                            <option value="27">27</option>
+                            <option value="28">28</option>
+                            <option value="29">29</option>
+                            <option value="30">30</option>
+                            <option value="31">31</option>
+                        </select>
+
+                        <label for="time">เวลา</label>
+                        <input type="text" id="time" data-role="datebox" data-options='{"mode":"timebox", "useNewStyle":true, "overrideTimeFormat": 24, "themeButton": "a", "themeInput": "a", "theme": "a", "themeHeader": "b", "overrideSetTimeButtonLabel": "ตั้งเวลา"}' />
+
+                        <input type="button" data-inline="true" value="เพิ่มการแจ้งเตือน" id="submit">
+                    </div>
+                </div>
+
+            </div>
+            <div id="fragment-62">
+                <div style="overflow:auto; width: 100%; ">
+                    <table data-role="table" id="table-column-toggle-pagesix" data-mode="columntoggle" data-column-btn-text="คอลัมน์" class="ui-responsive table-stroke ui-table ui-table-columntoggle">
+                        <thead>
+                        <tr>
+                            <th data-colstart="1">#</th>
+                            <th data-colstart="2">รายการ</th>
+                            <th data-colstart="3">การแจ้งเตือน</th>
+                            <th data-colstart="4" data-priority="1" class="ui-table-priority-5 ui-table-cell-hidden"><abbr title="แก้ไขข้อมูล">แก้ไข</abbr></th>
+                        </tr>
+                        </thead>
+                        <tbody id="table-body">
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <div data-role="footer" data-position="fixed">
+        <h1>&copy;coppyrith by jassada</h1>
+    </div>
+</section>
+
+<div data-role="dialog" data-transition="pop" id="scheduleEditDialog">
+    <div data-role="header">
+        <h1>แก้ไข</h1>
+    </div>
+    <div data-role="main" class="ui-content">
         <select id="type">
-            <option value="0" selected>รายรับ</option>
+            <option value="0">รายรับ</option>
             <option value="1">รายจ่าย</option>
         </select>
 
         <label for="title">รายการ</label>
-        <input type="text" data-type="search" id="title">
-        <form data-role="controlgroup" data-filter-reveal="true" data-filter="true" data-input="#pagesix #title" id="title-list"></form>
+        <input type="text" id="title">
 
         <div data-role="collapsible-set">
             <div data-role="collapsible" data-collapsed="false" id="days">
@@ -350,14 +468,14 @@
 
                         <input type="checkbox" id="checkbox-sa" class="custom">
                         <label for="checkbox-sa">ส</label>
-
                     </fieldset>
                 </div>
 
                 <label for="time">เวลา</label>
                 <input type="text" id="time" data-role="datebox" data-options='{"mode":"timebox", "useNewStyle":true, "overrideTimeFormat": 24, "themeButton": "a", "themeInput": "a", "theme": "a", "themeHeader": "b", "overrideSetTimeButtonLabel": "ตั้งเวลา"}' />
 
-                <input type="button" data-inline="true" value="เพิ่มการแจ้งเตือน" id="submit">
+                <a href="#" class="ui-btn ui-corner-all" data-rel="back" onclick="saveScheduleEdit(0);">แก้ไข</a>
+                <a href="#" class="ui-btn ui-corner-all" data-rel="back">กลับ</a>
             </div>
 
             <div data-role="collapsible" id="month">
@@ -400,23 +518,18 @@
                 <label for="time">เวลา</label>
                 <input type="text" id="time" data-role="datebox" data-options='{"mode":"timebox", "useNewStyle":true, "overrideTimeFormat": 24, "themeButton": "a", "themeInput": "a", "theme": "a", "themeHeader": "b", "overrideSetTimeButtonLabel": "ตั้งเวลา"}' />
 
-                <input type="button" data-inline="true" value="เพิ่มการแจ้งเตือน" id="submit">
+                <a href="#" class="ui-btn ui-corner-all" data-rel="back" onclick="saveScheduleEdit(1);">แก้ไข</a>
+                <a href="#" class="ui-btn ui-corner-all" data-rel="back">กลับ</a>
             </div>
-
         </div>
-
     </div>
-    <div data-role="footer" data-position="fixed">
-        <h1>&copy;coppyrith by jassada</h1>
-    </div>
-</section>
+</div>
 <!-- page6 -->
 
 <!-- page7 -->
 <section data-role="page" id="pageseven" data-position="fixed">
-
     <div data-role="header">
-        <a href="#mypanel" class="ui-btn ui-corner-all ui-shadow ui-icon-bars ui-btn-icon-left">Menu</a>
+        <a href="#mypanel" class="ui-btn ui-corner-all ui-icon-bars ui-btn-icon-notext"></a>
         <h1>จัดการกลุ่ม</h1>
 
     </div>
@@ -448,9 +561,8 @@
 
 <!-- page8 -->
 <section data-role="page" id="pageeight" data-position="fixed">
-
     <div data-role="header">
-        <a href="#mypanel" class="ui-btn ui-corner-all ui-shadow ui-icon-bars ui-btn-icon-left">Menu</a>
+        <a href="#mypanel" class="ui-btn ui-corner-all ui-icon-bars ui-btn-icon-notext"></a>
         <h1>รายการของกลุ่ม</h1>
     </div>
     <div data-role="main" class="ui-content">
@@ -458,8 +570,8 @@
         <div data-role="tabs">
             <div data-role="navbar">
                 <ul>
-                    <li><a href="#fragment-1" class="ui-btn-active">รายวัน</a></li>
-                    <li><a href="#fragment-2">รายเดือน</a></li>
+                    <li><a href="#fragment-1" class="ui-btn-active" id="tab1">รายวัน</a></li>
+                    <li><a href="#fragment-2" id="tab2">รายเดือน</a></li>
                 </ul>
             </div>
             <div id="fragment-1">
@@ -473,9 +585,9 @@
                 <div data-role="tabs" id="inner-tabs1">
                     <div data-role="navbar">
                         <ul>
-                            <li><a href="#fragment-11" class="ui-btn-active"><abbr title="ตารางรายการ">ตาราง</abbr></a></li>
-                            <li><a href="#fragment-12"><abbr title="กราฟแท่งเปรียบเทียบรายรับ-รายจ่าย">กราฟแท่ง</abbr></a></li>
-                            <li><a href="#fragment-13"><abbr title="กราฟวงกลมเปรียบเทียบประเภท">กราฟวงกลม</abbr></a></li>
+                            <li><a href="#fragment-11" class="ui-btn-active" id="tab11"><abbr title="ตารางรายการ">ตาราง</abbr></a></li>
+                            <li><a href="#fragment-12" id="tab12"><abbr title="กราฟแท่งเปรียบเทียบรายรับ-รายจ่าย">กราฟแท่ง</abbr></a></li>
+                            <li><a href="#fragment-13" id="tab13"><abbr title="กราฟวงกลมเปรียบเทียบประเภท">กราฟวงกลม</abbr></a></li>
                         </ul>
                     </div>
                     <div id="fragment-11">
@@ -515,17 +627,17 @@
             <div id="fragment-2">
                 <p></p>
                 <label for="month-from">จากเดือน</label>
-                <input type="date" id="month-from" data-role="datebox" data-options='{"mode": "datebox", "overrideDateFormat":"%Y-%m", "overrideDateFieldOrder": ["m", "y"], "overrideSetDateButtonLabel": "เลือก", "overrideTitleDateDialogLabel": "เลือกเดือนและปี"}' />
+                <input type="text" id="month-from" data-role="datebox" data-options='{"mode": "datebox", "overrideDateFormat":"%Y-%m", "overrideDateFieldOrder": ["m", "y"], "overrideSetDateButtonLabel": "เลือก", "overrideTitleDateDialogLabel": "เลือกเดือนและปี"}' />
 
 
                 <label for="month-to">ถึงเดือน</label>
-                <input type="date" id="month-to" data-role="datebox" data-options='{"mode": "datebox", "overrideDateFormat":"%Y-%m", "overrideDateFieldOrder": ["m", "y"], "overrideSetDateButtonLabel": "เลือก", "overrideTitleDateDialogLabel": "เลือกเดือนและปี"}' />
+                <input type="text" id="month-to" data-role="datebox" data-options='{"mode": "datebox", "overrideDateFormat":"%Y-%m", "overrideDateFieldOrder": ["m", "y"], "overrideSetDateButtonLabel": "เลือก", "overrideTitleDateDialogLabel": "เลือกเดือนและปี"}' />
 
                 <div data-role="tabs" id="inner-tabs2">
                     <div data-role="navbar">
                         <ul>
-                            <li><a href="#fragment-22" class="ui-btn-active"><abbr title="กราฟแท่งเปรียบเทียบรายรับ-รายจ่าย">กราฟแท่ง</abbr></a></li>
-                            <li><a href="#fragment-23"><abbr title="กราฟวงกลมเปรียบเทียบประเภท">กราฟวงกลม</abbr></a></li>
+                            <li><a href="#fragment-22" class="ui-btn-active" id="tab22"><abbr title="กราฟแท่งเปรียบเทียบรายรับ-รายจ่าย">กราฟแท่ง</abbr></a></li>
+                            <li><a href="#fragment-23" id="tab23"><abbr title="กราฟวงกลมเปรียบเทียบประเภท">กราฟวงกลม</abbr></a></li>
                         </ul>
                     </div>
                     <div id="fragment-22">
@@ -551,9 +663,8 @@
 
 <!-- page9 -->
 <section data-role="page" id="pagenine" data-position="fixed">
-
     <div data-role="header">
-        <a href="#mypanel" class="ui-btn ui-corner-all ui-shadow ui-icon-bars ui-btn-icon-left">Menu</a>
+        <a href="#mypanel" class="ui-btn ui-corner-all ui-icon-bars ui-btn-icon-notext"></a>
         <h1>ข้อมูลผู้ใช้</h1>
     </div>
     <div data-role="main" class="ui-content">
@@ -671,6 +782,14 @@
             localStorage.removeItem(KEY_LEVEL);
             localStorage.removeItem(KEY_GROUPID);
             $.mobile.changePage($("#pageone"), {transition: "slidedown", changeHash: false});
+        });
+
+        $(document).on('focus', 'input, textarea', function() {
+            $("div.ui-footer").hide();
+        });
+
+        $(document).on('blur', 'input, textarea', function() {
+            $("div.ui-footer").show();
         });
     });
 

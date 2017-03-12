@@ -22,7 +22,14 @@ document.addEventListener('deviceready', function () {
 //    });
 
     cordova.plugins.notification.local.on("click", function (notification, state) {
-        alert(notification.id + " was clicked");
+        var id = notification.id;
+        if (id >= 10000) {
+            id /= 10;
+            id -= 1000;
+        }
+
+        localStorage.setItem(KEY_NOTI_SCHEDULE_ID_CLICKED, id);
+        console.log(localStorage.getItem(KEY_NOTI_SCHEDULE_ID_CLICKED));
     }, this);
 
     syncSchedules();
@@ -50,13 +57,11 @@ function syncSchedules() {
                 }
 
                 var id = 1000 + Number(r["id"]);
+                var type = r["type"];
                 var title = r["title"];
                 var frequency = r["frequency"].split(" ");
 
                 var text = "";
-
-                console.log((frequency[0] == "0") + " " + frequency[0])
-
                 if (frequency[0] == "0") {
                     var schedules = [];
 
@@ -127,7 +132,7 @@ function syncSchedules() {
         }
     });
 
-    printLocalSchedules();
+//    printLocalSchedules();
 }
 
 function printLocalSchedules() {
@@ -148,6 +153,6 @@ function addSchedules(schedules) {
 
 function clearSchedules() {
     cordova.plugins.notification.local.cancelAll(function() {
-
+        printLocalSchedules();
     }, this);
 }

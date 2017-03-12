@@ -11,6 +11,38 @@ $(document).ready(function() {
         google.charts.load('current', {'packages':['corechart']});
     });
 
+    $(document).on("pageshow", "#pagefive", function() {
+
+    });
+
+    $(document).on("focus", "#fragment-1 *", function() {
+        $("#pagefive #tab1").addClass('ui-btn-active');
+    });
+
+    $(document).on("focus", "#fragment-2 *", function() {
+        $("#pagefive #tab2").addClass('ui-btn-active');
+    });
+
+    $(document).on("focus", "#fragment-11 *", function() {
+        $("#pagefive #tab11").addClass('ui-btn-active');
+    });
+
+    $(document).on("focus", "#fragment-12 *", function() {
+        $("#pagefive #tab12").addClass('ui-btn-active');
+    });
+
+    $(document).on("focus", "#fragment-13 *", function() {
+        $("#pagefive #tab13").addClass('ui-btn-active');
+    });
+
+    $(document).on("focus", "#fragment-22 *", function() {
+        $("#pagefive #tab22").addClass('ui-btn-active');
+    });
+
+    $(document).on("focus", "#fragment-23 *", function() {
+        $("#pagefive #tab23").addClass('ui-btn-active');
+    });
+
 
     // f 1
     $(document).on('click','#pagefive #fragment-1 #date-from', function() {
@@ -79,13 +111,6 @@ $(document).ready(function() {
                 break;
         }
     });
-
-    function hideAllEditFields() {
-        $("#pagefive #fragment-1 #fragment-11 #table-body tr[id^=edit-field]").hide(0);
-    }
-
-
-
 
 
 });
@@ -167,7 +192,7 @@ function getTransactionsTable() {
                     <td data-colstart="6" data-priority="3" class="ui-table-priority-6 ui-table-cell-hidden">\
                         <div class="ui-controlgroup-controls ">\
                             <a href="#" onclick="showEditField(' + i + ');" data-role="button" data-iconpos="notext" data-theme="a" data-inline="true" class="ui-link ui-btn ui-btn-a ui-icon-edit ui-btn-icon-notext ui-btn-inline ui-shadow ui-corner-all" role="button">My button</a>\
-                            <a href="#" data-role="button" data-iconpos="notext" data-theme="a" data-inline="true" class="ui-link ui-btn ui-btn-a ui-icon-delete ui-btn-icon-notext ui-btn-inline ui-shadow ui-corner-all" role="button">My button</a>\
+                            <a href="#" onclick="remove(' + r.id + ');" data-role="button" data-iconpos="notext" data-theme="a" data-inline="true" class="ui-link ui-btn ui-btn-a ui-icon-delete ui-btn-icon-notext ui-btn-inline ui-shadow ui-corner-all" role="button">My button</a>\
                         </div>\
                     </td>\
                 </tr>');
@@ -484,5 +509,24 @@ function getMonthlyPie() {
 
     }).fail(function(jqXHR, textStatus, errorThrown) {
                 console.log(jqXHR + "\n" + textStatus + "\n" + errorThrown);
+    });
+}
+
+function remove(id) {
+
+    $.ajax({
+        url: SERVER_URL,
+        type: "POST",
+        dataType: "json",
+        data: {
+            "function": "remove_transaction",
+            "id": id
+        }
+    }).done(function(response) {
+        if (response != undefined) {
+            getTransactionsTable();
+            getDailyBar();
+            getDailyPie();
+        }
     });
 }
