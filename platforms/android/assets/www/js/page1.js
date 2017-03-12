@@ -1,5 +1,4 @@
 $(document).ready(function() {
-
     $(document).on('click','#pageone #login', function() {
         $.ajax({
             url: SERVER_URL,

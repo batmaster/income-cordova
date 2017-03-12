@@ -139,6 +139,7 @@ function saveEdit(i) {
     var t = $("#pagefive #fragment-1 #fragment-11 #table-body #edit-field" + i + " #time").datebox('getTheDate');
     var date = TODATE(d.getFullYear(), d.getMonth() + 1, d.getDate(), t.getHours(), t.getMinutes(), 0);
 
+    loading();
     $.ajax({
         url: SERVER_URL,
         type: "POST",
@@ -152,9 +153,12 @@ function saveEdit(i) {
             "date": date
         }
     }).done(function(response) {
+        hideLoading();
         getTransactionsTable();
         getDailyBar();
         getDailyPie();
+
+        toast("แก้ไขรายการเรียบร้อยแล้ว");
     });
 }
 
@@ -167,6 +171,7 @@ function getTransactionsTable() {
     var dt = $("#pagefive #fragment-1 #date-to").datebox('getTheDate');
     var date_to = TODATE(dt.getFullYear(), dt.getMonth() + 1, dt.getDate(), 23, 59, 59);
 
+    loading();
     $.ajax({
         url: SERVER_URL,
         type: "POST",
@@ -180,6 +185,7 @@ function getTransactionsTable() {
     }).done(function(response) {
         $("#pagefive #fragment-1 #fragment-11 #table-body").empty();
         if (response != undefined) {
+            hideLoading();
             for (var i = 0; i < response.length; i++) {
                 var r = response[i];
                 $("#pagefive #fragment-1 #fragment-11 #table-body").append('\
@@ -190,10 +196,8 @@ function getTransactionsTable() {
                     <td data-colstart="4" style="text-align: right;">' + (r.type == "0" ? "+" : "-") + Number(r.amount).toFixed(2) + '</td>\
                     <td data-colstart="5" data-priority="2" class="ui-table-priority-5 ui-table-cell-hidden">' + r.date.substring(0, 16) + '</td>\
                     <td data-colstart="6" data-priority="3" class="ui-table-priority-6 ui-table-cell-hidden">\
-                        <div class="ui-controlgroup-controls ">\
-                            <a href="#" onclick="showEditField(' + i + ');" data-role="button" data-iconpos="notext" data-theme="a" data-inline="true" class="ui-link ui-btn ui-btn-a ui-icon-edit ui-btn-icon-notext ui-btn-inline ui-shadow ui-corner-all" role="button">My button</a>\
-                            <a href="#" onclick="remove(' + r.id + ');" data-role="button" data-iconpos="notext" data-theme="a" data-inline="true" class="ui-link ui-btn ui-btn-a ui-icon-delete ui-btn-icon-notext ui-btn-inline ui-shadow ui-corner-all" role="button">My button</a>\
-                        </div>\
+                        <a href="#" onclick="showEditField(' + i + ');" class="ui-btn ui-corner-all ui-icon-edit ui-btn-icon-notext ui-btn-inline">My button</a>\
+                        <a href="#" onclick="remove(' + r.id + ');" class="ui-btn ui-corner-all ui-icon-delete ui-btn-icon-notext ui-btn-inline">My button</a>\
                     </td>\
                 </tr>');
 
@@ -205,8 +209,8 @@ function getTransactionsTable() {
                     <td data-colstart="2"><input type="text" id="title" value="' + r.title + '"></td>\
                     <td data-colstart="3" data-priority="1" class="ui-table-priority-3 ui-table-cell-hidden">\
                         <select id="type">\
-                            <option value="0" ' + (TYPE[r.type] == 0 ? "selected" : "") + '>รายรับ</option>\
-                            <option value="1" ' + (TYPE[r.type] == 1 ? "selected" : "") + '>รายจ่าย</option>\
+                            <option value="0" ' + (r.type == '0' ? "selected" : "") + '>รายรับ</option>\
+                            <option value="1" ' + (r.type == '1' ? "selected" : "") + '>รายจ่าย</option>\
                         </select>\
                     </td>\
                     <td data-colstart="4" style="text-align: right;"><input type="number" id="amount" value="' + Number(r.amount) + '"></td>\
@@ -215,10 +219,8 @@ function getTransactionsTable() {
                         <input type="text" id="time" data-role="datebox" value="' + r.date.substring(11, 16) + '" data-options=\'{"mode":"timebox", "useNewStyle":true, "overrideTimeFormat": 24, "themeButton": "a", "themeInput": "a", "theme": "a", "themeHeader": "b", "overrideSetTimeButtonLabel": "ตั้งเวลา", "defaultValue": "' + r.date.substring(11, 16) + '"}\' />\
                     </td>\
                     <td data-colstart="6" data-priority="6" class="ui-table-priority-6 ui-table-cell-hidden">\
-                        <div class="ui-controlgroup-controls ">\
-                            <a href="#" onclick="hideAllEditFields();" data-role="button" data-iconpos="notext" data-theme="a" data-inline="true" class="ui-link ui-btn ui-btn-a ui-icon-back ui-btn-icon-notext ui-btn-inline ui-shadow ui-corner-all" role="button">My button</a>\
-                            <a href="#" onclick="saveEdit(' + i + ');" data-role="button" data-iconpos="notext" data-theme="a" data-inline="true" class="ui-link ui-btn ui-btn-a ui-icon-check ui-btn-icon-notext ui-btn-inline ui-shadow ui-corner-all ui-last-child" role="button">My button</a>\
-                        </div>\
+                        <a href="#" onclick="hideAllEditFields();" class="ui-btn ui-corner-all ui-icon-back ui-btn-icon-notext ui-btn-inline">My button</a>\
+                        <a href="#" onclick="saveEdit(' + i + ');" class="ui-btn ui-corner-all ui-icon-check ui-btn-icon-notext ui-btn-inline">My button</a>\
                     </td>\
                 </tr>');
             }
@@ -229,6 +231,8 @@ function getTransactionsTable() {
 
             $('#pagefive #fragment-1 #fragment-11 #table-column-toggle-pagefive').trigger("create");
             $('#pagefive #fragment-1 #fragment-11 #table-column-toggle-pagefive').table("refresh");
+
+//            $("#pagefive #fragment-1 #fragment-11 #table-body #type").selectmenu().selectmenu("refresh");
 
             hideAllEditFields();
         }
@@ -247,6 +251,7 @@ function getDailyBar() {
     var dt = $("#pagefive #fragment-1 #date-to").datebox('getTheDate');
     var date_to = TODATE(dt.getFullYear(), dt.getMonth() + 1, dt.getDate(), 23, 59, 59);
 
+    loading();
     $.ajax({
         url: SERVER_URL,
         type: "POST",
@@ -258,6 +263,7 @@ function getDailyBar() {
             "user_id": localStorage.getItem(KEY_USERID)
         }
     }).done(function(response) {
+        hideLoading();
         google.charts.setOnLoadCallback(function() {
             var data = new google.visualization.DataTable();
 
@@ -329,6 +335,7 @@ function getDailyPie() {
     var dt = $("#pagefive #fragment-1 #date-to").datebox('getTheDate');
     var date_to = TODATE(dt.getFullYear(), dt.getMonth() + 1, dt.getDate(), 23, 59, 59);
 
+    loading();
     $.ajax({
         url: SERVER_URL,
         type: "POST",
@@ -340,6 +347,7 @@ function getDailyPie() {
             "user_id": localStorage.getItem(KEY_USERID)
         }
     }).done(function(response) {
+        hideLoading();
         google.charts.setOnLoadCallback(function() {
             var income = new google.visualization.DataTable();
             income.addColumn('string', 'รายการ');
@@ -384,6 +392,7 @@ function getMonthlyBar() {
     var last_day = new Date(dt.getFullYear(), dt.getMonth() + 1, 0);
     var month_to = TODATE(last_day.getFullYear(), last_day.getMonth() + 1, last_day.getDate(), 23, 59, 59);
 
+    loading();
     $.ajax({
         url: SERVER_URL,
         type: "POST",
@@ -395,6 +404,7 @@ function getMonthlyBar() {
             "user_id": localStorage.getItem(KEY_USERID)
         }
     }).done(function(response) {
+        hideLoading();
         google.charts.setOnLoadCallback(function() {
             var data = new google.visualization.DataTable();
 
@@ -467,6 +477,7 @@ function getMonthlyPie() {
     var last_day = new Date(dt.getFullYear(), dt.getMonth() + 1, 0);
     var month_to = TODATE(last_day.getFullYear(), last_day.getMonth() + 1, last_day.getDate(), 23, 59, 59);
 
+    loading();
     $.ajax({
         url: SERVER_URL,
         type: "POST",
@@ -478,6 +489,7 @@ function getMonthlyPie() {
             "user_id": localStorage.getItem(KEY_USERID)
         }
     }).done(function(response) {
+        hideLoading();
         google.charts.setOnLoadCallback(function() {
             var income = new google.visualization.DataTable();
             income.addColumn('string', 'รายการ');
@@ -513,7 +525,7 @@ function getMonthlyPie() {
 }
 
 function remove(id) {
-
+    loading();
     $.ajax({
         url: SERVER_URL,
         type: "POST",
@@ -524,9 +536,12 @@ function remove(id) {
         }
     }).done(function(response) {
         if (response != undefined) {
+            hideLoading();
             getTransactionsTable();
             getDailyBar();
             getDailyPie();
+
+            toast("ลบรายการเรียบร้อยแล้ว");
         }
     });
 }

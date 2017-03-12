@@ -6,6 +6,7 @@ $(document).ready(function() {
     });
 
     function getGroupDetail() {
+        loading();
         $.ajax({
             url: SERVER_URL,
             type: "POST",
@@ -16,6 +17,7 @@ $(document).ready(function() {
             }
         }).done(function(response) {
             if (response != undefined) {
+                hideLoading();
                 $("#pageseven #title").text(response.title);
                 $("#pageseven #code").text(response.code);
                 if (response.pending > 0) {
@@ -32,6 +34,7 @@ $(document).ready(function() {
     function getMembers() {
         $("#pageseven #table-body").empty();
 
+        loading();
         $.ajax({
             url: SERVER_URL,
             type: "POST",
@@ -43,6 +46,7 @@ $(document).ready(function() {
         }).done(function(response) {
             $("#pageseven #table-body").empty();
             if (response != undefined) {
+                hideLoading();
                 for (var i = 0; i < response.length; i++) {
                     var r = response[i];
                     $("#pageseven #table-body").append('\
@@ -75,6 +79,7 @@ function approve(user_id, src) {
       disabled: true
     });
 
+    loading();
     $.ajax({
         url: SERVER_URL,
         type: "POST",
@@ -84,8 +89,9 @@ function approve(user_id, src) {
             "user_id": user_id
         }
     }).done(function(response) {
-        console.log("approve ok" + response);
+        hideLoading();
     }).fail(function(jqXHR, textStatus, errorThrown) {
-                console.log(jqXHR + "\n" + textStatus + "\n" + errorThrown);
+        hideLoading();
+        console.log(jqXHR + "\n" + textStatus + "\n" + errorThrown);
     });
 }

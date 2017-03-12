@@ -3,6 +3,7 @@ $(document).ready(function() {
 
     function getGroups() {
         $("#pagenine #title-list .ui-controlgroup-controls").empty();
+        loading();
         $.ajax({
             url: SERVER_URL,
             type: "POST",
@@ -12,6 +13,7 @@ $(document).ready(function() {
             }
         }).done(function(response) {
             if (response != undefined) {
+                hideLoading();
                 for (var i = 0; i < response.length; i++) {
                     var r = response[i];
                     $("#pagenine #title-list .ui-controlgroup-controls").append('<div class="ui-checkbox ui-screen-hidden"><label class="ui-btn ui-corner-all ui-btn-inherit ui-btn-icon-left ui-checkbox-off" data-id="' + r.id + '">' + r.title + ' @' + r.code + '</label><input type="checkbox"></div>');
@@ -21,6 +23,7 @@ $(document).ready(function() {
     }
 
     function getGroupDetail() {
+        loading();
         $.ajax({
             url: SERVER_URL,
             type: "POST",
@@ -31,6 +34,7 @@ $(document).ready(function() {
             }
         }).done(function(response) {
             if (response != undefined) {
+                hideLoading();
                 $("#pagenine #title").text(response.title);
                 $("#pagenine #code").text(response.code);
             }
@@ -41,7 +45,7 @@ $(document).ready(function() {
     }
 
     function getUserDetail() {
-    console.log("getUserDetail");
+        loading();
         $.ajax({
             url: SERVER_URL,
             type: "POST",
@@ -51,8 +55,8 @@ $(document).ready(function() {
                 "user_id": localStorage.getItem(KEY_USERID)
             }
         }).done(function(response) {
-        console.log(response)
             if (response != undefined) {
+                hideLoading();
                 $("#pagenine #name").val(response.name);
                 $("#pagenine #lastname").val(response.lastname);
                 $("#pagenine #username").val(response.username);
@@ -78,6 +82,7 @@ $(document).ready(function() {
     });
 
     $(document).on('click','#pagenine #join', function() {
+        loading();
         $.ajax({
             url: SERVER_URL,
             type: "POST",
@@ -89,7 +94,7 @@ $(document).ready(function() {
             }
         }).done(function(response) {
             if (response != undefined) {
-                console.log(response);
+                hideLoading();
                 if (response.ok) {
                     localStorage.setItem(KEY_GROUPID, group_id);
                     printLocalStorages();
@@ -128,6 +133,7 @@ $(document).ready(function() {
             $("#pagenine #title").prop("disabled", true);
             $("#pagenine #join").button("disable");
 
+            loading();
             $.ajax({
                 url: SERVER_URL,
                 type: "POST",
@@ -138,6 +144,7 @@ $(document).ready(function() {
                 }
             }).done(function(response) {
                 if (response != undefined) {
+                    hideLoading();
                     $("#pagenine #not-join #title").val(response.title + ' @' + response.code);
                     group_id = -1 * response.id;
                 }
@@ -232,6 +239,7 @@ $(document).ready(function() {
             password_new = "";
         }
 
+        loading();
         $.ajax({
             url: SERVER_URL,
             type: "POST",
@@ -252,12 +260,12 @@ $(document).ready(function() {
             }
         }).done(function(response) {
             if (response != undefined) {
-                console.log(response);
+                hideLoading();
                 if (response.ok) {
-
+                    toast("แก้ไขข้อมูลส่วนตัวเรียบร้อยแล้ว");
                 }
                 else {
-                    console.log("wrong password")
+                    toast("แก้ไขข้อมูลส่วนตัวไม่สำเร็จ");
                 }
             }
         });

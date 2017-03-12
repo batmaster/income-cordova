@@ -65,9 +65,9 @@
             <label for="password">รหัสผ่าน</label>
             <input type="password" id="password">
         </div>
-        <input type="button" data-inline="true" value="Submit" id="login">
+        <input type="button" data-inline="true" value="ลงชื่อเข้าใช้" id="login">
 
-        <a href="#pagethree" data-icon="plus" data-role="button" data-inline="true">Register</a>
+        <a href="#pagethree" data-icon="plus" data-role="button" data-inline="true">ลงทะเบียน</a>
     </div>
     <div data-role="footer" data-position="fixed">
         <h1>&copy;coppyrith by jassada</h1>
@@ -91,7 +91,7 @@
 
     <div data-role="header">
         <a href="#mypanel" class="ui-btn ui-corner-all ui-icon-bars ui-btn-icon-notext"></a>
-        <h1>My Homepage</h1>
+        <h1>รายรับรายจ่าย</h1>
     </div>
     <div data-role="main" class="ui-content">
         <h3>สรุปบัญชี</h3>
@@ -791,6 +791,9 @@
         $(document).on('blur', 'input, textarea', function() {
             $("div.ui-footer").show();
         });
+
+        hideLoading();
+
     });
 
 </script>

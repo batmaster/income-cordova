@@ -249,3 +249,41 @@ $(document).ready(function() {
 
     printLocalStorages();
 });
+
+function toast(text) {
+    window.plugins.toast.showWithOptions({
+            message: text,
+            duration: 1500, // ms
+            position: "bottom",
+            addPixelsY: -40,  // (optional) added a negative value to move it up a bit (default 0)
+            data: {'foo':'bar'}
+        },
+        //Success callback
+        function(args) {
+            console.log(args.event);
+            //This will print 'hide'
+        },
+        function(error) {
+            console.error('toast error: ', error);
+        }
+    );
+}
+
+function hideToast() {
+    // this function takes an optional success callback, but you can do without just as well
+    window.plugins.toast.hide();
+}
+
+function loading() {
+    $.mobile.loading('show', {
+        text: "",
+        textVisible: false,
+        theme: "b",
+        textonly: false,
+        html: ""
+    });
+}
+
+function hideLoading() {
+    $.mobile.loading("hide");
+}

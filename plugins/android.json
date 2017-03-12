@@ -15,6 +15,9 @@
         },
         "cordova-plugin-console": {
             "PACKAGE_NAME": "com.cordovaapp.income"
+        },
+        "cordova-plugin-x-toast": {
+            "PACKAGE_NAME": "com.cordovaapp.income"
         }
     },
     "dependent_plugins": {

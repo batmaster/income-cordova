@@ -20,6 +20,7 @@ $(document).ready(function() {
         var t = $("#pagefour #time").datebox('getTheDate');
         var date = TODATE(d.getFullYear(), d.getMonth() + 1, d.getDate(), t.getHours(), t.getMinutes(), 0);
 
+        loading();
         $.ajax({
             url: SERVER_URL,
             type: "POST",
@@ -34,8 +35,9 @@ $(document).ready(function() {
                 "group_id": localStorage.getItem(KEY_GROUPID)
             }
         }).done(function(response) {
+            hideLoading();
             if (response.id != undefined) {
-                console.log("adding transaction ok");
+                toast("เพิ่มรายการเรียบร้อยแล้ว");
                 clearFields();
             }
             else {
@@ -46,6 +48,7 @@ $(document).ready(function() {
 
     function getTransactionTitles() {
         $("#pagefour #title-list .ui-controlgroup-controls").empty();
+        loading();
         $.ajax({
             url: SERVER_URL,
             type: "POST",
@@ -57,6 +60,7 @@ $(document).ready(function() {
             }
         }).done(function(response) {
             if (response != undefined) {
+                hideLoading();
                 for (var i = 0; i < response.length; i++) {
                     var r = response[i];
                     $("#pagefour #title-list .ui-controlgroup-controls").append('<div class="ui-checkbox ui-screen-hidden"><label class="ui-btn ui-corner-all ui-btn-inherit ui-btn-icon-left ui-checkbox-off">' + r.title + '</label><input type="checkbox"></div>');
@@ -90,7 +94,7 @@ $(document).ready(function() {
 
         if (localStorage.getItem(KEY_NOTI_SCHEDULE_ID_CLICKED) != undefined) {
             var id = localStorage.getItem(KEY_NOTI_SCHEDULE_ID_CLICKED);
-
+            loading();
             $.ajax({
                 url: SERVER_URL,
                 type: "POST",
@@ -100,8 +104,8 @@ $(document).ready(function() {
                     "id": id
                 }
             }).done(function(response) {
-                console.log(response);
                 if (response != undefined) {
+                    hideLoading();
                     $("#pagefour #type").val(response.type).selectmenu("refresh");
                     $("#pagefour #title").val(response.title);
                     $("#pagefour #amount").focus();

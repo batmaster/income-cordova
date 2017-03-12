@@ -124,6 +124,7 @@ function getTransactionsTableForGroup() {
     var dt = $("#pageeight #fragment-1 #date-to").datebox('getTheDate');
     var date_to = TODATE(dt.getFullYear(), dt.getMonth() + 1, dt.getDate(), 23, 59, 59);
 
+    loading();
     $.ajax({
         url: SERVER_URL,
         type: "POST",
@@ -136,8 +137,8 @@ function getTransactionsTableForGroup() {
         }
     }).done(function(response) {
         $("#pageeight #fragment-1 #fragment-11 #table-body").empty();
-        console.log("getting transaction ok " + response);
         if (response != undefined) {
+            hideLoading();
             for (var i = 0; i < response.length; i++) {
                 var r = response[i];
                 console.log(TYPE[r.type]);
@@ -174,6 +175,7 @@ function getDailyBarForGroup() {
     var dt = $("#pageeight #fragment-1 #date-to").datebox('getTheDate');
     var date_to = TODATE(dt.getFullYear(), dt.getMonth() + 1, dt.getDate(), 23, 59, 59);
 
+    loading();
     $.ajax({
         url: SERVER_URL,
         type: "POST",
@@ -185,6 +187,7 @@ function getDailyBarForGroup() {
             "group_id": localStorage.getItem(KEY_GROUPID)
         }
     }).done(function(response) {
+        hideLoading();
         google.charts.setOnLoadCallback(function() {
             var data = new google.visualization.DataTable();
 
@@ -246,6 +249,7 @@ function getDailyPieForGroup() {
     var dt = $("#pageeight #fragment-1 #date-to").datebox('getTheDate');
     var date_to = TODATE(dt.getFullYear(), dt.getMonth() + 1, dt.getDate(), 23, 59, 59);
 
+    loading()
     $.ajax({
         url: SERVER_URL,
         type: "POST",
@@ -257,6 +261,7 @@ function getDailyPieForGroup() {
             "group_id": localStorage.getItem(KEY_GROUPID)
         }
     }).done(function(response) {
+        hideLoading();
         google.charts.setOnLoadCallback(function() {
             var income = new google.visualization.DataTable();
             income.addColumn('string', 'รายการ');
@@ -301,6 +306,7 @@ function getMonthlyBarForGroup() {
     var last_day = new Date(dt.getFullYear(), dt.getMonth() + 1, 0);
     var month_to = TODATE(last_day.getFullYear(), last_day.getMonth() + 1, last_day.getDate(), 23, 59, 59);
 
+    loading();
     $.ajax({
         url: SERVER_URL,
         type: "POST",
@@ -312,6 +318,7 @@ function getMonthlyBarForGroup() {
             "group_id": localStorage.getItem(KEY_GROUPID)
         }
     }).done(function(response) {
+        hideLoading();
         google.charts.setOnLoadCallback(function() {
             var data = new google.visualization.DataTable();
 
@@ -374,6 +381,7 @@ function getMonthlyPieForGroup() {
     var last_day = new Date(dt.getFullYear(), dt.getMonth() + 1, 0);
     var month_to = TODATE(last_day.getFullYear(), last_day.getMonth() + 1, last_day.getDate(), 23, 59, 59);
 
+    loading();
     $.ajax({
         url: SERVER_URL,
         type: "POST",
@@ -385,6 +393,7 @@ function getMonthlyPieForGroup() {
             "group_id": localStorage.getItem(KEY_GROUPID)
         }
     }).done(function(response) {
+        hideLoading();
         google.charts.setOnLoadCallback(function() {
             var income = new google.visualization.DataTable();
             income.addColumn('string', 'รายการ');

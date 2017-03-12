@@ -17,6 +17,7 @@ $(document).ready(function() {
     });
 
     $(document).on('click','#pagethree #register', function() {
+        loading();
         $.ajax({
             url: SERVER_URL,
             type: "POST",
@@ -34,12 +35,14 @@ $(document).ready(function() {
                 "birthday": $("#pagethree #birthday").val(),
             }
         }).done(function(response) {
+            hideLoading();
             localStorage.setItem(KEY_USERID, response.id);
             localStorage.setItem(KEY_LEVEL, $("#pagethree #level").val());
             localStorage.setItem(KEY_GROUPID, response.group_id);
 
             $.mobile.changePage($("#pagetwo"), {transition: "slideup", changeHash: false});
         }).fail(function(jqXHR, textStatus, errorThrown) {
+            hideLoading();
             console.log(jqXHR + "\n" + textStatus + "\n" + errorThrown);
         });
     });

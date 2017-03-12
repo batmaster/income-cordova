@@ -5,6 +5,7 @@ $(document).ready(function() {
     });
 
     function getSummary() {
+        loading();
         $.ajax({
             url: SERVER_URL,
             type: "POST",
@@ -14,7 +15,7 @@ $(document).ready(function() {
                 "user_id": localStorage.getItem(KEY_USERID)
             }
         }).done(function(response) {
-
+            hideLoading();
             $("#pagetwo #amount").text((response.amount == undefined ? 0 : response.amount) + " บาท");
 
             google.charts.setOnLoadCallback(function() {
@@ -37,10 +38,7 @@ $(document).ready(function() {
     }
 
     $(document).on("pageshow", "#pagetwo", function() {
-
-        console.log(localStorage.getItem(KEY_NOTI_SCHEDULE_ID_CLICKED))
-        console.log(localStorage.getItem(KEY_NOTI_SCHEDULE_ID_CLICKED) == null)
-        console.log(localStorage.getItem(KEY_NOTI_SCHEDULE_ID_CLICKED) == undefined)
+        hideLoading();
 
         if (localStorage.getItem(KEY_NOTI_SCHEDULE_ID_CLICKED) != undefined) {
             document.location.hash = "#pagefour";

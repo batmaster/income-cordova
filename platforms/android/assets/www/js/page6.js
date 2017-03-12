@@ -60,6 +60,7 @@ $(document).ready(function() {
 
 
     function addSchedule(frequency) {
+        loading();
         $.ajax({
             url: SERVER_URL,
             type: "POST",
@@ -73,11 +74,13 @@ $(document).ready(function() {
             }
         }).done(function(response) {
             if (response != undefined) {
+                hideLoading();
                 clearFields();
                 getSchedulesTable();
                 syncSchedules();
 
                 $("#pagesix #tab1").trigger('click');
+                toast("เพิ่มการแจ้งเตือนเรียบร้อยแล้ว");
             }
         });
     }
@@ -99,6 +102,7 @@ $(document).ready(function() {
 
     function getTransactionTitlesPageSix() {
         $("#pagesix #title-list .ui-controlgroup-controls").empty();
+        loading();
         $.ajax({
             url: SERVER_URL,
             type: "POST",
@@ -110,6 +114,7 @@ $(document).ready(function() {
             }
         }).done(function(response) {
             if (response != undefined) {
+                hideLoading();
                 for (var i = 0; i < response.length; i++) {
                     var r = response[i];
                     $("#pagesix #title-list .ui-controlgroup-controls").append('<div class="ui-checkbox ui-screen-hidden"><label class="ui-btn ui-corner-all ui-btn-inherit ui-btn-icon-left ui-checkbox-off">' + r.title + '</label><input type="checkbox"></div>');
@@ -195,6 +200,7 @@ console.log(tab);
 
     frequency += " " + TOTIME(time.getHours(), time.getMinutes());
 
+    loading();
     $.ajax({
         url: SERVER_URL,
         type: "POST",
@@ -207,16 +213,19 @@ console.log(tab);
             "frequency": frequency
         }
     }).done(function(response) {
-        console.log(response);
+        hideLoading();
         $("#scheduleEditDialog").dialog("close");
         getSchedulesTable();
         syncSchedules();
+
+        toast("แก้ไขการแจ้งเตือนเรียบร้อยแล้ว");
     });
 }
 
 function getSchedulesTable() {
     $("#pagesix #table-body").empty();
 
+    loading();
     $.ajax({
         url: SERVER_URL,
         type: "POST",
@@ -228,6 +237,7 @@ function getSchedulesTable() {
     }).done(function(response) {
         $("#pagesix #table-body").empty();
         if (response != undefined) {
+            hideLoading();
             for (var i = 0; i < response.length; i++) {
                 var r = response[i];
 
@@ -258,10 +268,8 @@ function getSchedulesTable() {
                     <td data-colstart="2"><input type="checkbox" onclick="swap(' + r.id + ')" data-enhanced="true" class="custom" ' + (r.state == "1" ? "checked" : "") + '> ' + r.title + '</td>\
                     <td data-colstart="3">' + text + '</td>\
                     <td data-colstart="4" data-priority="1" class="ui-table-priority-4 ui-table-cell-hidden">\
-                        <div class="ui-controlgroup-controls ">\
-                            <a href="#" onclick="showScheduleEditField(' + param + ');" data-role="button" data-iconpos="notext" data-theme="a" data-inline="true" class="ui-link ui-btn ui-btn-a ui-icon-edit ui-btn-icon-notext ui-btn-inline ui-shadow ui-corner-all" role="button">My button</a>\
-                            <a href="#" onclick="removeSchedule(' + r.id + ');" data-role="button" data-iconpos="notext" data-theme="a" data-inline="true" class="ui-link ui-btn ui-btn-a ui-icon-delete ui-btn-icon-notext ui-btn-inline ui-shadow ui-corner-all" role="button">My button</a>\
-                        </div>\
+                        <a href="#" onclick="showScheduleEditField(' + param + ');" class="ui-btn ui-corner-all ui-icon-edit ui-btn-icon-notext ui-btn-inline">My button</a>\
+                        <a href="#" onclick="removeSchedule(' + r.id + ');" class="ui-btn ui-corner-all ui-icon-delete ui-btn-icon-notext ui-btn-inline">My button</a>\
                     </td>\
                 </tr>');
             }
@@ -283,8 +291,7 @@ function getSchedulesTable() {
 }
 
 function swap(id) {
-    console.log(id);
-
+    loading();
     $.ajax({
         url: SERVER_URL,
         type: "POST",
@@ -295,6 +302,7 @@ function swap(id) {
         }
     }).done(function(response) {
         if (response != undefined) {
+            hideLoading();
             getSchedulesTable();
             syncSchedules();
         }
@@ -302,8 +310,7 @@ function swap(id) {
 }
 
 function removeSchedule(id) {
-    console.log(id);
-
+    loading();
     $.ajax({
         url: SERVER_URL,
         type: "POST",
@@ -313,10 +320,12 @@ function removeSchedule(id) {
             "id": id
         }
     }).done(function(response) {
-        console.log(response);
         if (response != undefined) {
+            hideLoading();
             getSchedulesTable();
             syncSchedules();
+
+            toast("ลบการแจ้งเตือนเรียบร้อยแล้ว");
         }
     });
 }
