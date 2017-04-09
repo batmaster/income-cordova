@@ -111,6 +111,12 @@ $(document).ready(function() {
     });
 
     $(document).on("pageshow", "#pagenine", function() {
+
+        document.addEventListener("backbutton", function (e) {
+            e.preventDefault();
+            $.mobile.changePage($("#pagetwo"), {transition: "slidedown", changeHash: false});
+        }, false);
+
         $("#pagenine #title-list .ui-controlgroup-controls").removeClass("ui-screen-hidden");
         getGroups();
         getUserDetail();

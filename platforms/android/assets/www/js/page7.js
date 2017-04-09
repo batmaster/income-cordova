@@ -1,6 +1,12 @@
 $(document).ready(function() {
 
     $(document).on("pageshow", "#pageseven", function() {
+
+        document.addEventListener("backbutton", function (e) {
+            e.preventDefault();
+            $.mobile.changePage($("#pagetwo"), {transition: "slidedown", changeHash: false});
+        }, false);
+
         getGroupDetail();
         getMembers();
     });

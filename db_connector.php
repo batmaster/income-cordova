@@ -103,33 +103,39 @@
         else if ($function == "get_summary_by_user_id") {
             $user_id = $_POST["user_id"];
 
-            $cycle_date = sql("SELECT cycle_date FROM user WHERE id = $user_id", false)[cycle_date];
+            // $cycle_date = sql("SELECT cycle_date FROM user WHERE id = $user_id", false)[cycle_date];
+            //
+            // $d = new DateTime();
+            // $before_setdate_month = $d->format('m');
+            // $d->setDate($d->format('Y'), $d->format('m'), $cycle_date);
+            // $after_setdate_month = $d->format('m');
+            // $d->setTime(0, 0, 0);
+            //
+            // if ($before_setdate_month != $after_setdate_month) {
+            //     $d->setDate($d->format('Y'), $d->format('m'), 1);
+            // }
+            //
+            // $now = new DateTime();
+            // if ($now < $d) {
+            //     $d->sub(new DateInterval("P1M"));
+            // }
+            //
+            // $from = $d->format('Y-m-d H:i:s');
+            // $to = $now->format('Y-m-d H:i:s');
+            //
+            // $txt_from = $d->format('Y-m-d');
+            // $txt_to = $now->format('Y-m-d');
+            //
+            // echo json_encode(sql("SELECT '$txt_from' date_from, '$txt_to' date_to, SUM(if(type = 0, t.amount, 0)) income, SUM(if(type = 1, t.amount, 0)) outcome,
+            //         (SELECT SUM(if(type = 0, t.amount, -1 * t.amount)) FROM transaction t WHERE t.user_id = $user_id) amount
+            //     FROM transaction t
+            //     WHERE '$from' <= DATE(t.date) AND DATE(t.date) <= '$to' AND t.user_id = $user_id", false));
 
-            $d = new DateTime();
-            $before_setdate_month = $d->format('m');
-            $d->setDate($d->format('Y'), $d->format('m'), $cycle_date);
-            $after_setdate_month = $d->format('m');
-            $d->setTime(0, 0, 0);
 
-            if ($before_setdate_month != $after_setdate_month) {
-                $d->setDate($d->format('Y'), $d->format('m'), 1);
-            }
-
-            $now = new DateTime();
-            if ($now < $d) {
-                $d->sub(new DateInterval("P1M"));
-            }
-
-            $from = $d->format('Y-m-d H:i:s');
-            $to = $now->format('Y-m-d H:i:s');
-
-            $txt_from = $d->format('Y-m-d');
-            $txt_to = $now->format('Y-m-d');
-
-            echo json_encode(sql("SELECT '$txt_from' date_from, '$txt_to' date_to, SUM(if(type = 0, t.amount, 0)) income, SUM(if(type = 1, t.amount, 0)) outcome,
+            echo json_encode(sql("SELECT SUM(if(type = 0, t.amount, 0)) income, SUM(if(type = 1, t.amount, 0)) outcome,
                     (SELECT SUM(if(type = 0, t.amount, -1 * t.amount)) FROM transaction t WHERE t.user_id = $user_id) amount
                 FROM transaction t
-                WHERE '$from' <= DATE(t.date) AND DATE(t.date) <= '$to' AND t.user_id = $user_id", false));
+                WHERE t.user_id = $user_id", false));
 
 
         }
@@ -199,6 +205,14 @@
             echo json_encode("ok");
         }
         // user
+        else if ($function == "get_transactions") {
+            $date_from = $_POST["date_from"];
+            $date_to = $_POST["date_to"];
+
+            echo json_encode(sql("SELECT t.id, t.type, t.title, t.amount, t.date, CONCAT(u.name, ' ', u.lastname) name FROM transaction t, user u
+                WHERE t.user_id = u.id AND '$date_from' <= DATE(t.date) AND DATE(t.date) <= '$date_to'
+                ORDER BY DATE(t.date)"));
+        }
         //// date
         else if ($function == "get_transactions_by_user_id") {
             $user_id = $_POST["user_id"];
@@ -214,7 +228,10 @@
             $date_from = $_POST["date_from"];
             $date_to = $_POST["date_to"];
 
-            echo json_encode(sql("SELECT DATE(t.date) date, SUM(if(type = 0, t.amount, 0)) income, SUM(if(type = 0, 1, 0)) count_income, SUM(if(type = 1, t.amount, 0)) outcome, SUM(if(type = 1, 1, 0)) count_outcome
+            echo json_encode(sql("SELECT DATE(t.date) date, SUM(if(type = 0, t.amount, 0)) income, SUM(if(type = 0, 1, 0)) count_income, SUM(if(type = 1, t.amount, 0)) outcome, SUM(if(type = 1, 1, 0)) count_outcome,
+                ((SELECT SUM(t2.amount) FROM transaction t2 WHERE DATE(t2.date) <= DATE(t.date) AND t2.type = 0 AND t2.user_id = $user_id) -
+                (SELECT SUM(t2.amount) FROM transaction t2 WHERE DATE(t2.date) <= DATE(t.date) AND t2.type = 1 AND t2.user_id = $user_id)) balance
+
                 FROM transaction t
                 WHERE '$date_from' <= DATE(t.date) AND DATE(t.date) <= '$date_to' AND t.user_id = $user_id
                 GROUP BY DATE(t.date)"));
@@ -234,7 +251,10 @@
             $month_from = $_POST["month_from"];
             $month_to = $_POST["month_to"];
 
-            echo json_encode(sql("SELECT DATE(t.date) date, SUM(if(type = 0, t.amount, 0)) income, SUM(if(type = 0, 1, 0)) count_income, SUM(if(type = 1, t.amount, 0)) outcome, SUM(if(type = 1, 1, 0)) count_outcome
+            echo json_encode(sql("SELECT DATE(t.date) date, SUM(if(type = 0, t.amount, 0)) income, SUM(if(type = 0, 1, 0)) count_income, SUM(if(type = 1, t.amount, 0)) outcome, SUM(if(type = 1, 1, 0)) count_outcome,
+                ((SELECT SUM(t2.amount) FROM transaction t2 WHERE DATE(t2.date) <= DATE(t.date) AND t2.type = 0 AND t2.user_id = $user_id) -
+                (SELECT SUM(t2.amount) FROM transaction t2 WHERE DATE(t2.date) <= DATE(t.date) AND t2.type = 1 AND t2.user_id = $user_id)) balance
+
                 FROM transaction t
                 WHERE '$month_from' <= DATE(t.date) AND DATE(t.date) <= '$month_to' AND t.user_id = $user_id
                 GROUP BY YEAR(t.date), MONTH(t.date)"));
@@ -265,7 +285,10 @@
             $date_from = $_POST["date_from"];
             $date_to = $_POST["date_to"];
 
-            echo json_encode(sql("SELECT DATE(t.date) date, SUM(if(type = 0, t.amount, 0)) income, SUM(if(type = 0, 1, 0)) count_income, SUM(if(type = 1, t.amount, 0)) outcome, SUM(if(type = 1, 1, 0)) count_outcome
+            echo json_encode(sql("SELECT DATE(t.date) date, SUM(if(type = 0, t.amount, 0)) income, SUM(if(type = 0, 1, 0)) count_income, SUM(if(type = 1, t.amount, 0)) outcome, SUM(if(type = 1, 1, 0)) count_outcome,
+                ((SELECT SUM(t2.amount) FROM transaction t2 WHERE DATE(t2.date) <= DATE(t.date) AND t2.type = 0 AND t2.group_id = $group_id) -
+                (SELECT SUM(t2.amount) FROM transaction t2 WHERE DATE(t2.date) <= DATE(t.date) AND t2.type = 1 AND t2.group_id = $group_id)) balance
+
                 FROM transaction t
                 WHERE '$date_from' <= DATE(t.date) AND DATE(t.date) <= '$date_to' AND t.group_id = $group_id
                 GROUP BY DATE(t.date)"));
@@ -285,7 +308,10 @@
             $month_from = $_POST["month_from"];
             $month_to = $_POST["month_to"];
 
-            echo json_encode(sql("SELECT DATE(t.date) date, SUM(if(type = 0, t.amount, 0)) income, SUM(if(type = 0, 1, 0)) count_income, SUM(if(type = 1, t.amount, 0)) outcome, SUM(if(type = 1, 1, 0)) count_outcome
+            echo json_encode(sql("SELECT DATE(t.date) date, SUM(if(type = 0, t.amount, 0)) income, SUM(if(type = 0, 1, 0)) count_income, SUM(if(type = 1, t.amount, 0)) outcome, SUM(if(type = 1, 1, 0)) count_outcome,
+                ((SELECT SUM(t2.amount) FROM transaction t2 WHERE DATE(t2.date) <= DATE(t.date) AND t2.type = 0 AND t2.group_id = $group_id) -
+                (SELECT SUM(t2.amount) FROM transaction t2 WHERE DATE(t2.date) <= DATE(t.date) AND t2.type = 1 AND t2.group_id = $group_id)) balance
+
                 FROM transaction t
                 WHERE '$month_from' <= DATE(t.date) AND DATE(t.date) <= '$month_to' AND t.group_id = $group_id
                 GROUP BY YEAR(t.date), MONTH(t.date)"));

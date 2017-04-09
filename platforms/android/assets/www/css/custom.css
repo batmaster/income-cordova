@@ -37,3 +37,7 @@
 fieldset.group-days .ui-btn {
     padding: .7em 0.8em;
 }
+
+input {
+    min-width: 6em;
+}

@@ -26,6 +26,7 @@
     <link rel="stylesheet" href="css/custom.css">
     <script src="js/global.js"></script>
     <script src="js/notification.js"></script>
+    <script src="js/page0.js"></script>
     <script src="js/page1.js"></script>
     <script src="js/page2.js"></script>
     <script src="js/page3.js"></script>
@@ -35,24 +36,49 @@
     <script src="js/page7.js"></script>
     <script src="js/page8.js"></script>
     <script src="js/page9.js"></script>
+    <script src="js/page10.js"></script>
 </head>
 <body>
 
 <div data-role="panel" id="mypanel" data-position="left" data-display="reveal">
     <div data-role="main" class="ui-content">
 
-        <a href="#pagetwo" data-icon="home" data-role="button" class="ui-page-theme-a">สรุปผล</a>
-        <a href="#pagefour" data-icon="plus" data-role="button" class="ui-page-theme-a">บันทึกรายการ</a>
-        <a href="#pagefive" data-icon="grid" data-role="button" class="ui-page-theme-a">รายการ</a>
-        <a href="#pagesix" data-icon="calendar" data-role="button" class="ui-page-theme-a">การแจ้งเตือน</a>
-        <a href="#pageseven" data-icon="grid" data-role="button" class="ui-page-theme-a">จัดการกลุ่ม</a>
-        <a href="#pageeight" data-icon="grid" data-role="button" class="ui-page-theme-a">รายการของกลุ่ม</a>
-        <a href="#pagenine" data-icon="user" data-role="button" class="ui-page-theme-a">ข้อมูลผู้ใช้</a>
+        <a href="#pagetwo" data-icon="home" data-role="button" class="ui-page-theme-a" id="menu2">สรุปผล</a>
+        <a href="#pagefour" data-icon="plus" data-role="button" class="ui-page-theme-a" id="menu4">บันทึกรายการ</a>
+        <a href="#pagefive" data-icon="grid" data-role="button" class="ui-page-theme-a" id="menu5">รายการ</a>
+        <a href="#pagesix" data-icon="calendar" data-role="button" class="ui-page-theme-a" id="menu6">การแจ้งเตือน</a>
+        <a href="#pageseven" data-icon="grid" data-role="button" class="ui-page-theme-a" id="menu7">จัดการกลุ่ม</a>
+        <a href="#pageeight" data-icon="grid" data-role="button" class="ui-page-theme-a" id="menu8">รายการของกลุ่ม</a>
+        <a href="#pagenine" data-icon="user" data-role="button" class="ui-page-theme-a" id="menu9">ข้อมูลผู้ใช้</a>
+
+        <a href="#pageten" data-icon="grid" data-role="button" class="ui-page-theme-a" id="menu10">จัดการรายการ</a>
 
         <a href="#" data-icon="delete" data-role="button" class="ui-page-theme-a" id="logout">ออกจากระบบ</a>
     </div>
 </div>
 
+<!-- page0 Welcome -->
+<section data-role="page" id="pagezero">
+    <div data-role="header" data-position="fixed">
+        <a href="#mypanel" class="ui-btn ui-corner-all ui-icon-bars ui-btn-icon-notext"></a>
+        <h1>ยินดีต้อนรับ</h1>
+    </div>
+    <div data-role="main" class="ui-content">
+        <br>
+        <div style="text-align: center;">
+            <img src="img/icon.png" style="width: 80%; height: auto"/>
+        </div>
+        <br>
+        <br>
+        <h1>แอพพลิเคชั่นรายรับรายจ่าย<br>บนแอนรอยด์</h1>
+    </div>
+    <div data-role="footer" data-position="fixed">
+        <h1>&copy;coppyrith by jassada</h1>
+    </div>
+</section>
+
+<!-- page0 -->
+<!-- page1 register -->
 <section data-role="page" id="pageone">
     <div data-role="header" data-position="fixed">
         <h1>Login</h1>
@@ -178,9 +204,16 @@
             <option value="1">รายจ่าย</option>
         </select>
 
-        <label for="title">รายการ</label>
-        <input type="text" data-type="search" id="title">
-        <form data-role="controlgroup" data-filter-reveal="true" data-filter="true" data-input="#pagefour #title" id="title-list"></form>
+        <label>รายการ</label>
+
+        <select id="title0">
+            <option value="0" selected>รายรับ</option>
+        </select>
+
+        <div id="title-group">
+            <input type="text" data-type="search" id="title">
+            <form data-role="controlgroup" data-filter-reveal="true" data-filter="true" data-input="#pagefour #title" id="title-list"></form>
+        </div>
 
         <label for="amount">จำนวนเงิน</label>
         <input type="number" id="amount">
@@ -232,7 +265,7 @@
                         <a href="#" class="ui-btn ui-corner-all ui-btn-a" id="today">เลือกวันนี้</a>
 
                         <div style="width: 100%; height: 400px; overflow: auto">
-                            <table data-role="table" id="table-column-toggle-pagefive" data-mode="columntoggle" data-column-btn-text="คอลัมน์" class="ui-responsive table-stroke ui-table ui-table-columntoggle">
+                            <table data-role="table" id="table-column-toggle-pagefive" data-mode="columntoggle" data-column-btn-text="ข้อมูลเพิ่มเติม" class="ui-responsive table-stroke ui-table ui-table-columntoggle">
                                 <thead>
                                 <tr>
                                     <th data-colstart="1">#</th>
@@ -408,7 +441,7 @@
             </div>
             <div id="fragment-62">
                 <div style="overflow:auto; width: 100%; ">
-                    <table data-role="table" id="table-column-toggle-pagesix" data-mode="columntoggle" data-column-btn-text="คอลัมน์" class="ui-responsive table-stroke ui-table ui-table-columntoggle">
+                    <table data-role="table" id="table-column-toggle-pagesix" data-mode="columntoggle" data-column-btn-text="ข้อมูลเพิ่มเติม" class="ui-responsive table-stroke ui-table ui-table-columntoggle">
                         <thead>
                         <tr>
                             <th data-colstart="1">#</th>
@@ -538,7 +571,7 @@
         <h3>รหัสกลุ่ม <i>@<span id="code"></span></i></h3>
 
         <h4>รายชื่อสมาชิก <span id="badge" class="badge"></span></h4>
-        <table data-role="table" id="table-column-toggle-pageseven" data-mode="columntoggle" data-column-btn-text="คอลัมน์" class="ui-responsive table-stroke ui-table ui-table-columntoggle">
+        <table data-role="table" id="table-column-toggle-pageseven" data-mode="columntoggle" data-column-btn-text="ข้อมูลเพิ่มเติม" class="ui-responsive table-stroke ui-table ui-table-columntoggle">
             <thead>
             <tr>
                 <th data-colstart="1">#</th>
@@ -595,7 +628,7 @@
                         <a href="#" class="ui-btn ui-corner-all ui-btn-a" id="today">เลือกวันนี้</a>
 
                         <div style="width: 100%; height: 400px; overflow: auto">
-                            <table data-role="table" id="table-column-toggle-pageeight" data-mode="columntoggle" data-column-btn-text="คอลัมน์" class="ui-responsive table-stroke ui-table ui-table-columntoggle">
+                            <table data-role="table" id="table-column-toggle-pageeight" data-mode="columntoggle" data-column-btn-text="ข้อมูลเพิ่มเติม" class="ui-responsive table-stroke ui-table ui-table-columntoggle">
                                 <thead>
                                 <tr>
                                     <th data-colstart="1">#</th>
@@ -750,6 +783,48 @@
 </section>
 <!-- page9 -->
 
+<!-- page10 save -->
+<section data-role="page" id="pageten" data-position="fixed">
+
+    <div data-role="header">
+        <a href="#mypanel" class="ui-btn ui-corner-all ui-icon-bars ui-btn-icon-notext"></a>
+        <h1>จัดการรายการ</h1>
+    </div>
+    <div data-role="main" class="ui-content">
+        <label for="date-from">จากวันที่</label>
+        <input type="text" id="date-from" data-role="datebox" data-options='{"mode":"calbox", "calUsePickers": "true"}' />
+
+        <label for="date-to">ถึงวันที่</label>
+        <input type="text" id="date-to" data-role="datebox" data-options='{"mode":"calbox", "calUsePickers": "true"}' />
+
+        <a href="#" class="ui-btn ui-corner-all ui-btn-a" id="today">เลือกวันนี้</a>
+
+        <div style="width: 100%; height: 400px; overflow: auto">
+            <table data-role="table" id="table-column-toggle-pageten" data-mode="columntoggle" data-column-btn-text="ข้อมูลเพิ่มเติม" class="ui-responsive table-stroke ui-table ui-table-columntoggle">
+                <thead>
+                <tr>
+                    <th data-colstart="1">#</th>
+                    <th data-colstart="2">รายการ</th>
+                    <th data-colstart="3" data-priority="1" class="ui-table-priority-3 ui-table-cell-hidden">ประเภท</th>
+                    <th data-colstart="4">จำนวน</th>
+                    <th data-colstart="5" data-priority="2" class="ui-table-priority-5 ui-table-cell-hidden">วันที่</th>
+                    <th data-colstart="6" data-priority="3" class="ui-table-priority-6"><abbr title="ชื่อผู้ทำรายการ">ชื่อ</abbr></th>
+                    <th data-colstart="7" data-priority="4" class="ui-table-priority-7 ui-table-cell-hidden"><abbr title="แก้ไขข้อมูล">แก้ไข</abbr></th>
+                </tr>
+                </thead>
+                <tbody id="table-body">
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+
+    <div data-role="footer" data-position="fixed">
+        <h1>&copy;coppyrith by jassada</h1>
+    </div>
+</section>
+<!-- page10 -->
+
 <script type="text/javascript">
 
     $(document).on("mobileinit", function() {
@@ -771,7 +846,7 @@
             document.location.hash = "#pageone";
         }
         else {
-            document.location.hash = "#pagetwo";
+            document.location.hash = "#pagezero";
         }
         $.mobile.initializePage();
 

@@ -40,7 +40,7 @@ $(document).ready(function() {
             localStorage.setItem(KEY_LEVEL, $("#pagethree #level").val());
             localStorage.setItem(KEY_GROUPID, response.group_id);
 
-            $.mobile.changePage($("#pagetwo"), {transition: "slideup", changeHash: false});
+            $.mobile.changePage($("#pagezero"), {transition: "slideup", changeHash: false});
         }).fail(function(jqXHR, textStatus, errorThrown) {
             hideLoading();
             console.log(jqXHR + "\n" + textStatus + "\n" + errorThrown);

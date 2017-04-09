@@ -124,6 +124,12 @@ $(document).ready(function() {
     }
 
     $(document).on("pageshow", "#pagesix", function() {
+
+        document.addEventListener("backbutton", function (e) {
+            e.preventDefault();
+            $.mobile.changePage($("#pagetwo"), {transition: "slidedown", changeHash: false});
+        }, false);
+
         clearFields();
 
         $("#pagesix #title-list .ui-controlgroup-controls").removeClass("ui-screen-hidden");

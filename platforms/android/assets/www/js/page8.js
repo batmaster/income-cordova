@@ -13,7 +13,10 @@ $(document).ready(function() {
     });
     
     $(document).on("pageshow", "#pageeight", function() {
-
+        document.addEventListener("backbutton", function (e) {
+            e.preventDefault();
+            $.mobile.changePage($("#pagetwo"), {transition: "slidedown", changeHash: false});
+        }, false);
     });
 
     $(document).on("focus", "#fragment-1 *", function() {
@@ -192,6 +195,7 @@ function getDailyBarForGroup() {
             var data = new google.visualization.DataTable();
 
             data.addColumn('string', 'วันที่');
+            data.addColumn('number', 'คงเหลือ');
             data.addColumn('number', 'รายรับ');
             data.addColumn('number', 'รายจ่าย');
 
@@ -204,14 +208,14 @@ function getDailyBarForGroup() {
                     var current = new Date(r.date);
 
                     if ((d.getFullYear() == current.getFullYear()) && (d.getMonth() == current.getMonth()) && (d.getDate() == current.getDate())) {
-                        data.addRow([moment(new Date(d.getFullYear(), d.getMonth(), d.getDate())).locale("th").format('DD MMM'), Number(r.income), Number(r.outcome)]);
+                        data.addRow([moment(new Date(d.getFullYear(), d.getMonth(), d.getDate())).locale("th").format('DD MMM'), Number(r.balance), Number(r.income), Number(r.outcome)]);
                         response.splice(i, 1);
                         added = true;
                         break;
                     }
                 }
                 if (!added) {
-                    data.addRow([moment(new Date(Date.UTC(d.getFullYear(), d.getMonth(), d.getDate()))).locale("th").format('DD MMM'), 0, 0]);
+                    data.addRow([moment(new Date(Date.UTC(d.getFullYear(), d.getMonth(), d.getDate()))).locale("th").format('DD MMM'), 0, 0, 0]);
                 }
             }
 
@@ -232,7 +236,8 @@ function getDailyBarForGroup() {
                 minValue: 1,
               },
               explorer: {actions: ['dragToPan', 'rightClickToReset'], axis: 'horizontal'},
-              'chartArea': {'width': '80%', 'height': '55%'}
+              'chartArea': {'width': '80%', 'height': '55%'},
+              colors: ['#DF9C3D', '#4C6EC5', '#B45133']
             };
 
             new google.visualization.ColumnChart(document.getElementById('bar_group_div')).draw(data, options);
@@ -322,7 +327,8 @@ function getMonthlyBarForGroup() {
         google.charts.setOnLoadCallback(function() {
             var data = new google.visualization.DataTable();
 
-            data.addColumn('string', 'เดือน');
+            data.addColumn('string', 'วันที่');
+            data.addColumn('number', 'คงเหลือ');
             data.addColumn('number', 'รายรับ');
             data.addColumn('number', 'รายจ่าย');
 
@@ -335,14 +341,14 @@ function getMonthlyBarForGroup() {
                     var current = new Date(r.date);
 
                     if ((d.getFullYear() == current.getFullYear()) && (d.getMonth() == current.getMonth())) {
-                        data.addRow([moment(new Date(d.getFullYear(), d.getMonth(), 1)).locale("th").format('MMM YYYY'), Number(r.income), Number(r.outcome)]);
+                        data.addRow([moment(new Date(d.getFullYear(), d.getMonth(), 1)).locale("th").format('MMM YYYY'), Number(r.balance), Number(r.income), Number(r.outcome)]);
                         response.splice(i, 1);
                         added = true;
                         break;
                     }
                 }
                 if (!added) {
-                    data.addRow([moment(new Date(Date.UTC(d.getFullYear(), d.getMonth(), 1))).locale("th").format('MMM YYYY'), 0, 0]);
+                    data.addRow([moment(new Date(Date.UTC(d.getFullYear(), d.getMonth(), 1))).locale("th").format('MMM YYYY'), 0, 0, 0]);
                 }
             }
 
@@ -363,7 +369,8 @@ function getMonthlyBarForGroup() {
                 minValue: 0,
               },
               explorer: {actions: ['dragToPan', 'rightClickToReset'], axis: 'horizontal'},
-              'chartArea': {'width': '80%', 'height': '55%'}
+              'chartArea': {'width': '80%', 'height': '55%'},
+              colors: ['#DF9C3D', '#4C6EC5', '#B45133']
             };
 
             new google.visualization.ColumnChart(document.getElementById('bar_month_group_div')).draw(data, options);

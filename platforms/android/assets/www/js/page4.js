@@ -1,4 +1,7 @@
 $(document).ready(function() {
+
+    var list = [["โอนเงินเข้า", "เงินเดือน", "เงินปันผล", "อื่นๆ"], ["ค่ารถ", "ค่าอาหาร", "ค่าน้ำ", "ค่าไฟ", "ค่าโทรศัพท์", "อื่นๆ"]];
+
     $(document).on('click','#pagefour #date', function() {
         $("#pagefour #date").datebox('setTheDate', new Date());
     });
@@ -13,12 +16,40 @@ $(document).ready(function() {
 
     $(document).on('change','#pagefour #type', function() {
         getTransactionTitles();
+
+        loadAutoList($("#pagefour #type").val());
+    });
+
+    function loadAutoList(l) {
+        $('#pagefour #title0').empty();
+        for(var i = 0; i < list[l].length; i++) {
+            $('#pagefour #title0').append('<option value=' + list[l][i] + '>' + list[l][i] + '</option>');
+        }
+        $('#pagefour #title0').selectmenu();
+        $('#pagefour #title0').selectmenu("refresh");
+
+        $("#pagefour #title-group").hide();
+    }
+
+    $(document).on('change','#pagefour #title0', function() {
+        if ($("#pagefour #title0").val() == "อื่นๆ") {
+            $("#pagefour #title").val("");
+            $("#pagefour #title-group").show("fast");
+        }
+        else {
+            $("#pagefour #title-group").hide("fast");
+        }
     });
 
     $(document).on('click','#pagefour #submit', function() {
         var d = $("#pagefour #date").datebox('getTheDate');
         var t = $("#pagefour #time").datebox('getTheDate');
         var date = TODATE(d.getFullYear(), d.getMonth() + 1, d.getDate(), t.getHours(), t.getMinutes(), 0);
+
+        var title = $("#pagefour #title0").val();
+        if (title == "อื่นๆ") {
+            title = $("#pagefour #title").val();
+        }
 
         loading();
         $.ajax({
@@ -29,7 +60,7 @@ $(document).ready(function() {
                 "function": "add_transaction",
                 "user_id": localStorage.getItem(KEY_USERID),
                 "type": $("#pagefour #type").val(),
-                "title": $("#pagefour #title").val(),
+                "title": title,
                 "amount": $("#pagefour #amount").val(),
                 "date": date,
                 "group_id": localStorage.getItem(KEY_GROUPID)
@@ -89,6 +120,14 @@ $(document).ready(function() {
 
 
     $(document).on("pageshow", "#pagefour", function() {
+
+        document.addEventListener("backbutton", function (e) {
+            e.preventDefault();
+            $.mobile.changePage($("#pagetwo"), {transition: "slidedown", changeHash: false});
+        }, false);
+
+        loadAutoList(0);
+
         $("#pagefour #title-list .ui-controlgroup-controls").removeClass("ui-screen-hidden");
         getTransactionTitles();
 

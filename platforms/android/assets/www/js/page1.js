@@ -1,4 +1,5 @@
 $(document).ready(function() {
+    hideLoading();
     $(document).on('click','#pageone #login', function() {
         $.ajax({
             url: SERVER_URL,
@@ -16,7 +17,7 @@ $(document).ready(function() {
                 localStorage.setItem(KEY_GROUPID, response.group_id);
                 printLocalStorages();
 
-                $.mobile.changePage($("#pagetwo"), {transition: "slideup", changeHash: false});
+                $.mobile.changePage($("#pagezero"), {transition: "slideup", changeHash: false});
             }
             else {
                 $.mobile.changePage("#loginFailDialog", {role: "dialog", transition: "pop"});

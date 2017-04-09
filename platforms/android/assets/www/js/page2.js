@@ -38,14 +38,13 @@ $(document).ready(function() {
     }
 
     $(document).on("pageshow", "#pagetwo", function() {
+
+        document.addEventListener("backbutton", function (e) {
+
+        }, false);
+
         hideLoading();
 
-        if (localStorage.getItem(KEY_NOTI_SCHEDULE_ID_CLICKED) != undefined) {
-            document.location.hash = "#pagefour";
-        }
-        else {
-            getSummary();
-        }
-
+        getSummary();
     });
 });

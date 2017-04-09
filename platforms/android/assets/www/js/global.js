@@ -243,9 +243,9 @@ var MD5 = function (string) {
 }
 
 $(document).ready(function() {
-    document.addEventListener("backbutton", function (e) {
-        e.preventDefault();
-    }, false);
+//    document.addEventListener("backbutton", function (e) {
+//        e.preventDefault();
+//    }, false);
 
     printLocalStorages();
 });
