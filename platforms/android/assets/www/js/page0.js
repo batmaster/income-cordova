@@ -11,7 +11,7 @@ $(document).ready(function() {
             $("#menu8").hide();
             $("#menu9").show();
             $("#menu10").hide();
-            console.log(00);
+            $("#menu11").hide();
         }
         else if (localStorage.getItem(KEY_LEVEL) == 1) {
             $("#menu2").show();
@@ -22,7 +22,7 @@ $(document).ready(function() {
             $("#menu8").show();
             $("#menu9").show();
             $("#menu10").hide();
-            console.log(11);
+            $("#menu11").hide();
         }
         else {
             $("#menu2").hide();
@@ -33,7 +33,7 @@ $(document).ready(function() {
             $("#menu8").hide();
             $("#menu9").hide();
             $("#menu10").show();
-            console.log(-1);
+            $("#menu11").show();
         }
 
         if (localStorage.getItem(KEY_NOTI_SCHEDULE_ID_CLICKED) != undefined) {

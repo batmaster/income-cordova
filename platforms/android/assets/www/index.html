@@ -37,6 +37,7 @@
     <script src="js/page8.js"></script>
     <script src="js/page9.js"></script>
     <script src="js/page10.js"></script>
+    <script src="js/page11.js"></script>
 </head>
 <body>
 
@@ -51,7 +52,8 @@
         <a href="#pageeight" data-icon="grid" data-role="button" class="ui-page-theme-a" id="menu8">รายการของกลุ่ม</a>
         <a href="#pagenine" data-icon="user" data-role="button" class="ui-page-theme-a" id="menu9">ข้อมูลผู้ใช้</a>
 
-        <a href="#pageten" data-icon="grid" data-role="button" class="ui-page-theme-a" id="menu10">จัดการรายการ</a>
+        <a href="#pageten" data-icon="grid" data-role="button" class="ui-page-theme-a" id="menu10">จัดการประเภทรายการ</a>
+        <a href="#pageeleven" data-icon="grid" data-role="button" class="ui-page-theme-a" id="menu11">จัดการรายการ<br>รายรับรายจ่าย</a>
 
         <a href="#" data-icon="delete" data-role="button" class="ui-page-theme-a" id="logout">ออกจากระบบ</a>
     </div>
@@ -788,7 +790,71 @@
 
     <div data-role="header">
         <a href="#mypanel" class="ui-btn ui-corner-all ui-icon-bars ui-btn-icon-notext"></a>
-        <h1>จัดการรายการ</h1>
+        <h1>ประเภทรายการ</h1>
+    </div>
+    <div data-role="main" class="ui-content">
+        <div data-role="tabs">
+            <div data-role="navbar">
+                <ul>
+                    <li><a href="#fragment-income" class="ui-btn-active">ประเภทรายรับ</a></li>
+                    <li><a href="#fragment-outcome">ประเภทรายจ่าย</a></li>
+                </ul>
+            </div>
+            <div id="fragment-income">
+                <br>
+                <label for="title">ประเภทรายการ</label>
+                <input type="text" id="title">
+
+                <input type="button" data-inline="true" value="เพิ่มรายการ" id="submit">
+
+                <table data-role="table" id="my-table" data-mode="reflow" class="ui-responsive table-stroke ui-table">
+                    <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>รายการ</th>
+                        <th>แก้ไข</th>
+                    </tr>
+                    </thead>
+                    <tbody id="table-body">
+                    </tbody>
+                </table>
+            </div>
+            <div id="fragment-outcome">
+                <br>
+                <label for="title">ประเภทรายการ</label>
+                <input type="text" id="title">
+
+                <input type="button" data-inline="true" value="เพิ่มรายการ" id="submit">
+
+                <table data-role="table" id="my-table" data-mode="reflow" class="ui-responsive table-stroke ui-table">
+                    <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>รายการ</th>
+                        <th>แก้ไข</th>
+                    </tr>
+                    </thead>
+                    <tbody id="table-body">
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    </div>
+
+    <div data-role="footer" data-position="fixed">
+        <h1>&copy;coppyrith by jassada</h1>
+    </div>
+</section>
+<!-- page10 -->
+
+<!-- page11 save -->
+<section data-role="page" id="pageeleven" data-position="fixed">
+
+    <div data-role="header">
+        <a href="#mypanel" class="ui-btn ui-corner-all ui-icon-bars ui-btn-icon-notext"></a>
+        <h1>รายการรายรับรายจ่าย</h1>
     </div>
     <div data-role="main" class="ui-content">
         <label for="date-from">จากวันที่</label>
@@ -800,7 +866,7 @@
         <a href="#" class="ui-btn ui-corner-all ui-btn-a" id="today">เลือกวันนี้</a>
 
         <div style="width: 100%; height: 400px; overflow: auto">
-            <table data-role="table" id="table-column-toggle-pageten" data-mode="columntoggle" data-column-btn-text="ข้อมูลเพิ่มเติม" class="ui-responsive table-stroke ui-table ui-table-columntoggle">
+            <table data-role="table" id="table-column-toggle-pageeleven" data-mode="columntoggle" data-column-btn-text="ข้อมูลเพิ่มเติม" class="ui-responsive table-stroke ui-table ui-table-columntoggle">
                 <thead>
                 <tr>
                     <th data-colstart="1">#</th>
@@ -823,7 +889,7 @@
         <h1>&copy;coppyrith by jassada</h1>
     </div>
 </section>
-<!-- page10 -->
+<!-- page11 -->
 
 <script type="text/javascript">
 

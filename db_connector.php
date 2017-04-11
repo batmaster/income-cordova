@@ -385,5 +385,32 @@
             SQL("DELETE FROM schedule WHERE id = $id");
             echo json_encode("ok");
         }
+        /******************** #list ********************/
+        else if ($function == "get_list_income") {
+            echo json_encode(SQL("SELECT id, title FROM list WHERE type = 0"));
+        }
+        else if ($function == "get_list_outcome") {
+            echo json_encode(SQL("SELECT id, title FROM list WHERE type = 1"));
+        }
+        else if ($function == "add_list") {
+            $title = $_POST["title"];
+            $type = $_POST["type"];
+
+            SQL("INSERT INTO list (title, type) VALUES ('$title', $type)");
+            echo json_encode("ok");
+        }
+        else if ($function == "edit_list") {
+            $id = $_POST["id"];
+            $title = $_POST["title"];
+
+            SQL("UPDATE list SET title = '$title' WHERE id = $id");
+            echo json_encode("ok");
+        }
+        else if ($function == "remove_list") {
+            $id = $_POST["id"];
+
+            SQL("DELETE FROM list WHERE id = $id");
+            echo json_encode("ok");
+        }
     }
 ?>

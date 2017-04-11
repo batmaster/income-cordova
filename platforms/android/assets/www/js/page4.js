@@ -1,7 +1,5 @@
 $(document).ready(function() {
 
-    var list = [["โอนเงินเข้า", "เงินเดือน", "เงินปันผล", "อื่นๆ"], ["ค่ารถ", "ค่าอาหาร", "ค่าน้ำ", "ค่าไฟ", "ค่าโทรศัพท์", "อื่นๆ"]];
-
     $(document).on('click','#pagefour #date', function() {
         $("#pagefour #date").datebox('setTheDate', new Date());
     });
@@ -22,13 +20,38 @@ $(document).ready(function() {
 
     function loadAutoList(l) {
         $('#pagefour #title0').empty();
-        for(var i = 0; i < list[l].length; i++) {
-            $('#pagefour #title0').append('<option value=' + list[l][i] + '>' + list[l][i] + '</option>');
-        }
-        $('#pagefour #title0').selectmenu();
-        $('#pagefour #title0').selectmenu("refresh");
 
-        $("#pagefour #title-group").hide();
+        var fn = l == 0 ? "get_list_income" : "get_list_outcome";
+
+        loading();
+        $.ajax({
+            url: SERVER_URL,
+            type: "POST",
+            dataType: "json",
+            data: {
+                "function": fn,
+            }
+        }).done(function(response) {
+
+            if (response != undefined) {
+                hideLoading();
+
+                for(var i = 0; i < response.length; i++) {
+                    $('#pagefour #title0').append('<option value="' + response[i].title + '">' + response[i].title + '</option>');
+                }
+                $('#pagefour #title0').append('<option value="อื่นๆ">อื่นๆ</option>');
+                $('#pagefour #title0').selectmenu();
+                $('#pagefour #title0').selectmenu("refresh");
+
+                $("#pagefour #title-group").hide();
+
+            }
+            else {
+                console.log("getting transaction failed");
+            }
+        }).fail(function(jqXHR, textStatus, errorThrown) {
+                    console.log(jqXHR + "\n" + textStatus + "\n" + errorThrown);
+        });
     }
 
     $(document).on('change','#pagefour #title0', function() {
@@ -155,6 +178,4 @@ $(document).ready(function() {
         }
 
     });
-
-
 });

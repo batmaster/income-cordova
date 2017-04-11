@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Apr 10, 2017 at 03:48 AM
+-- Generation Time: Apr 12, 2017 at 03:10 AM
 -- Server version: 5.5.50-0ubuntu0.14.04.1
 -- PHP Version: 5.5.9-1ubuntu4.21
 
@@ -43,6 +43,34 @@ INSERT INTO `group` (`id`, `title`, `code`) VALUES
 (1, 'กลุ่มแบตเทส', 'g1'),
 (100, 'family', 'gl2'),
 (101, 'max', 'gl101');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `list`
+--
+
+CREATE TABLE IF NOT EXISTS `list` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `title` varchar(32) COLLATE utf8_unicode_ci NOT NULL,
+  `type` int(1) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=18 ;
+
+--
+-- Dumping data for table `list`
+--
+
+INSERT INTO `list` (`id`, `title`, `type`) VALUES
+(1, 'โอนเงินเข้า', 0),
+(10, 'เงินเดือน', 0),
+(11, 'เงินปันผล', 0),
+(12, 'ค่ารถ', 1),
+(13, 'ค่าอาหาร', 1),
+(14, 'ค่าน้ำ', 1),
+(15, 'ค่าไฟ', 1),
+(16, 'ค่าโทรศัพท์', 1),
+(17, 'ค่าของ', 1);
 
 -- --------------------------------------------------------
 
@@ -90,7 +118,7 @@ CREATE TABLE IF NOT EXISTS `transaction` (
   `date` varchar(20) COLLATE utf8_unicode_ci NOT NULL,
   `group_id` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=81 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=84 ;
 
 --
 -- Dumping data for table `transaction`
@@ -174,7 +202,10 @@ INSERT INTO `transaction` (`id`, `user_id`, `type`, `title`, `amount`, `date`, `
 (77, 16, 0, 'เพื่อนคืน', 200, '2017-04-10 02:21:00', 1),
 (78, 16, 1, 'ค่ารถ', 15, '2017-04-10 02:21:00', 1),
 (79, 16, 1, 'ค่าติด', 150, '2017-04-10 02:21:00', 1),
-(80, 16, 1, 'ค่าน้ำ', 450, '2017-04-10 02:21:00', 1);
+(80, 16, 1, 'ค่าน้ำ', 450, '2017-04-10 02:21:00', 1),
+(81, 39, 0, 'เงินเดือน', 5000, '2017-04-10 13:07:00', 101),
+(82, 39, 0, 'แม่ให้', 6000, '2017-04-10 13:07:00', 101),
+(83, 16, 1, 'ค่าของ', 456, '2017-04-12 03:05:00', 1);
 
 -- --------------------------------------------------------
 
