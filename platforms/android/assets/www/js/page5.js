@@ -17,7 +17,7 @@ $(document).ready(function() {
             e.preventDefault();
             $.mobile.changePage($("#pagetwo"), {transition: "slidedown", changeHash: false});
         }, false);
-        
+
     });
 
     $(document).on("focus", "#fragment-1 *", function() {
@@ -129,6 +129,7 @@ function showEditField(i) {
 }
 
 function hideAllEditFields() {
+  console.log("hideAllEditFields");
     $("#pagefive #fragment-1 #fragment-11 #table-body tr[id^=dummy]").show(0);
     $("#pagefive #fragment-1 #fragment-11 #table-body tr[id^=edit-field]").hide(0);
 }
@@ -188,6 +189,7 @@ function getTransactionsTable() {
             "user_id": localStorage.getItem(KEY_USERID)
         }
     }).done(function(response) {
+
         $("#pagefive #fragment-1 #fragment-11 #table-body").empty();
         if (response != undefined) {
             hideLoading();
