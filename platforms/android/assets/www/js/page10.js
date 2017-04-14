@@ -14,6 +14,8 @@ $(document).ready(function() {
         getIncomeList();
         getOutcomeList();
 
+        $("#pageten .ui-table-columntoggle-btn").hide();
+
     });
 
     $(document).on('click','#pageten #fragment-income #submit', function() {
@@ -130,7 +132,7 @@ function getIncomeList() {
                     <td data-colstart="2"><span id="title">' + r.title + '</span></td>\
                     <td data-colstart="3">\
                         <a href="#" onclick="showEditFieldPageTen(' + i + ');" class="ui-btn ui-corner-all ui-icon-edit ui-btn-icon-notext ui-btn-inline">My button</a>\
-                        <a href="#" onclick="remove(' + r.id + ');" class="ui-btn ui-corner-all ui-icon-delete ui-btn-icon-notext ui-btn-inline">My button</a>\
+                        <a href="#" onclick="removeList(' + r.id + ');" class="ui-btn ui-corner-all ui-icon-delete ui-btn-icon-notext ui-btn-inline">My button</a>\
                     </td>\
                 </tr>');
 
@@ -217,7 +219,7 @@ function getOutcomeList() {
                     <td data-colstart="2"><span id="title">' + r.title + '</span></td>\
                     <td data-colstart="3">\
                         <a href="#" onclick="showEditOutcomeFieldPageTen(' + i + ');" class="ui-btn ui-corner-all ui-icon-edit ui-btn-icon-notext ui-btn-inline">My button</a>\
-                        <a href="#" onclick="remove(' + r.id + ');" class="ui-btn ui-corner-all ui-icon-delete ui-btn-icon-notext ui-btn-inline">My button</a>\
+                        <a href="#" onclick="removeList(' + r.id + ');" class="ui-btn ui-corner-all ui-icon-delete ui-btn-icon-notext ui-btn-inline">My button</a>\
                     </td>\
                 </tr>');
 
@@ -248,7 +250,7 @@ function getOutcomeList() {
     });
 }
 
-function remove(id) {
+function removeList(id) {
     loading();
     $.ajax({
         url: SERVER_URL,

@@ -807,7 +807,7 @@
 
                 <input type="button" data-inline="true" value="เพิ่มรายการ" id="submit">
 
-                <table data-role="table" id="my-table" data-mode="reflow" class="ui-responsive table-stroke ui-table">
+                <table data-role="table" data-mode="columntoggle" class="ui-responsive table-stroke ui-table ui-table-columntoggle">
                     <thead>
                     <tr>
                         <th>#</th>
@@ -826,7 +826,7 @@
 
                 <input type="button" data-inline="true" value="เพิ่มรายการ" id="submit">
 
-                <table data-role="table" id="my-table" data-mode="reflow" class="ui-responsive table-stroke ui-table">
+                <table data-role="table" data-mode="columntoggle" class="ui-responsive table-stroke ui-table ui-table-columntoggle">
                     <thead>
                     <tr>
                         <th>#</th>
@@ -908,6 +908,43 @@
     });
 
     $(document).ready(function() {
+
+        $("#mypanel").on("panelbeforeopen",function(){
+            if (localStorage.getItem(KEY_LEVEL) == 0) {
+                $("#menu2").show();
+                $("#menu4").show();
+                $("#menu5").show();
+                $("#menu6").show();
+                $("#menu7").hide();
+                $("#menu8").hide();
+                $("#menu9").show();
+                $("#menu10").hide();
+                $("#menu11").hide();
+            }
+            else if (localStorage.getItem(KEY_LEVEL) == 1) {
+                $("#menu2").show();
+                $("#menu4").show();
+                $("#menu5").show();
+                $("#menu6").show();
+                $("#menu7").show();
+                $("#menu8").show();
+                $("#menu9").show();
+                $("#menu10").hide();
+                $("#menu11").hide();
+            }
+            else {
+                $("#menu2").hide();
+                $("#menu4").hide();
+                $("#menu5").hide();
+                $("#menu6").hide();
+                $("#menu7").hide();
+                $("#menu8").hide();
+                $("#menu9").hide();
+                $("#menu10").show();
+                $("#menu11").show();
+            }
+        });
+
         if (localStorage.getItem(KEY_USERID) == null) {
             document.location.hash = "#pageone";
         }

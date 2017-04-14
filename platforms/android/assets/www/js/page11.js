@@ -118,6 +118,7 @@ function getTransactionsTablePageEleven() {
                     <td data-colstart="6" data-priority="3" class="ui-table-priority-6">' + r.name + '</td>\
                     <td data-colstart="7" data-priority="4" class="ui-table-priority-7 ui-table-cell-hidden">\
                         <a href="#" onclick="showEditFieldPageEleven(' + i + ');" class="ui-btn ui-corner-all ui-icon-edit ui-btn-icon-notext ui-btn-inline">My button</a>\
+                        <a href="#" onclick="removeTransactionPageEleven(' + r.id + ');" class="ui-btn ui-corner-all ui-icon-delete ui-btn-icon-notext ui-btn-inline">My button</a>\
                     </td>\
                 </tr>');
 
@@ -150,8 +151,8 @@ function getTransactionsTablePageEleven() {
                 $("#pageeleven #table-body").append('<tr><td colspan="7" style="text-align: center;">ไม่มีรายการ</td></tr>');
             }
 
-            $('#pageeleven #table-column-toggle-pageten').trigger("create");
-            $('#pageeleven #table-column-toggle-pageten').table("refresh");
+            $('#pageeleven #table-column-toggle-pageeleven').trigger("create");
+            $('#pageeleven #table-column-toggle-pageeleven').table("refresh");
 
 //            $("#pageeleven #table-body #type").selectmenu().selectmenu("refresh");
 
@@ -162,5 +163,26 @@ function getTransactionsTablePageEleven() {
         }
     }).fail(function(jqXHR, textStatus, errorThrown) {
                 console.log(jqXHR + "\n" + textStatus + "\n" + errorThrown);
+    });
+}
+
+
+function removeTransactionPageEleven(id) {
+    loading();
+    $.ajax({
+        url: SERVER_URL,
+        type: "POST",
+        dataType: "json",
+        data: {
+            "function": "remove_transaction",
+            "id": id
+        }
+    }).done(function(response) {
+        if (response != undefined) {
+            hideLoading();
+            getTransactionsTablePageEleven();
+
+            toast("ลบรายการเรียบร้อยแล้ว");
+        }
     });
 }
